@@ -1,5 +1,7 @@
 DNS Resolver Michigan — лёгкий веб-инструмент для массового определения IP-адресов по списку доменов.
 
+https://michi-mochirellune.github.io/dns-resolver-michigan/
+
 Основные фичи:
 
 · Резолвинг через Cloudflare DNS или Google DNS — переключайся в настройках в один клик
