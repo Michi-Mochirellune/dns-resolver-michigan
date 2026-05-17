@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dns resolver by Michigan</title>
+    <title>DNS Resolver by Michigan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        /* Твой оригинальный стиль полностью сохранён */
         body {
             background-color: #0b0712;
             color: #e6dbff;
@@ -55,9 +54,7 @@
             transition: 0.2s;
         }
 
-        .settings-toggle:hover {
-            background-color: #59358c;
-        }
+        .settings-toggle:hover { background-color: #59358c; }
 
         .settings-box {
             background-color: #160f24;
@@ -69,10 +66,7 @@
             border: 1px solid #321f4d;
         }
 
-        .settings-label {
-            font-size: 14px;
-            color: #9980b3;
-        }
+        .settings-label { font-size: 14px; color: #9980b3; }
 
         .btn-group {
             display: flex;
@@ -112,9 +106,7 @@
             outline: none;
         }
 
-        textarea:focus {
-            border-color: #9e52ff;
-        }
+        textarea:focus { border-color: #9e52ff; }
 
         .start-btn {
             background-color: #782ec7;
@@ -129,13 +121,11 @@
             box-shadow: 0 0 15px rgba(120, 46, 199, 0.3);
         }
 
-        .start-btn:hover {
-            background-color: #8c3be0;
-        }
+        .start-btn:hover { background-color: #8c3be0; }
 
         .results-textarea {
             width: 100%;
-            height: 180px;
+            height: 200px;
             background-color: #130c1f;
             border: 1px solid #281840;
             color: #d4c7e8;
@@ -158,8 +148,9 @@
         }
 
         .credits {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -167,7 +158,7 @@
 
 <div class="container">
     <div class="header">
-        <h1>Dns resolver by Michigan</h1>
+        <h1>DNS Resolver by Michigan</h1>
         <button class="settings-toggle" id="settingsToggleBtn" onclick="toggleSettings()">⚙ Настройки</button>
     </div>
 
@@ -206,21 +197,84 @@
 </div>
 
 <script>
-    let dnsProvider = 'cloudflare'; 
-    let formatState = 0;
+    let dnsProvider = 'cloudflare';
+    let formatState = 0; // 0=classic, 1=hosts, 2=ipOnly
     const formats = ['classic', 'hosts', 'ipOnly'];
-    let fontSizeState = 0;          
+    
+    let fontSizeState = 0;
     let currentLang = 'ru';
 
     const fontSizes = ['16px', '19px', '23px'];
-    
-    const translations = { /* ... твой оригинальный translations полностью ... */ 
-        ru: { /* оставь как было */ },
-        en: { /* оставь как было */ }
+
+    const translations = {
+        ru: {
+            dnsLabel: 'Выбор DNS сервера:',
+            formatLabels: ['Формат: Classic', '[✔] Формат: Hosts', '[⚡] Формат: Only IP'],
+            fontLabels: ['Обычный', 'Средний', 'Крупный'],
+            placeholderInput: 'Вставь список доменов сюда...',
+            placeholderResults: 'Результаты появятся здесь...',
+            startBtn: 'Узнать IP адреса',
+            checking: 'Идет проверка...\n',
+            emptyList: 'Список пуст.',
+            copyHint: '💡 Зажми палец на тексте выше, чтобы скопировать результаты',
+            errorStatus: '[Ошибка/Не найден]',
+            errorLabel: 'Ошибка'
+        },
+        en: {
+            dnsLabel: 'Select DNS Server:',
+            formatLabels: ['Format: Classic', '[✔] Format: Hosts', '[⚡] Format: Only IP'],
+            fontLabels: ['Normal', 'Medium', 'Large'],
+            placeholderInput: 'Paste domain list here...',
+            placeholderResults: 'Results will appear here...',
+            startBtn: 'Resolve IPs',
+            checking: 'Checking...\n',
+            emptyList: 'List is empty.',
+            copyHint: '💡 Long press to copy results',
+            errorStatus: '[Error/Not found]',
+            errorLabel: 'Error'
+        }
     };
 
-    // === Все твои функции (toggleSettings, setDns, cycleFormat и т.д.) оставляем без изменений ===
-    // (я их не трогаю, чтобы не ломать)
+    function updateLanguageUI() {
+        const t = translations[currentLang];
+        document.getElementById('dnsLabel').innerText = t.dnsLabel;
+        document.getElementById('formatBtn').innerText = t.formatLabels[formatState];
+        document.getElementById('fontBtn').innerText = (currentLang === 'ru' ? 'Шрифт: ' : 'Font: ') + t.fontLabels[fontSizeState];
+        document.getElementById('inputDomains').placeholder = t.placeholderInput;
+        document.getElementById('resultsBox').placeholder = t.placeholderResults;
+        document.getElementById('startBtn').innerText = t.startBtn;
+    }
+
+    function toggleSettings() {
+        const box = document.getElementById('settingsBox');
+        const btn = document.getElementById('settingsToggleBtn');
+        box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        btn.innerText = box.style.display === 'flex' ? '✕ Закрыть' : '⚙ Настройки';
+    }
+
+    function setDns(provider) {
+        dnsProvider = provider;
+        document.getElementById('dnsCloudflare').classList.toggle('active', provider === 'cloudflare');
+        document.getElementById('dnsGoogle').classList.toggle('active', provider === 'google');
+    }
+
+    function cycleFormat() {
+        formatState = (formatState + 1) % 3;
+        document.getElementById('formatBtn').innerText = translations[currentLang].formatLabels[formatState];
+    }
+
+    function cycleFont() {
+        fontSizeState = (fontSizeState + 1) % 3;
+        const size = fontSizes[fontSizeState];
+        document.getElementById('inputDomains').style.fontSize = size;
+        document.getElementById('resultsBox').style.fontSize = size;
+        document.getElementById('fontBtn').innerText = (currentLang === 'ru' ? 'Шрифт: ' : 'Font: ') + translations[currentLang].fontLabels[fontSizeState];
+    }
+
+    function toggleLang() {
+        currentLang = currentLang === 'ru' ? 'en' : 'ru';
+        updateLanguageUI();
+    }
 
     async function startResolving() {
         const inputText = document.getElementById('inputDomains').value.trim();
@@ -231,12 +285,12 @@
 
         resultsBox.style.display = 'block';
         copyHint.style.display = 'none';
-        resultsBox.value = t.checking || 'Идет проверка...\n';
+        resultsBox.value = t.checking;
 
         const domains = inputText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
 
         if (domains.length === 0) {
-            resultsBox.value = t.emptyList || 'Список пуст.';
+            resultsBox.value = t.emptyList;
             return;
         }
 
@@ -248,29 +302,27 @@
         for (let domain of domains) {
             try {
                 const response = await fetch(`\( {apiUrl}?name= \){encodeURIComponent(domain)}&type=A`, {
-                    headers: { 
-                        'Accept': 'application/dns-json'
-                    },
+                    headers: { 'Accept': 'application/dns-json' },
                     mode: 'cors'
                 });
 
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) throw new Error('Network error');
 
                 const data = await response.json();
-                const ip = data.Answer?.find(record => record.type === 1)?.data;
+                const ip = data.Answer?.find(r => r.type === 1)?.data;
 
                 if (ip) {
                     if (currentFormat === 'hosts') output.push(`${ip} ${domain}`);
                     else if (currentFormat === 'ipOnly') output.push(ip);
                     else output.push(`[ + ] ${domain}  →  ${ip}`);
                 } else {
-                    throw new Error('No A record');
+                    throw new Error('No IP');
                 }
             } catch (e) {
-                console.error(`Ошибка при запросе ${domain}:`, e);
-                if (currentFormat === 'hosts') output.push(`# [${t.errorLabel || 'Ошибка'}] ${domain}`);
-                else if (currentFormat === 'ipOnly') output.push(`[${t.errorLabel || 'Ошибка'}] ${domain}`);
-                else output.push(`[ - ] ${domain}  →  ${t.errorStatus || '[Ошибка/Не найден]'}`);
+                console.error(`Ошибка ${domain}:`, e);
+                if (currentFormat === 'hosts') output.push(`# [${t.errorLabel}] ${domain}`);
+                else if (currentFormat === 'ipOnly') output.push(`[${t.errorLabel}] ${domain}`);
+                else output.push(`[ - ] ${domain}  →  ${t.errorStatus}`);
             }
             
             resultsBox.value = output.join('\n');
@@ -284,6 +336,5 @@
     // Инициализация
     updateLanguageUI();
 </script>
-
 </body>
 </html>
