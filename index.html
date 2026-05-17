@@ -6,16 +6,9 @@
     <title>DNS Resolver by Michigan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        :root {
-            --bg: #0b0712;
-            --accent: #782ec7;
-            --text: #e6dbff;
-            --secondary: #9980b3;
-        }
-
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: #0b0712;
+            color: #e6dbff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
@@ -39,6 +32,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            margin-bottom: 5px;
         }
 
         h1 {
@@ -72,15 +66,9 @@
             border: 1px solid #321f4d;
         }
 
-        .settings-label {
-            font-size: 14px;
-            color: #9980b3;
-        }
+        .settings-label { font-size: 14px; color: #9980b3; }
 
-        .btn-group {
-            display: flex;
-            gap: 8px;
-        }
+        .btn-group { display: flex; gap: 8px; }
 
         .toggle-btn {
             flex: 1;
@@ -96,7 +84,7 @@
 
         .toggle-btn.active {
             background-color: #782ec7;
-            color: white;
+            color: #ffffff;
             border-color: #9445ff;
             box-shadow: 0 0 8px rgba(120, 46, 199, 0.5);
         }
@@ -110,16 +98,15 @@
             border-radius: 8px;
             padding: 12px;
             font-size: 16px;
+            box-sizing: border-box;
             resize: vertical;
             outline: none;
         }
 
-        textarea:focus {
-            border-color: #9e52ff;
-        }
+        textarea:focus { border-color: #9e52ff; }
 
         .start-btn {
-            background-color: var(--accent);
+            background-color: #782ec7;
             color: white;
             border: none;
             border-radius: 8px;
@@ -127,13 +114,11 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(120, 46, 199, 0.3);
             transition: 0.2s;
+            box-shadow: 0 0 15px rgba(120, 46, 199, 0.3);
         }
 
-        .start-btn:hover {
-            background-color: #8c3be0;
-        }
+        .start-btn:hover { background-color: #8c3be0; }
 
         .results-textarea {
             width: 100%;
@@ -144,24 +129,19 @@
             border-radius: 8px;
             padding: 12px;
             font-size: 16px;
-            font-family: monospace;
+            box-sizing: border-box;
             resize: vertical;
             outline: none;
+            font-family: monospace;
             display: none;
         }
 
         .copy-hint {
-            color: var(--secondary);
+            color: #9980b3;
             font-size: 14px;
             text-align: center;
             margin-top: 5px;
             display: none;
-        }
-
-        .credits {
-            margin-top: 25px;
-            text-align: center;
-            font-size: 14px;
         }
     </style>
 </head>
@@ -174,19 +154,15 @@
     </div>
 
     <div class="settings-box" id="settingsBox">
-        <div class="settings-label" id="dnsLabel">Выбор DNS сервера:</div>
+        <div class="settings-label">Выбор DNS сервера:</div>
         <div class="btn-group">
             <button class="toggle-btn active" id="dnsCloudflare" onclick="setDns('cloudflare')">Cloudflare</button>
             <button class="toggle-btn" id="dnsGoogle" onclick="setDns('google')">Google</button>
         </div>
 
         <div class="btn-group">
-            <button class="toggle-btn" id="formatBtn" onclick="cycleFormat()">Формат: Classic</button>
+            <button class="toggle-btn" id="formatBtn" onclick="toggleFormat()">Формат: Classic</button>
             <button class="toggle-btn" id="fontBtn" onclick="cycleFont()">Шрифт: Обычный</button>
-        </div>
-
-        <div class="btn-group">
-            <button class="toggle-btn active" id="langBtn" onclick="toggleLang()">Language: RU</button>
         </div>
     </div>
 
@@ -197,72 +173,25 @@
     <textarea id="resultsBox" class="results-textarea" readonly placeholder="Результаты появятся здесь..."></textarea>
     
     <div id="copyHint" class="copy-hint">💡 Зажми палец на тексте выше, чтобы скопировать результаты</div>
-
-    <div class="credits">
-        <div class="credits-title">Ссылки разработчика</div>
-        <div class="credits-links">
-            <a href="https://github.com/Michi-Mochirellune" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://t.me/MichiMochirellune" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-        </div>
-    </div>
 </div>
 
 <script>
-    // === Настройки ===
     let dnsProvider = 'cloudflare';
-    let formatState = 0;           // 0 = classic, 1 = hosts, 2 = ipOnly
+    let outputFormat = 'classic';
     let fontSizeState = 0;
-    let currentLang = 'ru';
-
-    const formats = ['classic', 'hosts', 'ipOnly'];
     const fontSizes = ['16px', '19px', '23px'];
-
-    const translations = {
-        ru: {
-            dnsLabel: "Выбор DNS сервера:",
-            formatLabels: ["Формат: Classic", "[✔] Формат: Hosts", "[⚡] Формат: Only IP"],
-            fontLabels: ["Обычный", "Средний", "Крупный"],
-            placeholderInput: "Вставь список доменов сюда...",
-            placeholderResults: "Результаты появятся здесь...",
-            startBtn: "Узнать IP адреса",
-            checking: "Идет проверка...\n",
-            emptyList: "Список пуст.",
-            copyHint: "💡 Зажми палец на тексте выше, чтобы скопировать результаты",
-            errorStatus: "[Ошибка/Не найден]",
-            errorLabel: "Ошибка"
-        },
-        en: {
-            dnsLabel: "Select DNS Server:",
-            formatLabels: ["Format: Classic", "[✔] Format: Hosts", "[⚡] Format: Only IP"],
-            fontLabels: ["Normal", "Medium", "Large"],
-            placeholderInput: "Paste domain list here...",
-            placeholderResults: "Results will appear here...",
-            startBtn: "Resolve IPs",
-            checking: "Checking...\n",
-            emptyList: "List is empty.",
-            copyHint: "💡 Long press to copy results",
-            errorStatus: "[Error/Not found]",
-            errorLabel: "Error"
-        }
-    };
-
-    // === Основные функции интерфейса ===
-    function updateUI() {
-        const t = translations[currentLang];
-        document.getElementById('dnsLabel').textContent = t.dnsLabel;
-        document.getElementById('formatBtn').textContent = t.formatLabels[formatState];
-        document.getElementById('fontBtn').textContent = (currentLang === 'ru' ? 'Шрифт: ' : 'Font: ') + t.fontLabels[fontSizeState];
-        document.getElementById('inputDomains').placeholder = t.placeholderInput;
-        document.getElementById('resultsBox').placeholder = t.placeholderResults;
-        document.getElementById('startBtn').textContent = t.startBtn;
-    }
+    const fontLabels = ['Обычный', 'Средний', 'Крупный'];
 
     function toggleSettings() {
         const box = document.getElementById('settingsBox');
         const btn = document.getElementById('settingsToggleBtn');
-        const isVisible = box.style.display === 'flex';
-        box.style.display = isVisible ? 'none' : 'flex';
-        btn.textContent = isVisible ? '⚙ Настройки' : '✕ Закрыть';
+        if (box.style.display === 'flex') {
+            box.style.display = 'none';
+            btn.innerText = '⚙ Настройки';
+        } else {
+            box.style.display = 'flex';
+            btn.innerText = '✕ Закрыть';
+        }
     }
 
     function setDns(provider) {
@@ -271,87 +200,82 @@
         document.getElementById('dnsGoogle').classList.toggle('active', provider === 'google');
     }
 
-    function cycleFormat() {
-        formatState = (formatState + 1) % 3;
-        document.getElementById('formatBtn').textContent = translations[currentLang].formatLabels[formatState];
+    function toggleFormat() {
+        const btn = document.getElementById('formatBtn');
+        if (outputFormat === 'classic') {
+            outputFormat = 'hosts';
+            btn.innerText = '[✔] Формат: Hosts';
+            btn.classList.add('active');
+        } else {
+            outputFormat = 'classic';
+            btn.innerText = 'Формат: Classic';
+            btn.classList.remove('active');
+        }
     }
 
     function cycleFont() {
         fontSizeState = (fontSizeState + 1) % 3;
-        const size = fontSizes[fontSizeState];
-        document.getElementById('inputDomains').style.fontSize = size;
-        document.getElementById('resultsBox').style.fontSize = size;
-        document.getElementById('fontBtn').textContent = 
-            (currentLang === 'ru' ? 'Шрифт: ' : 'Font: ') + translations[currentLang].fontLabels[fontSizeState];
+        const newSize = fontSizes[fontSizeState];
+        document.getElementById('fontBtn').innerText = 'Шрифт: ' + fontLabels[fontSizeState];
+        document.getElementById('inputDomains').style.fontSize = newSize;
+        document.getElementById('resultsBox').style.fontSize = newSize;
     }
 
-    function toggleLang() {
-        currentLang = currentLang === 'ru' ? 'en' : 'ru';
-        updateUI();
-    }
-
-    // === Основная функция DNS ===
     async function startResolving() {
         const inputText = document.getElementById('inputDomains').value.trim();
         const resultsBox = document.getElementById('resultsBox');
         const copyHint = document.getElementById('copyHint');
-        const t = translations[currentLang];
 
         resultsBox.style.display = 'block';
         copyHint.style.display = 'none';
-        resultsBox.value = t.checking;
+        resultsBox.value = '🔄 Идет проверка...\n';
 
-        const domains = inputText.split('\n')
-            .map(line => line.trim())
-            .filter(line => line.length > 0);
+        const domains = inputText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
 
         if (domains.length === 0) {
-            resultsBox.value = t.emptyList;
+            resultsBox.value = 'Список пуст.';
             return;
         }
 
-        const baseUrl = dnsProvider === 'google' 
+        let output = [];
+        const apiUrl = dnsProvider === 'google' 
             ? 'https://dns.google/resolve' 
             : 'https://cloudflare-dns.com/dns-query';
 
-        let output = [];
-
         for (let domain of domains) {
             try {
-                const response = await fetch(`\( {baseUrl}?name= \){encodeURIComponent(domain)}&type=A`, {
-                    headers: { 'Accept': 'application/dns-json' },
-                    mode: 'cors'
+                let response = await fetch(`\( {apiUrl}?name= \){encodeURIComponent(domain)}&type=A`, {
+                    headers: { 'Accept': 'application/dns-json' }
                 });
 
-                if (!response.ok) throw new Error('Network error');
-
-                const data = await response.json();
-                const ip = data.Answer?.find(record => record.type === 1)?.data;
+                let data = await response.json();
+                
+                let ip = data.Answer?.find(record => record.type === 1)?.data;
 
                 if (ip) {
-                    if (formatState === 1) output.push(`${ip} ${domain}`);
-                    else if (formatState === 2) output.push(ip);
-                    else output.push(`[ + ] ${domain}  →  ${ip}`);
+                    if (outputFormat === 'hosts') {
+                        output.push(`${ip} ${domain}`);
+                    } else {
+                        output.push(`[ + ] ${domain}  →  ${ip}`);
+                    }
                 } else {
-                    throw new Error('No record');
+                    throw new Error();
                 }
             } catch (e) {
-                console.error(`Ошибка с ${domain}:`, e);
-                if (formatState === 1) output.push(`# [${t.errorLabel}] ${domain}`);
-                else if (formatState === 2) output.push(`[${t.errorLabel}] ${domain}`);
-                else output.push(`[ - ] ${domain}  →  ${t.errorStatus}`);
+                if (outputFormat === 'hosts') {
+                    output.push(`# [Ошибка] ${domain}`);
+                } else {
+                    output.push(`[ - ] ${domain}  →  [Ошибка/Не найден]`);
+                }
             }
-
+            
             resultsBox.value = output.join('\n');
         }
 
-        if (formatState !== 0 && output.length > 0) {
+        if (output.length > 0) {
             copyHint.style.display = 'block';
         }
     }
-
-    // Инициализация
-    updateUI();
 </script>
 </body>
 </html>
