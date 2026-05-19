@@ -6,10 +6,10 @@
     <title>Dns resolver Michigan</title>
     <style>
         :root{
-            --bg:#0b0712;--bg2:#160f24;--bg3:#1f142e;--bg4:#130c1f;--text:#e6dbff;--text2:#bfa6ff;--text3:#9980b3;--text4:#d4c7e8;--border:#321f4d;--border2:#442a66;--border3:#281840;--btn:#251a3a;--btn2:#402666;--btn3:#2d1a4a;--accent:#d4a8ff;--accent2:#e0c4ff;--accent-btn:#782ec7;--accent-btn2:#8c3be0;--green:#1a6b3c;--green2:#2ecc71;--input:#1f142e;--input-text:#e6e1ff;--placeholder:#665980;--dev-bg:#1a1130;--dev-border:#3d2760;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');--overlay:rgba(11,7,18,0.6);--preset-bg:#1a5c3a;--preset-text:#c2ffcc;--preset-hover:#22734a;--shadow:rgba(212,168,255,0.3);--clear-hover:#c0392b;--toggle-active-text:#fff;--hover-text:#fff;--active-border:#9445ff
+            --bg:#0b0712;--bg2:#160f24;--bg3:#1f142e;--bg4:#130c1f;--text:#e6dbff;--text2:#bfa6ff;--text3:#9980b3;--text4:#d4c7e8;--border:#321f4d;--border2:#442a66;--border3:#281840;--btn:#251a3a;--btn2:#402666;--btn3:#2d1a4a;--accent:#d4a8ff;--accent2:#e0c4ff;--accent-btn:#782ec7;--accent-btn2:#8c3be0;--green:#1a6b3c;--green2:#2ecc71;--input:#1f142e;--input-text:#e6e1ff;--placeholder:#665980;--dev-bg:#1a1130;--dev-border:#3d2760;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');--overlay:rgba(11,7,18,0.6);--preset-bg:#1a5c3a;--preset-text:#c2ffcc;--preset-hover:#22734a;--shadow:rgba(212,168,255,0.3);--clear-hover:#c0392b;--toggle-active-text:#fff;--hover-text:#fff;--active-border:#9445ff;--settings-active-bg:#402666
         }
         .light{
-            --bg:#fefefe;--bg2:#f5f5f5;--bg3:#eee;--bg4:#f5f5f5;--text:#333;--text2:#555;--text3:#939394;--text4:#444;--border:#ddd;--border2:#ccc;--border3:#ddd;--btn:#f0f0f0;--btn2:#e8e8e8;--btn3:#eee;--accent:#666;--accent2:#777;--accent-btn:#888;--accent-btn2:#999;--green:#1a6b3c;--green2:#2ecc71;--input:#f5f5f5;--input-text:#333;--placeholder:#aaa;--dev-bg:#f0f0f0;--dev-border:#ddd;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');--overlay:rgba(254,254,254,0.7);--preset-bg:#1a6b3c;--preset-text:#fff;--preset-hover:#1e7a45;--shadow:rgba(0,0,0,0.1);--clear-hover:#c0392b;--toggle-active-text:#333;--hover-text:#333;--active-border:#aaa
+            --bg:#fefefe;--bg2:#f5f5f5;--bg3:#eee;--bg4:#f5f5f5;--text:#333;--text2:#555;--text3:#939394;--text4:#444;--border:#ddd;--border2:#ccc;--border3:#ddd;--btn:#f0f0f0;--btn2:#e8e8e8;--btn3:#eee;--accent:#666;--accent2:#777;--accent-btn:#888;--accent-btn2:#999;--green:#1a6b3c;--green2:#2ecc71;--input:#f5f5f5;--input-text:#333;--placeholder:#aaa;--dev-bg:#f0f0f0;--dev-border:#ddd;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');--overlay:rgba(254,254,254,0.7);--preset-bg:#1a6b3c;--preset-text:#fff;--preset-hover:#1e7a45;--shadow:rgba(0,0,0,0.1);--clear-hover:#c0392b;--toggle-active-text:#333;--hover-text:#333;--active-border:#aaa;--settings-active-bg:#d5d5d5
         }
         body{
             background-color:var(--bg);
@@ -47,6 +47,7 @@
         .header-buttons{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
         .settings-toggle,.lang-toggle,.preset-btn,.theme-toggle{background-color:var(--btn2);color:var(--text2);border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:14px;transition:0.2s;white-space:nowrap}
         .settings-toggle:hover,.lang-toggle:hover,.preset-btn:hover,.theme-toggle:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .settings-toggle.active{background-color:var(--settings-active-bg)}
         .lang-toggle{background-color:var(--btn3)}
         .theme-toggle{background-color:var(--btn2);color:var(--text2)}
         .preset-btn{background-color:var(--preset-bg);color:var(--preset-text)}
@@ -87,7 +88,6 @@
         .dev-link svg{width:18px;height:18px;fill:currentColor}
         .dev-label{color:var(--text3);font-size:13px;margin-right:4px}
         select{background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:8px;border-radius:6px;font-size:13px;cursor:pointer}
-        /* Пасхалка */
         .easter-egg{
             position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
             background:var(--accent-btn);color:#fff;padding:20px 40px;border-radius:16px;
@@ -109,7 +109,7 @@
             <button class="preset-btn" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')" id="presetBtn">Тест сайтов</button>
             <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌓</button>
             <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">🇷🇺 RU</button>
-            <button class="settings-toggle" id="settingsToggleBtn" onclick="toggleSettings()">⚙ <span id="settingsBtnText">Настройки</span></button>
+            <button class="settings-toggle" id="settingsToggleBtn" onclick="toggleSettings()"><span id="settingsBtnText">Настройки</span></button>
         </div>
     </div>
     <div class="settings-box" id="settingsBox">
@@ -123,22 +123,22 @@
             <select id="recordType" onchange="setRecordType(this.value)">
                 <option value="A">A (IPv4)</option>
                 <option value="AAAA">AAAA (IPv6)</option>
-                <option value="MX">MX (Почта)</option>
-                <option value="NS">NS (DNS-серверы)</option>
-                <option value="TXT">TXT (Текст)</option>
+                <option value="MX">MX (<span id="mxLabel">Почта</span>)</option>
+                <option value="NS">NS (<span id="nsLabel">DNS-серверы</span>)</option>
+                <option value="TXT">TXT (<span id="txtLabel">Текст</span>)</option>
             </select>
         </div>
         <div class="settings-label" id="timeoutLabel">Таймаут:</div>
         <div class="btn-group">
-            <button class="toggle-btn active" id="to5" onclick="setTimeoutVal(5)">5 сек</button>
-            <button class="toggle-btn" id="to10" onclick="setTimeoutVal(10)">10 сек</button>
-            <button class="toggle-btn" id="to15" onclick="setTimeoutVal(15)">15 сек</button>
+            <button class="toggle-btn active" id="to5" onclick="setTimeoutVal(5)"><span id="to5Text">5 сек</span></button>
+            <button class="toggle-btn" id="to10" onclick="setTimeoutVal(10)"><span id="to10Text">10 сек</span></button>
+            <button class="toggle-btn" id="to15" onclick="setTimeoutVal(15)"><span id="to15Text">15 сек</span></button>
         </div>
         <div class="settings-label" id="delayLabel">Задержка между запросами:</div>
         <div class="btn-group">
-            <button class="toggle-btn active" id="del0" onclick="setDelay(0)">Без задержки</button>
-            <button class="toggle-btn" id="del500" onclick="setDelay(500)">0.5 сек</button>
-            <button class="toggle-btn" id="del1000" onclick="setDelay(1000)">1 сек</button>
+            <button class="toggle-btn active" id="del0" onclick="setDelay(0)"><span id="del0Text">Без задержки</span></button>
+            <button class="toggle-btn" id="del500" onclick="setDelay(500)"><span id="del500Text">0.5 сек</span></button>
+            <button class="toggle-btn" id="del1000" onclick="setDelay(1000)"><span id="del1000Text">1 сек</span></button>
         </div>
         <div class="btn-group">
             <button class="toggle-btn" id="formatBtn" onclick="toggleFormat()">Формат: Only IP</button>
@@ -182,12 +182,11 @@ const dnsApiUrls={cloudflare:'https://cloudflare-dns.com/dns-query',google:'http
 const dnsButtonIds={cloudflare:'dnsCloudflare',google:'dnsGoogle'};
 const timeoutIds={5:'to5',10:'to10',15:'to15'};
 const delayIds={0:'del0',500:'del500',1000:'del1000'};
-const translations={ru:{settings:'Настройки',closeSettings:'✕ Закрыть',dnsLabel:'Выбор DNS сервера:',typeLabel:'Тип записи:',timeoutLabel:'Таймаут:',delayLabel:'Задержка между запросами:',formatBtn:['Формат: Classic','[✔] Формат: Hosts','[IP] Формат: Only IP'],inputPlaceholder:'Вставь список доменов сюда...',startBtn:'Узнать IP адреса',resultsPlaceholder:'Результаты появятся здесь...',resolving:'Идет проверка...\n',empty:'Список пуст.',error:'[Ошибка/Не найден]',errorHosts:'# [Ошибка]',copyBtn:'Копировать',copyBtnDone:'✓ Скопировано!',exportBtn:'📥 Скачать .txt',clearBtn:'✕',presetBtn:'Тест сайтов',dedupBtn:'📋 Убрать дубли',devLabel:'Разработчик:',easter:'Спасибо за использование',stats:(found,errors,total)=>`Найдено: ${found} / Ошибок: ${errors} / Всего: ${total}`},en:{settings:'Settings',closeSettings:'✕ Close',dnsLabel:'Select DNS server:',typeLabel:'Record type:',timeoutLabel:'Timeout:',delayLabel:'Delay between requests:',formatBtn:['Format: Classic','[✔] Format: Hosts','[IP] Format: Only IP'],inputPlaceholder:'Paste domain list here...',startBtn:'Resolve IP addresses',resultsPlaceholder:'Results will appear here...',resolving:'Resolving...\n',empty:'List is empty.',error:'[Error/Not found]',errorHosts:'# [Error]',copyBtn:'Copy',copyBtnDone:'✓ Copied!',exportBtn:'📥 Download .txt',clearBtn:'✕',presetBtn:'Test sites',dedupBtn:'📋 Remove duplicates',devLabel:'Developer:',easter:'Thank you for using',stats:(found,errors,total)=>`Found: ${found} / Errors: ${errors} / Total: ${total}`}};
+const translations={ru:{settings:'Настройки',closeSettings:'✕ Закрыть',dnsLabel:'Выбор DNS сервера:',typeLabel:'Тип записи:',timeoutLabel:'Таймаут:',delayLabel:'Задержка между запросами:',formatBtn:['Формат: Classic','[✔] Формат: Hosts','[IP] Формат: Only IP'],inputPlaceholder:'Вставь список доменов сюда...',startBtnA:'Узнать IP адреса',startBtnAAAA:'Узнать IPv6 адреса',startBtnMX:'Узнать почтовые серверы',startBtnNS:'Узнать DNS-серверы',startBtnTXT:'Узнать TXT-записи',resultsPlaceholder:'Результаты появятся здесь...',resolving:'Идет проверка...\n',empty:'Список пуст.',error:'[Ошибка/Не найден]',errorHosts:'# [Ошибка]',copyBtn:'Копировать',copyBtnDone:'✓ Скопировано!',exportBtn:'📥 Скачать .txt',clearBtn:'✕',presetBtn:'Тест сайтов',dedupBtn:'📋 Убрать дубли',devLabel:'Разработчик:',easter:'Спасибо за использование',mxLabel:'Почта',nsLabel:'DNS-серверы',txtLabel:'Текст',to5:'5 сек',to10:'10 сек',to15:'15 сек',del0:'Без задержки',del500:'0.5 сек',del1000:'1 сек',stats:(found,errors,total)=>`Найдено: ${found} / Ошибок: ${errors} / Всего: ${total}`},en:{settings:'Settings',closeSettings:'✕ Close',dnsLabel:'Select DNS server:',typeLabel:'Record type:',timeoutLabel:'Timeout:',delayLabel:'Delay between requests:',formatBtn:['Format: Classic','[✔] Format: Hosts','[IP] Format: Only IP'],inputPlaceholder:'Paste domain list here...',startBtnA:'Resolve IP addresses',startBtnAAAA:'Resolve IPv6 addresses',startBtnMX:'Resolve mail servers',startBtnNS:'Resolve DNS servers',startBtnTXT:'Resolve TXT records',resultsPlaceholder:'Results will appear here...',resolving:'Resolving...\n',empty:'List is empty.',error:'[Error/Not found]',errorHosts:'# [Error]',copyBtn:'Copy',copyBtnDone:'✓ Copied!',exportBtn:'📥 Download .txt',clearBtn:'✕',presetBtn:'Test sites',dedupBtn:'📋 Remove duplicates',devLabel:'Developer:',easter:'Thank you for using',mxLabel:'Mail',nsLabel:'DNS servers',txtLabel:'Text',to5:'5 sec',to10:'10 sec',to15:'15 sec',del0:'No delay',del500:'0.5 sec',del1000:'1 sec',stats:(found,errors,total)=>`Found: ${found} / Errors: ${errors} / Total: ${total}`}};
 function t(key,...args){let str=translations[currentLanguage][key];if(typeof str==='function')return str(...args);return str}
 function updateUILanguage(){
 document.getElementById('inputDomains').placeholder=t('inputPlaceholder');
 document.getElementById('resultsBox').placeholder=t('resultsPlaceholder');
-document.getElementById('startBtn').innerText=t('startBtn');
 document.getElementById('dnsLabel').innerText=t('dnsLabel');
 document.getElementById('typeLabel').innerText=t('typeLabel');
 document.getElementById('timeoutLabel').innerText=t('timeoutLabel');
@@ -197,15 +196,29 @@ document.getElementById('clearBtn').innerText=t('clearBtn');
 document.getElementById('presetBtn').innerText=t('presetBtn');
 document.getElementById('dedupBtn').innerText=t('dedupBtn');
 document.getElementById('devLabel').innerText=t('devLabel');
+document.getElementById('mxLabel').innerText=t('mxLabel');
+document.getElementById('nsLabel').innerText=t('nsLabel');
+document.getElementById('txtLabel').innerText=t('txtLabel');
+document.getElementById('to5Text').innerText=t('to5');
+document.getElementById('to10Text').innerText=t('to10');
+document.getElementById('to15Text').innerText=t('to15');
+document.getElementById('del0Text').innerText=t('del0');
+document.getElementById('del500Text').innerText=t('del500');
+document.getElementById('del1000Text').innerText=t('del1000');
+updateStartBtnText();
 const ct=document.getElementById('copyBtnText'),cb=document.getElementById('copyBtn');
 if(!cb.classList.contains('copied'))ct.innerText=t('copyBtn');
 updateFormatButtonText();
 document.getElementById('langToggleBtn').innerText=currentLanguage==='ru'?'🇷🇺 RU':'🇬🇧 EN';
 updateSettingsButtonText()}
+function updateStartBtnText(){
+const btn=document.getElementById('startBtn');
+const key='startBtn'+recordType;
+btn.innerText=t(key)}
 function updateSettingsButtonText(){
-const sb=document.getElementById('settingsBox'),stb=document.getElementById('settingsToggleBtn'),sbt=document.getElementById('settingsBtnText');
-if(sb.style.display==='flex'){sbt.innerText=t('closeSettings');stb.style.backgroundColor=''}
-else{sbt.innerText=t('settings');stb.style.backgroundColor=''}}
+const stb=document.getElementById('settingsToggleBtn'),sbt=document.getElementById('settingsBtnText'),sb=document.getElementById('settingsBox');
+if(sb.style.display==='flex'){sbt.innerText='⚙ '+t('closeSettings');stb.classList.add('active')}
+else{sbt.innerText='⚙ '+t('settings');stb.classList.remove('active')}}
 function updateFormatButtonText(){
 const b=document.getElementById('formatBtn'),fl=t('formatBtn');
 if(outputFormat==='classic'){b.innerText=fl[0];b.classList.remove('active')}
@@ -224,7 +237,9 @@ function setDns(p){
 dnsProvider=p;
 Object.values(dnsButtonIds).forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove('active')});
 const ab=document.getElementById(dnsButtonIds[p]);if(ab)ab.classList.add('active')}
-function setRecordType(t){recordType=t}
+function setRecordType(t){
+recordType=t;
+updateStartBtnText()}
 function setTimeoutVal(s){
 timeout=s*1000;
 Object.values(timeoutIds).forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove('active')});
