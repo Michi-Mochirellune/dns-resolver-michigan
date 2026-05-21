@@ -251,6 +251,7 @@ function openFS(overlayId,sourceId,targetId){document.getElementById(targetId).v
 function closeFS(id){document.getElementById(id).classList.remove('show')}
 function updateAllTexts(){
 document.getElementById('stopBtn').textContent=t('stopBtn');
+document.getElementById('easterText').innerText=t('easter');
 if(currentResults.length>0){document.getElementById('dnsIndicator').innerText=t('dnsIndicator',dnsProvider==='compare'?'Cloudflare vs Google':dnsProvider==='cloudflare'?'Cloudflare':'Google');const found=currentResults.filter(r=>!r.error).length,errors=currentResults.length-found;document.getElementById('stats').innerText=t('stats',found,errors,currentResults.length);const totalSize=currentResults.reduce((s,r)=>s+(r.size||0),0);const sizeKB=(totalSize/1024).toFixed(1);const elapsed=((resolveStartTime>0?(Date.now()-resolveStartTime)/1000:0)).toFixed(1);document.getElementById('timeInfo').innerText=t('timeInfo',elapsed,sizeKB)}
 document.getElementById('inputDomains').placeholder=t('inputPlaceholder');document.getElementById('resultsBox').placeholder=t('resultsPlaceholder');
 document.getElementById('dnsLabel').innerText=t('dnsLabel');document.getElementById('typeLabel').innerText=t('typeLabel');
