@@ -1,4 +1,4 @@
-# Dns Resolver Michigan
+![Dns Resolver Michigan](https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoreadme.jpg)
 
 Мини-утилита для массового определения IP-адресов и DNS-записей доменов. Работает прямо в браузере, ничего устанавливать не нужно.
 
