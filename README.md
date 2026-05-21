@@ -51,4 +51,4 @@
 - localStorage для темы и языка
 
 ## Разработчик
-- Telegram: [@MichiMochirellune](https://t.me/PSI_missing)
+- Telegram: [@PSI_missing](https://t.me/PSI_missing)
