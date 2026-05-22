@@ -284,6 +284,7 @@ const lines=inputText.split('\n');let domains=lines.map(l=>l.trim()).filter(l=>l
 if(domains.length===0){rc.style.display='none';rb.value=t('empty');toast(t('emptyToast'));return}
 rc.style.display='flex';stats.innerText='';timeInfo.innerText='';dnsIndicator.innerText='';rb.value='';startBtn.style.display='none';stopBtn.style.display='inline-block';stopBtn.textContent=t('stopBtn');progressBar.style.display='block';progressFill.style.width='0%';stopBtn.disabled=false;currentResults=[];resolveStartTime=Date.now();
 const names=activeServers.map(k=>allDNSServers[k]?allDNSServers[k].name:k).join(', ');dnsIndicator.innerText=t('dnsIndicator',names);
+if('Notification' in window && Notification.permission === 'default'){Notification.requestPermission()}
 toast(t('started'));
 let found=0,errors=0,totalSize=0;abortController=new AbortController();
 let allOutput=[];
@@ -322,7 +323,6 @@ document.getElementById('dropBox').addEventListener('drop',e=>{e.preventDefault(
 try{const savedLang=localStorage.getItem('dnsresolver_lang');if(savedLang==='ru'||savedLang==='en')currentLanguage=savedLang;const savedTheme=localStorage.getItem('dnsresolver_theme');if(savedTheme==='system'||savedTheme==='light'||savedTheme==='dark')themeMode=savedTheme}catch(e){}
 applyTheme();updateAllTexts();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
-if('Notification' in window && Notification.permission === 'default'){Notification.requestPermission()}
 </script>
 </body>
 </html>
