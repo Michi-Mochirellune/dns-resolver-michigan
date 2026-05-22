@@ -313,13 +313,16 @@ allOutput.push(domainResults.join('\n'));
 rb.value=allOutput.join('\n');stats.innerText=t('stats',found,errors,i+1);progressFill.style.width=((i+1)/domains.length*100)+'%';
 if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promise(r=>setTimeout(r,delay))}
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);
-abortController=null;stopResolving()}
+abortController=null;stopResolving();
+if('serviceWorker' in navigator && Notification.permission === 'granted'){navigator.serviceWorker.ready.then(reg=>{reg.showNotification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png',silent:true})})}
 document.getElementById('dropBox').addEventListener('click',()=>document.getElementById('dropFileInput').click());
 document.getElementById('dropBox').addEventListener('dragover',e=>{e.preventDefault();e.currentTarget.classList.add('drag-over')});
 document.getElementById('dropBox').addEventListener('dragleave',e=>{e.currentTarget.classList.remove('drag-over')});
 document.getElementById('dropBox').addEventListener('drop',e=>{e.preventDefault();e.currentTarget.classList.remove('drag-over');const file=e.dataTransfer.files[0];if(file){const dt=new DataTransfer();dt.items.add(file);document.getElementById('dropFileInput').files=dt.files;handleFile(document.getElementById('dropFileInput'),true)}});
 try{const savedLang=localStorage.getItem('dnsresolver_lang');if(savedLang==='ru'||savedLang==='en')currentLanguage=savedLang;const savedTheme=localStorage.getItem('dnsresolver_theme');if(savedTheme==='system'||savedTheme==='light'||savedTheme==='dark')themeMode=savedTheme}catch(e){}
 applyTheme();updateAllTexts();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+if('Notification' in window && Notification.permission === 'default'){Notification.requestPermission()}
 </script>
 </body>
 </html>
