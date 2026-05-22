@@ -309,11 +309,11 @@ for(let s of activeServers){
         else{domainResults.push(t('errorHosts')+' '+domain)}
     }
 }
-allOutput.push(domainResults.join('\n'))}
+allOutput.push(domainResults.join('\n'));
 rb.value=allOutput.join('\n');stats.innerText=t('stats',found,errors,i+1);progressFill.style.width=((i+1)/domains.length*100)+'%';
 if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promise(r=>setTimeout(r,delay))}
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);
-abortController=null;stopResolving();
+abortController=null;stopResolving()}
 if('serviceWorker' in navigator && Notification.permission === 'granted'){navigator.serviceWorker.ready.then(reg=>{reg.showNotification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png',silent:true})})}
 document.getElementById('dropBox').addEventListener('click',()=>document.getElementById('dropFileInput').click());
 document.getElementById('dropBox').addEventListener('dragover',e=>{e.preventDefault();e.currentTarget.classList.add('drag-over')});
