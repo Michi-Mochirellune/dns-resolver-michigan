@@ -294,11 +294,17 @@ for(let s of activeServers){
     let res=await resolveSingle(domain,s,recordType);
     let shortName=allDNSServers[s]?allDNSServers[s].short:s;
     if(res&&res.result){found++;totalSize+=res.size;currentResults.push({domain,ip:res.result,error:false,ttl:res.ttl||null,dnssec:res.dnssec,size:res.size,server:s});let extras='';if(showTTL&&res.ttl)extras+=' [TTL:'+res.ttl+'s]';if(res.dnssec)extras+=' [🔒 DNSSEC]';
-        if(outputFormat==='hosts'){domainResults.push(`${res.result} ${domain}${extras}`)}
+        if(outputFormat==='hosts'){
+     if(showDNSNames){domainResults.push(`${shortName}: ${res.result} ${domain}${extras}`)}
+    else{domainResults.push(`${res.result} ${domain}${extras}`)}
+}
         else if(showDNSNames){domainResults.push(`${shortName}: ${res.result}${extras}`)}
         else{domainResults.push(res.result+extras)}
     }else{errors++;currentResults.push({domain,ip:null,error:true,size:0,server:s});
-        if(outputFormat==='hosts'){domainResults.push(`${t('errorHosts')} ${domain}`)}
+        if(outputFormat==='hosts'){
+    if(showDNSNames){domainResults.push(`${shortName}: ${t('errorHosts')} ${domain}`)}
+    else{domainResults.push(`${t('errorHosts')} ${domain}`)}
+}
         else if(showDNSNames){domainResults.push(`${shortName}: -`)}
         else{domainResults.push(t('errorHosts')+' '+domain)}
     }
