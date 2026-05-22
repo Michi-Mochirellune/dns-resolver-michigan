@@ -40,6 +40,8 @@
         .tgl-btn{flex:1;min-width:60px;background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:10px 8px;font-size:13px;border-radius:6px;cursor:pointer;text-align:center}
         .tgl-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
         .tgl-btn.active{background-color:var(--accent-btn);color:var(--toggle-active-text);border-color:var(--active-border);box-shadow:0 0 8px var(--shadow)}
+        .dns-select-btn{background:var(--accent-btn);color:#fff;border:none;padding:10px;border-radius:6px;cursor:pointer;font-size:14px;width:100%;text-align:center}
+        .dns-select-btn:hover{background:var(--accent-btn2)}
         textarea{width:100%;height:160px;background-color:var(--input);color:var(--input-text);border:1px solid var(--border2);border-radius:8px;padding:10px;font-size:15px;box-sizing:border-box;resize:vertical;outline:none}
         textarea::placeholder{color:var(--placeholder)}
         textarea:focus{border-color:var(--accent-btn);box-shadow:0 0 10px var(--shadow)}
@@ -80,9 +82,14 @@
         input[type="file"]{display:none}
         .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;justify-content:center;align-items:center}
         .modal-overlay.show{display:flex}
-        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;color:var(--text2);font-size:14px;max-width:320px;width:90%;display:flex;flex-direction:column;gap:8px;max-height:80vh;overflow-y:auto}
+        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;color:var(--text2);font-size:14px;max-width:400px;width:90%;display:flex;flex-direction:column;gap:8px;max-height:80vh;overflow-y:auto}
         .modal-box button{background:var(--btn);color:var(--text2);border:1px solid var(--border);padding:10px;border-radius:6px;cursor:pointer;font-size:14px;width:100%}
         .modal-box button:hover{background:var(--accent-btn);color:#fff}
+        .dns-grid{display:flex;flex-direction:column;gap:8px;text-align:left}
+        .dns-grid label{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;color:var(--text2);padding:8px;border-radius:6px;background:var(--btn)}
+        .dns-grid label:hover{background:var(--btn2)}
+        .dns-grid input[type="checkbox"]{accent-color:var(--accent-btn);width:18px;height:18px}
+        .dns-done-btn{background:var(--accent-btn)!important;color:#fff!important;margin-top:6px}
         .drop-box{background:var(--bg2);border:2px dashed var(--accent-btn);border-radius:16px;padding:40px;text-align:center;color:var(--text2);font-size:16px;cursor:pointer}
         .drop-box.drag-over{border-color:var(--accent);background:var(--btn2)}
         .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent-btn);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.3);opacity:0;pointer-events:none}
@@ -95,6 +102,13 @@
 <div class="easter-egg" id="easterEgg"><span id="easterText"></span> <span class="heart">❤️</span></div>
 <div class="modal-overlay" id="dropOverlay" onclick="hideModal('dropOverlay')"><div class="drop-box" id="dropBox" onclick="event.stopPropagation()"><span id="dropText"></span><input type="file" id="dropFileInput" accept="*" onchange="handleFile(this,true)" style="display:none"></div></div>
 <div class="modal-overlay" id="exportMenu" onclick="hideModal('exportMenu')"><div class="modal-box" onclick="event.stopPropagation()"><div style="font-weight:bold" id="exportTitle"></div><button onclick="exportFile('txt')">📄 TXT</button><button onclick="exportFile('csv')">📊 CSV</button><button onclick="exportFile('json')">📋 JSON</button></div></div>
+<div class="modal-overlay" id="dnsMenu" onclick="hideModal('dnsMenu')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div style="font-weight:bold" id="dnsMenuTitle"></div>
+        <div class="dns-grid" id="dnsGrid"></div>
+        <button class="dns-done-btn" onclick="hideModal('dnsMenu')" id="dnsDoneBtn"></button>
+    </div>
+</div>
 <div class="fullscreen-overlay" id="fsInput"><button class="fullscreen-close" onclick="closeFS('fsInput')">✕</button><textarea id="fsInputBox"></textarea></div>
 <div class="fullscreen-overlay" id="fsResults"><button class="fullscreen-close" onclick="closeFS('fsResults')">✕</button><textarea id="fsResultsBox" readonly></textarea></div>
 <div class="container" id="mainContainer">
@@ -115,10 +129,12 @@
     </div>
     <div class="settings-box" id="settingsBox">
         <div class="s-label" id="dnsLabel"></div>
+        <button class="dns-select-btn" onclick="showDNSMenu()" id="dnsSelectBtn"></button>
+        <div class="s-label" id="showDNSNamesLabel"><button class="tip-btn" onclick="toggleTip('dnsNamesTip')">?</button></div>
+        <div class="tip-content" id="dnsNamesTip"><span id="dnsNamesTipText"></span></div>
         <div class="btn-group">
-            <button class="tgl-btn active" id="dnsCloudflare" onclick="setDns('cloudflare')">☁️ Cloudflare</button>
-            <button class="tgl-btn" id="dnsGoogle" onclick="setDns('google')">🔴 Google</button>
-            <button class="tgl-btn" id="dnsCompare" onclick="setDns('compare')"><span id="compareText"></span></button>
+            <button class="tgl-btn" id="dnsNamesOn" onclick="setShowDNSNames(true)"><span id="dnsNamesOnText"></span></button>
+            <button class="tgl-btn active" id="dnsNamesOff" onclick="setShowDNSNames(false)"><span id="dnsNamesOffText"></span></button>
         </div>
         <div class="s-label" id="typeLabel"></div>
         <div class="btn-group">
@@ -136,12 +152,6 @@
         <div class="btn-group">
             <button class="tgl-btn" id="ttlOn" onclick="setShowTTL(true)"><span id="ttlOnText"></span></button>
             <button class="tgl-btn active" id="ttlOff" onclick="setShowTTL(false)"><span id="ttlOffText"></span></button>
-        </div>
-        <div class="s-label" id="scaleLabel"></div>
-        <div class="btn-group">
-            <button class="tgl-btn" id="scaleS" onclick="setScale(0.85)">🔽 S</button>
-            <button class="tgl-btn active" id="scaleM" onclick="setScale(1)">⚖️ M</button>
-            <button class="tgl-btn" id="scaleL" onclick="setScale(1.2)">🔼 L</button>
         </div>
         <div class="s-label" id="timeoutLabel"><button class="tip-btn" onclick="toggleTip('timeoutTip')">?</button></div>
         <div class="tip-content" id="timeoutTip"><span id="timeoutTipText"></span></div>
@@ -199,32 +209,49 @@
     </div>
 </div>
 <script>
-let dnsProvider='cloudflare',outputFormat='onlyip',currentLanguage='ru',recordType='A',timeout=5000,delay=0,themeMode='system',easterClicks=0,filterMode='all',currentResults=[],abortController=null,resolveStartTime=0,showTTL=false,scaleLevel=1;
-const dnsApiUrls={cloudflare:'https://cloudflare-dns.com/dns-query',google:'https://dns.google/resolve'};
-const dnsButtonIds={cloudflare:'dnsCloudflare',google:'dnsGoogle',compare:'dnsCompare'};
+let outputFormat='onlyip',currentLanguage='ru',recordType='A',timeout=5000,delay=0,themeMode='system',easterClicks=0,filterMode='all',currentResults=[],abortController=null,resolveStartTime=0,showTTL=false,showDNSNames=false,activeServers=['cloudflare'];
+const allDNSServers={cloudflare:{name:'☁️ Cloudflare',short:'CF',url:'https://cloudflare-dns.com/dns-query'},google:{name:'🔴 Google',short:'G',url:'https://dns.google/resolve'},dnssb:{name:'🟢 DNS.SB',short:'SB',url:'https://doh.dns.sb/dns-query'}};
 const timeoutIds={5:'to5',10:'to10',15:'to15'};
 const delayIds={0:'del0',500:'del500',1000:'del1000'};
 const recordTypes={A:1,AAAA:28,MX:15,NS:2,SOA:6,TXT:16};
-const L={ru:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Выбор DNS сервера',typeLabel:'📝 Тип записи',showTTLLabel:'⏱️ Показывать TTL',ttlTipText:'Время жизни DNS-записи в секундах',ttlOn:'✅ Вкл',ttlOff:'❌ Выкл',scaleLabel:'🔍 Масштаб',timeoutLabel:'⏰ Таймаут',delayLabel:'🐌 Задержка',formatLabel:'🎨 Формат вывода',formatBtn:['🎨 Формат: Classic','📁 Формат: Hosts','🔢 Формат: Only IP'],formatTipText:'Only IP — только адреса, Hosts — для hosts-файла, Classic — подробный вывод',inputPlaceholder:'📝 Вставь список доменов сюда...',startBtnA:'🚀 Узнать IP адреса',startBtnAAAA:'🚀 Узнать IPv6 адреса',startBtnMX:'📧 Узнать почтовые серверы',startBtnNS:'🗄️ Узнать DNS-серверы',startBtnSOA:'📋 Узнать зоны',startBtnTXT:'📝 Узнать TXT-записи',stopBtn:'⏹️ Стоп',resultsPlaceholder:'📊 Результаты появятся здесь...',resolving:'⏳ Идет проверка...\n',empty:'📭 Список пуст',error:'❌ Ошибка/Не найден',errorHosts:'# ❌ Ошибка',presetBtn:'📋 Тест сайтов',dedupBtn:'♻️ Убрать дубли',uploadBtn:'📂 Импорт',filterBtn:['🔍 Все','✅ Успешные','❌ Ошибки'],exportTitle:'📥 Экспорт',exportBtn:'📥 Экспорт',dnsIndicator:p=>`🔍 Проверено через: ${p}`,easter:'Спасибо за использование',mxLabel:'Почта',nsLabel:'DNS-серверы',soaLabel:'Зона',txtLabel:'Текст',compareText:'⚖️ Сравнить',to5:'5 сек',to10:'10 сек',to15:'15 сек',del0:'⚡ Без задержки',del500:'0.5 сек',del1000:'1 сек',timeoutTipText:'Максимальное время ожидания ответа от DNS-сервера',delayTipText:'Пауза между запросами, чтобы не перегружать сервер',dropText:'📂 Перетащите файл сюда или нажмите, чтобы выбрать',timeInfo:(s,z)=>`⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,stats:(f,e,t)=>`✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${t}`,copied:'✅ Скопировано',copyFail:'❌ Не удалось',emptyToast:'📭 Нечего копировать',imported:'✅ Файл загружен',importFail:'❌ Ошибка загрузки',cleared:'🗑️ Очищено',started:'🚀 Проверка началась',exported:'📥 Экспорт сохранён',dupsRemoved:'♻️ Дубли удалены',presetAdded:'📋 Тестовые сайты добавлены'},en:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Select DNS server',typeLabel:'📝 Record type',showTTLLabel:'⏱️ Show TTL',ttlTipText:'DNS record Time To Live in seconds',ttlOn:'✅ On',ttlOff:'❌ Off',scaleLabel:'🔍 Scale',timeoutLabel:'⏰ Timeout',delayLabel:'🐌 Delay',formatLabel:'🎨 Output format',formatBtn:['🎨 Format: Classic','📁 Format: Hosts','🔢 Format: Only IP'],formatTipText:'Only IP — just addresses, Hosts — for hosts file, Classic — detailed output',inputPlaceholder:'📝 Paste domain list here...',startBtnA:'🚀 Resolve IP addresses',startBtnAAAA:'🚀 Resolve IPv6 addresses',startBtnMX:'📧 Resolve mail servers',startBtnNS:'🗄️ Resolve DNS servers',startBtnSOA:'📋 Resolve zones',startBtnTXT:'📝 Resolve TXT records',stopBtn:'⏹ Stop',resultsPlaceholder:'📊 Results will appear here...',resolving:'⏳ Resolving...\n',empty:'📭 List is empty',error:'❌ Error/Not found',errorHosts:'# ❌ Error',presetBtn:'📋 Test sites',dedupBtn:'♻️ Remove duplicates',uploadBtn:'📂 Import',filterBtn:['🔍 All','✅ Success','❌ Errors'],exportTitle:'📥 Export',exportBtn:'📥 Export',dnsIndicator:p=>`🔍 Resolved via: ${p}`,easter:'Thank you for using',mxLabel:'Mail',nsLabel:'DNS servers',soaLabel:'Zone',txtLabel:'Text',compareText:'⚖️ Compare',to5:'5 sec',to10:'10 sec',to15:'15 sec',del0:'⚡ No delay',del500:'0.5 sec',del1000:'1 sec',timeoutTipText:'Maximum wait time for DNS response',delayTipText:'Pause between requests to avoid overloading',dropText:'📂 Drop file here or click to select',timeInfo:(s,z)=>`⏱️ Time: ${s}s | 📦 Response: ${z}KB`,stats:(f,e,t)=>`✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${t}`,copied:'✅ Copied',copyFail:'❌ Failed',emptyToast:'📭 Nothing to copy',imported:'✅ File loaded',importFail:'❌ Load error',cleared:'🗑️ Cleared',started:'🚀 Resolving started',exported:'📥 Export saved',dupsRemoved:'♻️ Duplicates removed',presetAdded:'📋 Test sites added'}};
+const L={ru:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Выбор DNS серверов',dnsSelectBtn:'📡 Выбрать DNS серверы',showDNSNamesLabel:'🏷️ Показывать названия DNS',dnsNamesTipText:'Добавляет краткое название DNS перед IP-адресом',dnsNamesOn:'✅ Вкл',dnsNamesOff:'❌ Выкл',dnsMenuTitle:'📡 Выберите DNS серверы',dnsDoneBtn:'✅ Готово',typeLabel:'📝 Тип записи',showTTLLabel:'⏱️ Показывать TTL',ttlTipText:'Время жизни DNS-записи в секундах',ttlOn:'✅ Вкл',ttlOff:'❌ Выкл',timeoutLabel:'⏰ Таймаут',delayLabel:'🐌 Задержка',formatLabel:'🎨 Формат вывода',formatBtn:['🎨 Формат: Classic','📁 Формат: Hosts','🔢 Формат: Only IP'],formatTipText:'Only IP — только адреса, Hosts — для hosts-файла, Classic — подробный вывод',inputPlaceholder:'📝 Вставь список доменов сюда...',startBtnA:'🚀 Узнать IP адреса',startBtnAAAA:'🚀 Узнать IPv6 адреса',startBtnMX:'📧 Узнать почтовые серверы',startBtnNS:'🗄️ Узнать DNS-серверы',startBtnSOA:'📋 Узнать зоны',startBtnTXT:'📝 Узнать TXT-записи',stopBtn:'⏹️ Стоп',resultsPlaceholder:'📊 Результаты появятся здесь...',resolving:'⏳ Идет проверка...\n',empty:'📭 Список пуст',error:'❌ Ошибка/Не найден',errorHosts:'# ❌ Ошибка',presetBtn:'📋 Тест сайтов',dedupBtn:'♻️ Убрать дубли',uploadBtn:'📂 Импорт',filterBtn:['🔍 Все','✅ Успешные','❌ Ошибки'],exportTitle:'📥 Экспорт',exportBtn:'📥 Экспорт',dnsIndicator:p=>`🔍 Проверено через: ${p}`,easter:'Спасибо за использование',mxLabel:'Почта',nsLabel:'DNS-серверы',soaLabel:'Зона',txtLabel:'Текст',to5:'5 сек',to10:'10 сек',to15:'15 сек',del0:'⚡ Без задержки',del500:'0.5 сек',del1000:'1 сек',timeoutTipText:'Максимальное время ожидания ответа от DNS-сервера',delayTipText:'Пауза между запросами, чтобы не перегружать сервер',dropText:'📂 Перетащите файл сюда или нажмите, чтобы выбрать',timeInfo:(s,z)=>`⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,stats:(f,e,t)=>`✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${t}`,copied:'✅ Скопировано',copyFail:'❌ Не удалось',emptyToast:'📭 Нечего копировать',imported:'✅ Файл загружен',importFail:'❌ Ошибка загрузки',cleared:'🗑️ Очищено',started:'🚀 Проверка началась',exported:'📥 Экспорт сохранён',dupsRemoved:'♻️ Дубли удалены',presetAdded:'📋 Тестовые сайты добавлены'},en:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Select DNS servers',dnsSelectBtn:'📡 Choose DNS servers',showDNSNamesLabel:'🏷️ Show DNS names',dnsNamesTipText:'Adds short DNS name before IP address',dnsNamesOn:'✅ On',dnsNamesOff:'❌ Off',dnsMenuTitle:'📡 Select DNS servers',dnsDoneBtn:'✅ Done',typeLabel:'📝 Record type',showTTLLabel:'⏱️ Show TTL',ttlTipText:'DNS record Time To Live in seconds',ttlOn:'✅ On',ttlOff:'❌ Off',timeoutLabel:'⏰ Timeout',delayLabel:'🐌 Delay',formatLabel:'🎨 Output format',formatBtn:['🎨 Format: Classic','📁 Format: Hosts','🔢 Format: Only IP'],formatTipText:'Only IP — just addresses, Hosts — for hosts file, Classic — detailed output',inputPlaceholder:'📝 Paste domain list here...',startBtnA:'🚀 Resolve IP addresses',startBtnAAAA:'🚀 Resolve IPv6 addresses',startBtnMX:'📧 Resolve mail servers',startBtnNS:'🗄️ Resolve DNS servers',startBtnSOA:'📋 Resolve zones',startBtnTXT:'📝 Resolve TXT records',stopBtn:'⏹ Stop',resultsPlaceholder:'📊 Results will appear here...',resolving:'⏳ Resolving...\n',empty:'📭 List is empty',error:'❌ Error/Not found',errorHosts:'# ❌ Error',presetBtn:'📋 Test sites',dedupBtn:'♻️ Remove duplicates',uploadBtn:'📂 Import',filterBtn:['🔍 All','✅ Success','❌ Errors'],exportTitle:'📥 Export',exportBtn:'📥 Export',dnsIndicator:p=>`🔍 Resolved via: ${p}`,easter:'Thank you for using',mxLabel:'Mail',nsLabel:'DNS servers',soaLabel:'Zone',txtLabel:'Text',to5:'5 sec',to10:'10 sec',to15:'15 sec',del0:'⚡ No delay',del500:'0.5 sec',del1000:'1 sec',timeoutTipText:'Maximum wait time for DNS response',delayTipText:'Pause between requests to avoid overloading',dropText:'📂 Drop file here or click to select',timeInfo:(s,z)=>`⏱️ Time: ${s}s | 📦 Response: ${z}KB`,stats:(f,e,t)=>`✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${t}`,copied:'✅ Copied',copyFail:'❌ Failed',emptyToast:'📭 Nothing to copy',imported:'✅ File loaded',importFail:'❌ Load error',cleared:'🗑️ Cleared',started:'🚀 Resolving started',exported:'📥 Export saved',dupsRemoved:'♻️ Duplicates removed',presetAdded:'📋 Test sites added'}};
 function t(key,...args){let str=L[currentLanguage][key];if(typeof str==='function')return str(...args);return str}
 function toast(msg){let el=document.querySelector('.toast');if(!el){el=document.createElement('div');el.className='toast';document.body.appendChild(el)}el.textContent=msg;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000)}
 function updateLogo(){document.getElementById('logo').src=document.body.classList.contains('light')?'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png':'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png'}
-function applyScale(){const s=scaleLevel;document.getElementById('mainContainer').style.transform=`scale(${s})`;document.getElementById('mainContainer').style.transformOrigin='top center';document.getElementById('scaleS').classList.toggle('active',s===0.85);document.getElementById('scaleM').classList.toggle('active',s===1);document.getElementById('scaleL').classList.toggle('active',s===1.2)}
-function setScale(s){scaleLevel=s;applyScale()}
 function setShowTTL(v){showTTL=v;document.getElementById('ttlOn').classList.toggle('active',v);document.getElementById('ttlOff').classList.toggle('active',!v)}
+function setShowDNSNames(v){showDNSNames=v;document.getElementById('dnsNamesOn').classList.toggle('active',v);document.getElementById('dnsNamesOff').classList.toggle('active',!v)}
 function copyTextarea(id){const ta=document.getElementById(id);const text=ta.value;if(!text.trim()){toast(t('emptyToast'));return}ta.select();ta.setSelectionRange(0,99999);try{document.execCommand('copy');toast(t('copied'))}catch(e){toast(t('copyFail'))}ta.blur()}
 function showModal(id){document.getElementById(id).classList.add('show')}
 function hideModal(id){document.getElementById(id).classList.remove('show')}
 function openFS(overlayId,sourceId,targetId){document.getElementById(targetId).value=document.getElementById(sourceId).value;document.getElementById(overlayId).classList.add('show')}
 function closeFS(id){document.getElementById(id).classList.remove('show')}
+function showDNSMenu(){
+    const grid=document.getElementById('dnsGrid');grid.innerHTML='';
+    for(let key in allDNSServers){
+        const s=allDNSServers[key];const checked=activeServers.includes(key)?'checked':'';
+        grid.innerHTML+=`<label><input type="checkbox" value="${key}" ${checked} onchange="toggleServer('${key}',this.checked)">${s.name}</label>`;
+    }
+    document.getElementById('dnsMenuTitle').innerText=t('dnsMenuTitle');
+    document.getElementById('dnsDoneBtn').innerText=t('dnsDoneBtn');
+    showModal('dnsMenu');
+}
+function toggleServer(key,checked){
+    if(checked){if(!activeServers.includes(key))activeServers.push(key)}
+    else{activeServers=activeServers.filter(k=>k!==key);if(activeServers.length===0)activeServers=['cloudflare']}
+}
 function updateAllTexts(){
 document.getElementById('stopBtn').textContent=t('stopBtn');document.getElementById('easterText').innerText=t('easter');
-if(currentResults.length>0){document.getElementById('dnsIndicator').innerText=t('dnsIndicator',dnsProvider==='compare'?'Cloudflare vs Google':dnsProvider==='cloudflare'?'Cloudflare':'Google');const found=currentResults.filter(r=>!r.error).length,errors=currentResults.length-found;document.getElementById('stats').innerText=t('stats',found,errors,currentResults.length);const totalSize=currentResults.reduce((s,r)=>s+(r.size||0),0);const sizeKB=(totalSize/1024).toFixed(1);const elapsed=((resolveStartTime>0?(Date.now()-resolveStartTime)/1000:0)).toFixed(1);document.getElementById('timeInfo').innerText=t('timeInfo',elapsed,sizeKB)}
+if(currentResults.length>0){
+    const names=activeServers.map(k=>allDNSServers[k]?allDNSServers[k].name:k).join(', ');document.getElementById('dnsIndicator').innerText=t('dnsIndicator',names);
+    const found=currentResults.filter(r=>!r.error).length,errors=currentResults.length-found;document.getElementById('stats').innerText=t('stats',found,errors,currentResults.length);
+    const totalSize=currentResults.reduce((s,r)=>s+(r.size||0),0);const sizeKB=(totalSize/1024).toFixed(1);const elapsed=((resolveStartTime>0?(Date.now()-resolveStartTime)/1000:0)).toFixed(1);document.getElementById('timeInfo').innerText=t('timeInfo',elapsed,sizeKB)}
 document.getElementById('inputDomains').placeholder=t('inputPlaceholder');document.getElementById('resultsBox').placeholder=t('resultsPlaceholder');
-document.getElementById('dnsLabel').innerText=t('dnsLabel');document.getElementById('typeLabel').innerText=t('typeLabel');
+document.getElementById('dnsLabel').innerText=t('dnsLabel');document.getElementById('dnsSelectBtn').innerText=t('dnsSelectBtn');
+document.getElementById('showDNSNamesLabel').innerHTML=t('showDNSNamesLabel')+' <button class="tip-btn" onclick="toggleTip(\'dnsNamesTip\')">?</button>';
+document.getElementById('dnsNamesTipText').innerText=t('dnsNamesTipText');document.getElementById('dnsNamesOnText').innerText=t('dnsNamesOn');document.getElementById('dnsNamesOffText').innerText=t('dnsNamesOff');
+document.getElementById('typeLabel').innerText=t('typeLabel');
 document.getElementById('showTTLLabel').innerHTML=t('showTTLLabel')+' <button class="tip-btn" onclick="toggleTip(\'ttlTip\')">?</button>';
 document.getElementById('ttlTipText').innerText=t('ttlTipText');document.getElementById('ttlOnText').innerText=t('ttlOn');document.getElementById('ttlOffText').innerText=t('ttlOff');
-document.getElementById('scaleLabel').innerText=t('scaleLabel');
 document.getElementById('timeoutLabel').innerHTML=t('timeoutLabel')+' <button class="tip-btn" onclick="toggleTip(\'timeoutTip\')">?</button>';
 document.getElementById('delayLabel').innerHTML=t('delayLabel')+' <button class="tip-btn" onclick="toggleTip(\'delayTip\')">?</button>';
 document.getElementById('formatLabel').innerHTML=t('formatLabel')+' <button class="tip-btn" onclick="toggleTip(\'formatTip\')">?</button>';
@@ -234,7 +261,6 @@ document.getElementById('exportMenuBtn').innerText=t('exportBtn');document.getEl
 document.getElementById('exportTitle').innerText=t('exportTitle');
 document.getElementById('mxLabel').innerText=t('mxLabel');document.getElementById('nsLabel').innerText=t('nsLabel');
 document.getElementById('soaLabel').innerText=t('soaLabel');document.getElementById('txtLabel').innerText=t('txtLabel');
-document.getElementById('compareText').innerText=t('compareText');
 document.getElementById('to5Text').innerText=t('to5');document.getElementById('to10Text').innerText=t('to10');document.getElementById('to15Text').innerText=t('to15');
 document.getElementById('del0Text').innerText=t('del0');document.getElementById('del500Text').innerText=t('del500');document.getElementById('del1000Text').innerText=t('del1000');
 document.getElementById('timeoutTipText').innerText=t('timeoutTipText');document.getElementById('delayTipText').innerText=t('delayTipText');
@@ -252,7 +278,6 @@ function cycleTheme(){themeMode=themeMode==='system'?'light':themeMode==='light'
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if(themeMode==='system')applyTheme()});
 function toggleSettings(){const b=document.getElementById('settingsBox');b.style.display=b.style.display==='flex'?'none':'flex';updateSettingsButtonText()}
 function toggleTip(id){document.getElementById(id).classList.toggle('show')}
-function setDns(p){dnsProvider=p;Object.values(dnsButtonIds).forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove('active')});const ab=document.getElementById(dnsButtonIds[p]);if(ab)ab.classList.add('active')}
 function setRecordType(t){recordType=t;updateStartBtnText();document.getElementById('inputDomains').placeholder=t('inputPlaceholder')}
 function setTimeoutVal(s){timeout=s*1000;Object.values(timeoutIds).forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove('active')});const ab=document.getElementById(timeoutIds[s]);if(ab)ab.classList.add('active')}
 function setDelay(d){delay=d;Object.values(delayIds).forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove('active')});const ab=document.getElementById(delayIds[d]);if(ab)ab.classList.add('active')}
@@ -265,32 +290,30 @@ function updateLineCounter(){const ta=document.getElementById('inputDomains');co
 function handleFile(input,isDrop){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){document.getElementById('inputDomains').value=e.target.result;updateLineCounter();if(isDrop)hideModal('dropOverlay');toast(t('imported'))};reader.onerror=function(){toast(t('importFail'))};reader.readAsText(file);input.value=''}
 function cycleFilter(){filterMode=filterMode==='all'?'success':filterMode==='success'?'errors':'all';document.getElementById('filterBtn').innerText=t('filterBtn')[filterMode==='all'?0:filterMode==='success'?1:2];applyFilter()}
 function applyFilter(){if(!currentResults.length)return;let filtered=[...currentResults];if(filterMode==='success')filtered=currentResults.filter(r=>!r.error);else if(filterMode==='errors')filtered=currentResults.filter(r=>r.error);displayResults(filtered)}
-function displayResults(results){const rb=document.getElementById('resultsBox');let lines=[];for(let r of results){if(r.error){lines.push(outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}`:outputFormat==='onlyip'?'-':`[❌] ${r.domain}  ->  ${t('error')}`)}else{let extras='';if(showTTL&&r.ttl)extras+=' [TTL:'+r.ttl+'s]';if(r.dnssec)extras+=' [🔒 DNSSEC]';lines.push(outputFormat==='hosts'?`${r.ip} ${r.domain}${extras}`:outputFormat==='onlyip'?r.ip+extras:`[✅] ${r.domain}  ->  ${r.ip}${extras}`)}}rb.value=lines.join('\n')}
+function displayResults(results){const rb=document.getElementById('resultsBox');let lines=[];for(let r of results){if(r.error){lines.push(outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}`:outputFormat==='onlyip'?'-':`[❌] ${r.domain}  ->  ${t('error')}`)}else{let extras='';if(showTTL&&r.ttl)extras+=' [TTL:'+r.ttl+'s]';if(r.dnssec)extras+=' [🔒 DNSSEC]';let prefix='';if(showDNSNames&&r.server&&allDNSServers[r.server]){prefix=allDNSServers[r.server].short+': '}lines.push(outputFormat==='hosts'?`${r.ip} ${r.domain}${extras}`:outputFormat==='onlyip'?prefix+r.ip+extras:`[✅] ${r.domain}  ->  ${prefix}${r.ip}${extras}`)}}rb.value=lines.join('\n')}
 function easterClick(){easterClicks++;if(easterClicks>=3){document.getElementById('easterEgg').classList.add('show');setTimeout(()=>document.getElementById('easterEgg').classList.remove('show'),2500);easterClicks=0}}
 function exportFile(format){const rb=document.getElementById('resultsBox');if(!rb.value.trim()&&!currentResults.length){toast(t('emptyToast'));return}let content=rb.value,mime='text/plain',ext='txt';if(format==='csv'&&currentResults.length){content='Domain,IP,Status';if(showTTL)content+=',TTL';content+='\n';for(let r of currentResults){content+=`${r.domain},${r.ip||''},${r.error?'Error':'OK'}`;if(showTTL)content+=`,${r.ttl||''}`;content+='\n'}mime='text/csv';ext='csv'}else if(format==='json'&&currentResults.length){content=JSON.stringify(currentResults.map(r=>({domain:r.domain,ip:r.ip||null,error:r.error,ttl:showTTL?r.ttl||null:undefined,dnssec:r.dnssec||false})),null,2);mime='application/json';ext='json'}const blob=new Blob([content],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`dns-results.${ext}`;a.click();URL.revokeObjectURL(url);toast(t('exported'))}
 function stopResolving(){if(abortController){abortController.abort();abortController=null}document.getElementById('startBtn').style.display='inline-block';document.getElementById('stopBtn').style.display='none';document.getElementById('progressBar').style.display='none';document.getElementById('startBtn').disabled=false}
-async function resolveSingle(domain,apiUrl,type){try{let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);let r=await fetch(`${apiUrl}?name=${encodeURIComponent(domain)}&type=${type}`,{headers:{'Accept':'application/dns-json'},signal:controller.signal});clearTimeout(timer);let d=await r.json();let result=null,ttl=null,dnssec=!!d.AD;if(d.Answer&&d.Answer.length>0){if(type==='MX'){let mx=d.Answer.filter(r=>r.type===15).sort((a,b)=>a.preference-b.preference);if(mx.length>0){result=mx.map(r=>r.data).join(', ');ttl=mx[0].TTL}}else if(type==='NS'){let ns=d.Answer.filter(r=>r.type===2);if(ns.length>0){result=ns.map(r=>r.data).join(', ');ttl=ns[0].TTL}}else if(type==='TXT'){let txt=d.Answer.filter(r=>r.type===16);if(txt.length>0){result=txt.map(r=>r.data).join(' | ');ttl=txt[0].TTL}}else if(type==='SOA'){let soa=d.Answer.find(r=>r.type===6);if(soa){result=soa.data;ttl=soa.TTL}}else{let rec=d.Answer.find(r=>r.type===recordTypes[type]);if(rec){result=rec.data;ttl=rec.TTL}}}return{result,ttl,dnssec,size:JSON.stringify(d).length}}catch(e){return null}}
+async function resolveSingle(domain,serverKey,type){try{let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);let apiUrl=allDNSServers[serverKey]?allDNSServers[serverKey].url:'https://cloudflare-dns.com/dns-query';let r=await fetch(`${apiUrl}?name=${encodeURIComponent(domain)}&type=${type}`,{headers:{'Accept':'application/dns-json'},signal:controller.signal});clearTimeout(timer);let d=await r.json();let result=null,ttl=null,dnssec=!!d.AD;if(d.Answer&&d.Answer.length>0){if(type==='MX'){let mx=d.Answer.filter(r=>r.type===15).sort((a,b)=>a.preference-b.preference);if(mx.length>0){result=mx.map(r=>r.data).join(', ');ttl=mx[0].TTL}}else if(type==='NS'){let ns=d.Answer.filter(r=>r.type===2);if(ns.length>0){result=ns.map(r=>r.data).join(', ');ttl=ns[0].TTL}}else if(type==='TXT'){let txt=d.Answer.filter(r=>r.type===16);if(txt.length>0){result=txt.map(r=>r.data).join(' | ');ttl=txt[0].TTL}}else if(type==='SOA'){let soa=d.Answer.find(r=>r.type===6);if(soa){result=soa.data;ttl=soa.TTL}}else{let rec=d.Answer.find(r=>r.type===recordTypes[type]);if(rec){result=rec.data;ttl=rec.TTL}}}return{result,ttl,dnssec,size:JSON.stringify(d).length}}catch(e){return null}}
 async function startResolving(){
 const it=document.getElementById('inputDomains').value,rb=document.getElementById('resultsBox'),rc=document.getElementById('resultsContainer'),stats=document.getElementById('stats'),timeInfo=document.getElementById('timeInfo'),dnsIndicator=document.getElementById('dnsIndicator'),startBtn=document.getElementById('startBtn'),stopBtn=document.getElementById('stopBtn'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill');
 let inputText=it.replace(/https?:\/\//g,'').replace(/\/.*/g,'');
 const lines=inputText.split('\n');let domains=lines.map(l=>l.trim()).filter(l=>l.length>0);
 if(domains.length===0){rc.style.display='none';rb.value=t('empty');toast(t('emptyToast'));return}
 rc.style.display='flex';stats.innerText='';timeInfo.innerText='';dnsIndicator.innerText='';rb.value='';startBtn.style.display='none';stopBtn.style.display='inline-block';stopBtn.textContent=t('stopBtn');progressBar.style.display='block';progressFill.style.width='0%';stopBtn.disabled=false;currentResults=[];resolveStartTime=Date.now();
-let providerName=dnsProvider==='compare'?'Cloudflare vs Google':dnsProvider==='cloudflare'?'Cloudflare':'Google';dnsIndicator.innerText=t('dnsIndicator',providerName);
+const names=activeServers.map(k=>allDNSServers[k]?allDNSServers[k].name:k).join(', ');dnsIndicator.innerText=t('dnsIndicator',names);
 toast(t('started'));
-let output=[],apiUrl=dnsApiUrls[dnsProvider==='compare'?'cloudflare':dnsProvider],found=0,errors=0,totalSize=0;abortController=new AbortController();
+let output=[],found=0,errors=0,totalSize=0;abortController=new AbortController();
 for(let i=0;i<domains.length;i++){
 if(abortController.signal.aborted)break;let domain=domains[i];
-if(dnsProvider==='compare'){
-let cf=await resolveSingle(domain,dnsApiUrls.cloudflare,recordType),gl=await resolveSingle(domain,dnsApiUrls.google,recordType);
-if(cf&&cf.result){found++;if(gl)totalSize+=cf.size+gl.size;currentResults.push({domain,ip:cf.result,error:false,ttl:cf.ttl||null,dnssec:cf.dnssec,size:cf.size});let extras='';if(showTTL&&cf.ttl)extras+=' [TTL:'+cf.ttl+'s]';if(cf.dnssec)extras+=' [🔒 DNSSEC]';if(outputFormat==='hosts')output.push(`${cf.result} ${domain}`);else if(outputFormat==='onlyip')output.push(`☁️ CF: ${cf.result}${extras}\n🔴 G: ${gl&&gl.result?gl.result:'-'}`);else output.push(`[✅] ${domain}\n  ☁️ CF: ${cf.result}${extras}\n  🔴 G: ${gl&&gl.result?gl.result:'-'}`)}
-else if(gl&&gl.result){found++;totalSize+=gl.size;currentResults.push({domain,ip:gl.result,error:false,ttl:gl.ttl||null,dnssec:gl.dnssec,size:gl.size});let extras='';if(showTTL&&gl.ttl)extras+=' [TTL:'+gl.ttl+'s]';if(gl.dnssec)extras+=' [🔒 DNSSEC]';if(outputFormat==='hosts')output.push(`${gl.result} ${domain}`);else if(outputFormat==='onlyip')output.push(`☁️ CF: -\n🔴 G: ${gl.result}${extras}`);else output.push(`[✅] ${domain}\n  ☁️ CF: -\n  🔴 G: ${gl.result}${extras}`)}
-else{errors++;currentResults.push({domain,ip:null,error:true,size:0});if(outputFormat==='hosts')output.push(`${t('errorHosts')} ${domain}`);else if(outputFormat==='onlyip')output.push('☁️ CF: -\n🔴 G: -');else output.push(`[❌] ${domain}\n  ☁️ CF: ${t('error')}\n  🔴 G: ${t('error')}`)}
-}else{
-let res=await resolveSingle(domain,dnsApiUrls[dnsProvider],recordType);
-if(res&&res.result){found++;totalSize+=res.size;currentResults.push({domain,ip:res.result,error:false,ttl:res.ttl||null,dnssec:res.dnssec,size:res.size});let extras='';if(showTTL&&res.ttl)extras+=' [TTL:'+res.ttl+'s]';if(res.dnssec)extras+=' [🔒 DNSSEC]';if(outputFormat==='hosts')output.push(`${res.result} ${domain}`);else if(outputFormat==='onlyip')output.push(res.result+extras);else output.push(`[✅] ${domain}  ->  ${res.result}${extras}`)}
-else{errors++;currentResults.push({domain,ip:null,error:true,size:0});if(outputFormat==='hosts')output.push(`${t('errorHosts')} ${domain}`);else if(outputFormat==='onlyip')output.push('-');else output.push(`[❌] ${domain}  ->  ${t('error')}`)}
+let domainResults=[];
+for(let s of activeServers){
+    let res=await resolveSingle(domain,s,recordType);
+    let shortName=allDNSServers[s]?allDNSServers[s].short:s;
+    if(res&&res.result){found++;totalSize+=res.size;currentResults.push({domain,ip:res.result,error:false,ttl:res.ttl||null,dnssec:res.dnssec,size:res.size,server:s});let extras='';if(showTTL&&res.ttl)extras+=' [TTL:'+res.ttl+'s]';if(res.dnssec)extras+=' [🔒 DNSSEC]';if(activeServers.length===1&&!showDNSNames){domainResults.push(res.result+extras)}else if(showDNSNames){domainResults.push(`${shortName}: ${res.result}${extras}`)}else{domainResults.push(res.result+extras)}}
+    else{errors++;currentResults.push({domain,ip:null,error:true,size:0,server:s});if(activeServers.length===1&&!showDNSNames){domainResults.push('-')}else if(showDNSNames){domainResults.push(`${shortName}: -`)}else{domainResults.push('-')}}
 }
+output.push(domainResults.join('\n'));
 rb.value=output.join('\n');stats.innerText=t('stats',found,errors,i+1);progressFill.style.width=((i+1)/domains.length*100)+'%';
 if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promise(r=>setTimeout(r,delay))}
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);
@@ -300,7 +323,7 @@ document.getElementById('dropBox').addEventListener('dragover',e=>{e.preventDefa
 document.getElementById('dropBox').addEventListener('dragleave',e=>{e.currentTarget.classList.remove('drag-over')});
 document.getElementById('dropBox').addEventListener('drop',e=>{e.preventDefault();e.currentTarget.classList.remove('drag-over');const file=e.dataTransfer.files[0];if(file){const dt=new DataTransfer();dt.items.add(file);document.getElementById('dropFileInput').files=dt.files;handleFile(document.getElementById('dropFileInput'),true)}});
 try{const savedLang=localStorage.getItem('dnsresolver_lang');if(savedLang==='ru'||savedLang==='en')currentLanguage=savedLang;const savedTheme=localStorage.getItem('dnsresolver_theme');if(savedTheme==='system'||savedTheme==='light'||savedTheme==='dark')themeMode=savedTheme}catch(e){}
-applyTheme();updateAllTexts();applyScale();
+applyTheme();updateAllTexts();
 </script>
 </body>
 </html>
