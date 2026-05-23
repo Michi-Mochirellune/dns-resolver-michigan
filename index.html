@@ -317,7 +317,7 @@ if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promis
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);
 abortController=null;stopResolving();
 if('Notification' in window && Notification.permission === 'granted'){
-  new Notification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png',silent:true})
+  new Notification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png'})
 }
 }
 document.getElementById('dropBox').addEventListener('click',()=>document.getElementById('dropFileInput').click());
