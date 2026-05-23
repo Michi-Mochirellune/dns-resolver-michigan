@@ -278,6 +278,7 @@ function exportFile(format){const rb=document.getElementById('resultsBox');if(!r
 function stopResolving(){if(abortController){abortController.abort();abortController=null}document.getElementById('startBtn').style.display='inline-block';document.getElementById('stopBtn').style.display='none';document.getElementById('progressBar').style.display='none';document.getElementById('startBtn').disabled=false}
 async function resolveSingle(domain,serverKey,type){try{let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);let apiUrl=allDNSServers[serverKey]?allDNSServers[serverKey].url:'https://cloudflare-dns.com/dns-query';let r=await fetch(`${apiUrl}?name=${encodeURIComponent(domain)}&type=${type}`,{headers:{'Accept':'application/dns-json'},signal:controller.signal});clearTimeout(timer);let d=await r.json();let result=null,ttl=null,dnssec=!!d.AD;if(d.Answer&&d.Answer.length>0){if(type==='MX'){let mx=d.Answer.filter(r=>r.type===15).sort((a,b)=>a.preference-b.preference);if(mx.length>0){result=mx.map(r=>r.data).join(', ');ttl=mx[0].TTL}}else if(type==='NS'){let ns=d.Answer.filter(r=>r.type===2);if(ns.length>0){result=ns.map(r=>r.data).join(', ');ttl=ns[0].TTL}}else if(type==='TXT'){let txt=d.Answer.filter(r=>r.type===16);if(txt.length>0){result=txt.map(r=>r.data).join(' | ');ttl=txt[0].TTL}}else if(type==='SOA'){let soa=d.Answer.find(r=>r.type===6);if(soa){result=soa.data;ttl=soa.TTL}}else{let rec=d.Answer.find(r=>r.type===recordTypes[type]);if(rec){result=rec.data;ttl=rec.TTL}}}return{result,ttl,dnssec,size:JSON.stringify(d).length}}catch(e){return null}}
 async function startResolving(){
+
 const it=document.getElementById('inputDomains').value,rb=document.getElementById('resultsBox'),rc=document.getElementById('resultsContainer'),stats=document.getElementById('stats'),timeInfo=document.getElementById('timeInfo'),dnsIndicator=document.getElementById('dnsIndicator'),startBtn=document.getElementById('startBtn'),stopBtn=document.getElementById('stopBtn'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill');
 let inputText=it.replace(/https?:\/\//g,'').replace(/\/.*/g,'');
 const lines=inputText.split('\n');let domains=lines.map(l=>l.trim()).filter(l=>l.length>0);
@@ -314,8 +315,10 @@ allOutput.push(domainResults.join('\n'));
 rb.value=allOutput.join('\n');stats.innerText=t('stats',found,errors,i+1);progressFill.style.width=((i+1)/domains.length*100)+'%';
 if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promise(r=>setTimeout(r,delay))}
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);
-abortController=null;stopResolving()}
-if('serviceWorker' in navigator && Notification.permission === 'granted'){navigator.serviceWorker.ready.then(reg=>{reg.showNotification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png',silent:true})})}
+abortController=null;stopResolving();
+if('Notification' in window && Notification.permission === 'granted'){
+  new Notification('DNS Resolver Michigan',{body:'Проверка завершена :Р',icon:'icon-192.png',silent:true})
+}}
 document.getElementById('dropBox').addEventListener('click',()=>document.getElementById('dropFileInput').click());
 document.getElementById('dropBox').addEventListener('dragover',e=>{e.preventDefault();e.currentTarget.classList.add('drag-over')});
 document.getElementById('dropBox').addEventListener('dragleave',e=>{e.currentTarget.classList.remove('drag-over')});
