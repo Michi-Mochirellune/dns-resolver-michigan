@@ -1,22 +1,15 @@
-// Service Worker для DNS Resolver Michigan
-self.addEventListener('install', event => {
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', event => {
-  event.waitUntil(clients.claim());
-});
-
-self.addEventListener('push', event => {
-  const data = event.data ? event.data.text() : 'Проверка завершена :Р';
-  const options = {
-    body: data,
+self.addEventListener('push', function(event) {
+  const promise = self.registration.showNotification('DNS Resolver Michigan', {
+    body: 'Проверка завершена :Р',
     icon: 'icon-192.png',
-    badge: 'icon-192.png',
-    silent: true,
-    vibrate: [100, 50, 100]
-  };
+    silent: true
+  });
+  event.waitUntil(promise);
+});
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
   event.waitUntil(
-    self.registration.showNotification('DNS Resolver Michigan', options)
+    clients.openWindow('/')
   );
 });
