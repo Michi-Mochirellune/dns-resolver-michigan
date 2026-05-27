@@ -10,803 +10,109 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         button,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit;margin:0;padding:0;border:none;background:none;color:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
-        
-        /* ===== ТЕМЫ ===== */
         :root{
-            --bg:#0b0712;
-            --bg2:#160f24;
-            --bg3:#1f142e;
-            --bg4:#130c1f;
-            --text:#e6dbff;
-            --text2:#bfa6ff;
-            --text3:#9980b3;
-            --text4:#d4c7e8;
-            --border:#321f4d;
-            --border2:#442a66;
-            --border3:#281840;
-            --btn:#251a3a;
-            --btn2:#402666;
-            --btn3:#2d1a4a;
-            --accent:#d4a8ff;
-            --accent2:#e0c4ff;
-            --accent-btn:#782ec7;
-            --accent-btn2:#8c3be0;
-            --green:#1a6b3c;
-            --green2:#2ecc71;
-            --input:#1f142e;
-            --input-text:#e6e1ff;
-            --placeholder:#665980;
-            --dev-bg:#1a1130;
-            --dev-border:#3d2760;
-            --bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');
-            --overlay:rgba(11,7,18,0.6);
-            --preset-bg:#2c8c3c;
-            --preset-text:#fff;
-            --preset-hover:#1e7a45;
-            --shadow:rgba(212,168,255,0.3);
-            --clear-hover:#c0392b;
-            --toggle-active-text:#fff;
-            --hover-text:#fff;
-            --active-border:#9445ff;
-            --settings-active-bg:#402666;
-            --tooltip-bg:#251a3a;
-            --tooltip-text:#bfa6ff;
-            --progress-bg:#251a3a;
-            --progress-fill:#782ec7;
-            --logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png');
-            --theme-icon:'🌙'
+            --bg:#0b0712;--bg2:#160f24;--bg3:#1f142e;--bg4:#130c1f;--text:#e6dbff;--text2:#bfa6ff;--text3:#9980b3;--text4:#d4c7e8;--border:#321f4d;--border2:#442a66;--border3:#281840;--btn:#251a3a;--btn2:#402666;--btn3:#2d1a4a;--accent:#d4a8ff;--accent2:#e0c4ff;--accent-btn:#782ec7;--accent-btn2:#8c3be0;--green:#1a6b3c;--green2:#2ecc71;--input:#1f142e;--input-text:#e6e1ff;--placeholder:#665980;--dev-bg:#1a1130;--dev-border:#3d2760;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');--overlay:rgba(11,7,18,0.6);--preset-bg:#2c8c3c;--preset-text:#fff;--preset-hover:#1e7a45;--shadow:rgba(212,168,255,0.3);--clear-hover:#c0392b;--toggle-active-text:#fff;--hover-text:#fff;--active-border:#9445ff;--settings-active-bg:#402666;--tooltip-bg:#251a3a;--tooltip-text:#bfa6ff;--progress-bg:#251a3a;--progress-fill:#782ec7;--logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png');--theme-icon:'🌙'
         }
-        .light{
-            --bg:#fefefe;
-            --bg2:#f5f5f5;
-            --bg3:#eee;
-            --bg4:#f5f5f5;
-            --text:#333;
-            --text2:#555;
-            --text3:#939394;
-            --text4:#444;
-            --border:#ddd;
-            --border2:#ccc;
-            --border3:#ddd;
-            --btn:#f0f0f0;
-            --btn2:#e8e8e8;
-            --btn3:#eee;
-            --accent:#666;
-            --accent2:#777;
-            --accent-btn:#888;
-            --accent-btn2:#999;
-            --green:#1a6b3c;
-            --green2:#2ecc71;
-            --input:#f5f5f5;
-            --input-text:#333;
-            --placeholder:#aaa;
-            --dev-bg:#f0f0f0;
-            --dev-border:#ddd;
-            --bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');
-            --overlay:rgba(254,254,254,0.7);
-            --preset-bg:#2c8c3c;
-            --preset-text:#fff;
-            --preset-hover:#1e7a45;
-            --shadow:rgba(0,0,0,0.1);
-            --clear-hover:#c0392b;
-            --toggle-active-text:#333;
-            --hover-text:#333;
-            --active-border:#aaa;
-            --settings-active-bg:#d5d5d5;
-            --tooltip-bg:#e8e8e8;
-            --tooltip-text:#555;
-            --progress-bg:#e0e0e0;
-            --progress-fill:#888;
-            --logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png');
-            --theme-icon:'☀️'
-        }
-        .xp{
-        --bg:#3881f4;
-        --bg2:#2360c4;
-        --bg3:#2360c4;
-        --bg4:#2360c4;
-        --text:#ffffff;
-        --text2:#ffffff;
-        --text3:#ffffff;
-        --text4:#ffffff;
-        --border:#1a4ab0;
-        --border2:#1a4ab0;
-        --border3:#1a4ab0;
-        --btn:#2360c4;
-        --btn2:#2360c4;
-        --btn3:#2360c4;
-        --accent:#1a4ab0;
-        --accent2:#1a3a6a;
-        --accent-btn:#1a4ab0;
-        --accent-btn2:#1a3a6a;
-        --green:#2c8c3c;
-        --green2:#1e7a45;
-        --input:#2360c4;
-        --input-text:#ffffff;
-        --placeholder:#b8d0ff;
-        --dev-bg:#2360c4;
-        --dev-border:#1a4ab0;
-        --bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgxp.png');
-        --overlay:rgba(0,0,0,0.15);
-        --preset-bg:#2c8c3c;
-        --preset-text:#ffffff;
-        --preset-hover:#1e7a45;
-        --shadow:rgba(26,58,106,0.5);
-        --clear-hover:#c0392b;
-        --toggle-active-text:#ffffff;
-        --hover-text:#ffffff;
-        --active-border:#1a4ab0;
-        --settings-active-bg:#1a4ab0;
-        --tooltip-bg:#2360c4;
-        --tooltip-text:#ffffff;
-        --progress-bg:#1a4ab0;
-        --progress-fill:#1a3a6a;
-        --logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png');
-        --theme-icon:'XP'
-        }
-        
-        /* ===== ОБЩИЕ СТИЛИ ===== */
+        .light{--bg:#fefefe;--bg2:#f5f5f5;--bg3:#eee;--bg4:#f5f5f5;--text:#333;--text2:#555;--text3:#939394;--text4:#444;--border:#ddd;--border2:#ccc;--border3:#ddd;--btn:#f0f0f0;--btn2:#e8e8e8;--btn3:#eee;--accent:#666;--accent2:#777;--accent-btn:#888;--accent-btn2:#999;--green:#1a6b3c;--green2:#2ecc71;--input:#f5f5f5;--input-text:#333;--placeholder:#aaa;--dev-bg:#f0f0f0;--dev-border:#ddd;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');--overlay:rgba(254,254,254,0.7);--preset-bg:#2c8c3c;--preset-text:#fff;--preset-hover:#1e7a45;--shadow:rgba(0,0,0,0.1);--clear-hover:#c0392b;--toggle-active-text:#333;--hover-text:#333;--active-border:#aaa;--settings-active-bg:#d5d5d5;--tooltip-bg:#e8e8e8;--tooltip-text:#555;--progress-bg:#e0e0e0;--progress-fill:#888;--logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png');--theme-icon:'☀️'}
+        .xp{--bg:#3881f4;--bg2:#2360c4;--bg3:#1a4ab0;--bg4:#1a3a6a;--text:#ffffff;--text2:#ffffff;--text3:#e0e8ff;--text4:#ffffff;--border:#5a9af5;--border2:#4a8ae5;--border3:#3a7ad5;--btn:#2d6cd4;--btn2:#2360c4;--btn3:#1a4ab0;--accent:#6aafff;--accent2:#8ac0ff;--accent-btn:#4a8ae5;--accent-btn2:#3a7ad5;--green:#2c8c3c;--green2:#1e7a45;--input:#2360c4;--input-text:#ffffff;--placeholder:#a0c8ff;--dev-bg:#2d6cd4;--dev-border:#5a9af5;--bg-img:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgxp.png');--overlay:rgba(0,0,0,0.1);--preset-bg:#2c8c3c;--preset-text:#ffffff;--preset-hover:#1e7a45;--shadow:rgba(0,0,0,0.3);--clear-hover:#c0392b;--toggle-active-text:#ffffff;--hover-text:#ffffff;--active-border:#6aafff;--settings-active-bg:#1a4ab0;--tooltip-bg:#1a4ab0;--tooltip-text:#e0e8ff;--progress-bg:#1a4ab0;--progress-fill:#6aafff;--logo-url:url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png');--theme-icon:'XP'}
         *{transition:all 0.2s ease}
-        body{
-            background-color:var(--bg);
-            background-image:var(--bg-img);
-            background-size:cover;
-            background-position:center;
-            background-attachment:scroll;
-            color:var(--text);
-            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-            margin:0;
-            padding:20px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            min-height:100vh;
-            position:relative
-        }
-        body::before{
-            content:'';
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background-color:var(--overlay);
-            z-index:0
-        }
-        .container{
-            width:100%;
-            max-width:500px;
-            display:flex;
-            flex-direction:column;
-            gap:10px;
-            position:relative;
-            z-index:1
-        }
-        
-        /* ===== ШАПКА ===== */
-        .header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            width:100%;
-            margin-bottom:3px;
-            flex-wrap:wrap;
-            gap:6px
-        }
-        .header-left{
-            display:flex;
-            align-items:center;
-            gap:8px
-        }
-        .logo{
-            height:50px;
-            cursor:pointer;
-            user-select:none
-        }
-        .logo:hover{
-            filter:drop-shadow(0 0 8px var(--shadow))
-        }
-        .header-buttons{
-            display:flex;
-            gap:4px;
-            align-items:center;
-            flex-wrap:wrap
-        }
-        
-        /* ===== КНОПКИ (ВСЕ КВАДРАТНЫЕ) ===== */
-        .h-btn{
-            background-color:var(--btn2);
-            color:var(--text2);
-            border:none;
-            padding:8px 10px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:13px;
-            white-space:nowrap;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .h-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        .h-btn.active{
-            background-color:var(--settings-active-bg)
-        }
-        .h-btn.lang{
-            background-color:var(--btn3)
-        }
-        .h-btn.preset{
-            background-color:var(--preset-bg);
-            color:var(--preset-text)
-        }
-        .h-btn.preset:hover{
-            background-color:var(--preset-hover);
-            color:#fff
-        }
-        .h-btn.star-btn{
-            background-color:var(--accent-btn);
-            color:#fff;
-            font-size:16px;
-            padding:8px 12px
-        }
-        .h-btn.star-btn:hover{
-            background-color:var(--accent-btn2);
-            transform:scale(1.05)
-        }
-        .h-btn.theme-btn{
-            background-color:var(--btn2);
-            color:var(--text2)
-        }
-        .h-btn.theme-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        
-        /* ===== НАСТРОЙКИ ===== */
-        .settings-box{
-            background-color:var(--bg2);
-            border-radius:0px;
-            padding:14px;
-            display:none;
-            flex-direction:column;
-            gap:10px;
-            border:1px solid var(--border)
-        }
-        .s-label{
-            font-size:14px;
-            color:var(--text3);
-            display:flex;
-            align-items:center;
-            gap:4px
-        }
-        .tip-btn{
-            background:var(--tooltip-bg);
-            color:var(--tooltip-text);
-            border:none;
-            border-radius:0px;
-            width:18px;
-            height:18px;
-            font-size:11px;
-            cursor:pointer;
-            font-weight:bold;
-            padding:0;
-            line-height:18px;
-            text-align:center
-        }
-        .tip-btn:hover{
-            transform:scale(1.1);
-            background:var(--accent-btn);
-            color:#fff
-        }
-        .tip-content{
-            display:none;
-            font-size:11px;
-            color:var(--text3);
-            margin-top:2px;
-            padding:4px 6px;
-            background:var(--tooltip-bg);
-            border-radius:0px
-        }
-        .tip-content.show{
-            display:block
-        }
-        .btn-group{
-            display:flex;
-            gap:6px;
-            flex-wrap:wrap
-        }
-        .tgl-btn{
-            flex:1;
-            min-width:60px;
-            background-color:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:10px 8px;
-            font-size:13px;
-            border-radius:0px;
-            cursor:pointer;
-            text-align:center;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .tgl-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        .tgl-btn.active{
-            background-color:var(--accent-btn);
-            color:var(--toggle-active-text);
-            border-color:var(--active-border);
-            box-shadow:0 0 8px var(--shadow)
-        }
-        .dns-select-btn{
-            background:var(--accent-btn);
-            color:#fff;
-            border:none;
-            padding:10px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:14px;
-            width:100%;
-            text-align:center;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .dns-select-btn:hover{
-            background:var(--accent-btn2)
-        }
-        .compact-row{
-            display:flex;
-            gap:4px;
-            align-items:center
-        }
-        .compact-row select{
-            flex:1;
-            min-width:0;
-            background-color:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:10px 8px;
-            border-radius:0px;
-            font-size:13px;
-            cursor:pointer
-        }
-        .compact-row select:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        
-        /* ===== ПОЛЯ ВВОДА ===== */
-        textarea{
-            width:100%;
-            height:160px;
-            background-color:var(--input);
-            color:var(--input-text);
-            border:1px solid var(--border2);
-            border-radius:0px;
-            padding:10px;
-            font-size:15px;
-            box-sizing:border-box;
-            resize:vertical;
-            outline:none
-        }
-        textarea::placeholder{
-            color:var(--placeholder)
-        }
-        textarea:focus{
-            border-color:var(--accent-btn);
-            box-shadow:0 0 10px var(--shadow)
-        }
-        .input-row,.results-row{
-            display:flex;
-            gap:4px;
-            align-items:stretch
-        }
-        .side-btns{
-            display:flex;
-            flex-direction:column;
-            gap:4px;
-            flex:0 0 auto
-        }
-        .side-btn{
-            background-color:var(--btn2);
-            color:var(--text2);
-            border:none;
-            padding:6px 8px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:14px;
-            flex:1;
-            display:flex;
-            align-items:center;
-            justify-content:center
-        }
-        .side-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        .side-btn.danger:hover{
-            background-color:var(--clear-hover);
-            color:#fff
-        }
-        
-        /* ===== ГЛАВНЫЕ КНОПКИ ===== */
-        .main-btn{
-            color:#fff;
-            border:none;
-            border-radius:0px;
-            padding:14px;
-            font-size:18px;
-            font-weight:bold;
-            cursor:pointer;
-            box-shadow:0 0 15px var(--shadow);
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .main-btn.start{
-            background-color:var(--accent-btn);
-            width:100%
-        }
-        .main-btn.start:hover{
-            background-color:var(--accent-btn2)
-        }
-        .main-btn.stop{
-            background-color:#c0392b;
-            display:none
-        }
-        .main-btn.stop:hover{
-            background-color:#e74c3c
-        }
-        .main-btn:disabled{
-            opacity:0.5;
-            cursor:not-allowed
-        }
-        
-        /* ===== ПРОГРЕСС ===== */
-        .progress-bar{
-            display:none;
-            height:6px;
-            background:var(--progress-bg);
-            border-radius:0px;
-            overflow:hidden
-        }
-        .progress-fill{
-            height:100%;
-            background:var(--progress-fill);
-            border-radius:0px;
-            width:0%
-        }
-        
-        /* ===== ИНДИКАТОРЫ ===== */
-        .dns-indicator,.stats,.time-info{
-            color:var(--text3);
-            font-size:12px;
-            text-align:center;
-            min-height:14px
-        }
-        .stats{
-            font-size:13px
-        }
-        .line-counter{
-            color:var(--text3);
-            font-size:11px;
-            text-align:right;
-            min-height:12px
-        }
-        
-        /* ===== РЕЗУЛЬТАТЫ ===== */
-        .results-container{
-            display:none;
-            flex-direction:column;
-            gap:6px;
-            margin-top:2px
-        }
-        .results-header{
-            display:flex;
-            justify-content:flex-start;
-            align-items:center;
-            flex-wrap:wrap;
-            gap:6px;
-            margin-bottom:2px
-        }
-        .results-actions{
-            display:flex;
-            gap:4px;
-            flex-wrap:wrap
-        }
-        .a-btn{
-            background-color:var(--btn3);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:7px 12px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:13px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .a-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        .results-textarea{
-            width:100%;
-            height:160px;
-            background-color:var(--bg4);
-            border:1px solid var(--border3);
-            color:var(--text4);
-            border-radius:0px;
-            padding:10px;
-            font-size:15px;
-            box-sizing:border-box;
-            resize:vertical;
-            outline:none;
-            font-family:monospace
-        }
-        .results-textarea:focus{
-            border-color:var(--accent-btn);
-            box-shadow:0 0 10px var(--shadow)
-        }
-        
-        /* ===== ПОЛНОЭКРАННЫЙ РЕЖИМ ===== */
-        .fullscreen-overlay{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:997;
-            background:var(--bg);
-            padding:40px 20px;
-            box-sizing:border-box;
-            display:none;
-            flex-direction:column;
-            gap:10px
-        }
-        .fullscreen-overlay.show{
-            display:flex
-        }
-        .fullscreen-overlay textarea{
-            height:100%;
-            background:var(--bg4);
-            color:var(--text4);
-            border:1px solid var(--border3);
-            border-radius:0px;
-            padding:15px;
-            font-size:16px;
-            font-family:monospace;
-            resize:none
-        }
-        .fullscreen-close{
-            position:absolute;
-            top:10px;
-            right:20px;
-            background:var(--accent-btn);
-            color:#fff;
-            border:none;
-            padding:10px 16px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:16px
-        }
-        .fullscreen-close:hover{
-            background:var(--accent-btn2)
-        }
-        
-        /* ===== БЫСТРЫЕ ДЕЙСТВИЯ ===== */
-        .quick-actions{
-            display:flex;
-            gap:4px;
-            flex-wrap:wrap
-        }
-        .q-btn{
-            background-color:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:6px 10px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:12px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center
-        }
-        .q-btn:hover{
-            background-color:var(--accent-btn);
-            color:var(--hover-text)
-        }
-        
-        /* ===== СЕЛЕКТЫ ===== */
-        select{
-            background-color:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:8px;
-            border-radius:0px;
-            font-size:13px;
-            cursor:pointer
-        }
-        
-        /* ===== ПАСХАЛКА ===== */
-        .easter-egg{
-            position:fixed;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%) scale(0);
-            background:var(--accent-btn);
-            color:#fff;
-            padding:20px 40px;
-            border-radius:0px;
-            font-size:24px;
-            font-weight:bold;
-            z-index:999;
-            text-align:center;
-            box-shadow:0 0 40px var(--shadow);
-            pointer-events:none;
-            transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275)
-        }
-        .easter-egg.show{
-            transform:translate(-50%,-50%) scale(1)
-        }
-        .easter-egg .heart{
-            display:inline-block;
-            animation:pulse 0.6s ease-in-out infinite alternate
-        }
-        @keyframes pulse{
-            from{transform:scale(1)}
-            to{transform:scale(1.3)}
-        }
-        
-        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
+        body{background-color:var(--bg);background-image:var(--bg-img);background-size:cover;background-position:center;background-attachment:scroll;color:var(--text);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:20px;display:flex;flex-direction:column;align-items:center;min-height:100vh;position:relative}
+        body::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-color:var(--overlay);z-index:0}
+        .container{width:100%;max-width:500px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+        .header{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:3px;flex-wrap:wrap;gap:6px}
+        .header-left{display:flex;align-items:center;gap:8px}
+        .logo{height:50px;cursor:pointer;user-select:none}
+        .logo:hover{filter:drop-shadow(0 0 8px var(--shadow))}
+        .header-buttons{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+        .h-btn{background-color:var(--btn2);color:var(--text2);border:none;padding:8px 10px;border-radius:0px;cursor:pointer;font-size:13px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center}
+        .h-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .h-btn.active{background-color:var(--settings-active-bg)}
+        .h-btn.lang{background-color:var(--btn3)}
+        .h-btn.preset{background-color:var(--preset-bg);color:var(--preset-text)}
+        .h-btn.preset:hover{background-color:var(--preset-hover);color:#fff}
+        .h-btn.star-btn{background-color:var(--accent-btn);color:#fff;font-size:16px;padding:8px 12px}
+        .h-btn.star-btn:hover{background-color:var(--accent-btn2);transform:scale(1.05)}
+        .settings-box{background-color:var(--bg2);border-radius:0px;padding:14px;display:none;flex-direction:column;gap:10px;border:1px solid var(--border)}
+        .s-label{font-size:14px;color:var(--text3);display:flex;align-items:center;gap:4px}
+        .btn-group{display:flex;gap:6px;flex-wrap:wrap}
+        .tgl-btn{flex:1;min-width:60px;background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:8px 6px;font-size:12px;border-radius:0px;cursor:pointer;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+        .tgl-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .tgl-btn.active{background-color:var(--accent-btn);color:var(--toggle-active-text);border-color:var(--active-border);box-shadow:0 0 8px var(--shadow)}
+        .dns-select-btn{background:var(--accent-btn);color:#fff;border:none;padding:10px;border-radius:0px;cursor:pointer;font-size:14px;width:100%;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+        .dns-select-btn:hover{background:var(--accent-btn2)}
+        .view-select-btn{background:var(--btn);color:var(--text2);border:none;padding:10px;border-radius:0px;cursor:pointer;font-size:14px;width:100%;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+        .view-select-btn:hover{background:var(--accent-btn);color:#fff}
+        .settings-row{display:flex;gap:8px;align-items:stretch;width:100%}
+        .settings-row select{flex:1;min-width:0;background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:10px 6px;border-radius:0px;font-size:13px;cursor:pointer}
+        .settings-row select:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .settings-item{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+        .settings-label{font-size:14px;color:var(--text3);text-align:center;min-height:14px;line-height:1.2}
+        textarea{width:100%;height:160px;background-color:var(--input);color:var(--input-text);border:1px solid var(--border2);border-radius:0px;padding:10px;font-size:15px;box-sizing:border-box;resize:vertical;outline:none}
+        textarea::placeholder{color:var(--placeholder)}
+        textarea:focus{border-color:var(--accent-btn);box-shadow:0 0 10px var(--shadow)}
+        .input-row,.results-row{display:flex;gap:4px;align-items:stretch}
+        .side-btns{display:flex;flex-direction:column;gap:4px;flex:0 0 auto}
+        .side-btn{background-color:var(--btn2);color:var(--text2);border:none;padding:6px 8px;border-radius:0px;cursor:pointer;font-size:14px;flex:1;display:flex;align-items:center;justify-content:center}
+        .side-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .side-btn.danger:hover{background-color:var(--clear-hover);color:#fff}
+        .main-btn{color:#fff;border:none;border-radius:0px;padding:14px;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 0 15px var(--shadow);display:inline-flex;align-items:center;justify-content:center}
+        .main-btn.start{background-color:var(--accent-btn);width:100%}
+        .main-btn.start:hover{background-color:var(--accent-btn2)}
+        .main-btn.stop{background-color:#c0392b;display:none}
+        .main-btn.stop:hover{background-color:#e74c3c}
+        .main-btn:disabled{opacity:0.5;cursor:not-allowed}
+        .progress-bar{display:none;height:6px;background:var(--progress-bg);border-radius:0px;overflow:hidden}
+        .progress-fill{height:100%;background:var(--progress-fill);border-radius:0px;width:0%}
+        .dns-indicator,.stats,.time-info{color:var(--text3);font-size:12px;text-align:center;min-height:14px}
+        .stats{font-size:13px}
+        .line-counter{color:var(--text3);font-size:11px;text-align:right;min-height:12px}
+        .search-row{display:flex;gap:4px;align-items:center}
+        .search-input{flex:1;background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:6px 8px;border-radius:0px;font-size:12px;outline:none}
+        .search-input::placeholder{color:var(--placeholder)}
+        .search-input:focus{border-color:var(--accent-btn)}
+        .results-container{display:none;flex-direction:column;gap:6px;margin-top:2px}
+        .results-header{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:2px}
+        .results-actions{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+        .a-btn{background-color:var(--btn3);color:var(--text2);border:1px solid var(--border);padding:7px 12px;border-radius:0px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+        .a-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .a-btn.toggled{background-color:var(--accent-btn);color:#fff}
+        .results-textarea{width:100%;height:160px;background-color:var(--bg4);border:1px solid var(--border3);color:var(--text4);border-radius:0px;padding:10px;font-size:15px;box-sizing:border-box;resize:vertical;outline:none;font-family:monospace}
+        .results-textarea:focus{border-color:var(--accent-btn);box-shadow:0 0 10px var(--shadow)}
+        .fullscreen-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:997;background:var(--bg);padding:40px 20px;box-sizing:border-box;display:none;flex-direction:column;gap:10px}
+        .fullscreen-overlay.show{display:flex}
+        .fullscreen-overlay textarea{height:100%;background:var(--bg4);color:var(--text4);border:1px solid var(--border3);border-radius:0px;padding:15px;font-size:16px;font-family:monospace;resize:none}
+        .fullscreen-close{position:absolute;top:10px;right:20px;background:var(--accent-btn);color:#fff;border:none;padding:10px 16px;border-radius:0px;cursor:pointer;font-size:16px}
+        .fullscreen-close:hover{background:var(--accent-btn2)}
+        .quick-actions{display:flex;gap:4px;flex-wrap:wrap}
+        .q-btn{background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:6px 10px;border-radius:0px;cursor:pointer;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+        .q-btn:hover{background-color:var(--accent-btn);color:var(--hover-text)}
+        .q-btn.toggled{background-color:var(--accent-btn);color:#fff}
+        select{background-color:var(--btn);color:var(--text2);border:1px solid var(--border);padding:8px;border-radius:0px;font-size:13px;cursor:pointer}
+        .easter-egg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:var(--accent-btn);color:#fff;padding:20px 40px;border-radius:0px;font-size:24px;font-weight:bold;z-index:999;text-align:center;box-shadow:0 0 40px var(--shadow);pointer-events:none;transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275)}
+        .easter-egg.show{transform:translate(-50%,-50%) scale(1)}
+        .easter-egg .heart{display:inline-block;animation:pulse 0.6s ease-in-out infinite alternate}
+        @keyframes pulse{from{transform:scale(1)}to{transform:scale(1.3)}}
         input[type="file"]{display:none}
-        .modal-overlay{
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.7);
-            z-index:998;
-            justify-content:center;
-            align-items:center
-        }
-        .modal-overlay.show{
-            display:flex
-        }
-        .modal-box{
-            background:var(--bg2);
-            border:1px solid var(--border);
-            border-radius:0px;
-            padding:20px;
-            text-align:center;
-            color:var(--text2);
-            font-size:14px;
-            max-width:400px;
-            width:90%;
-            display:flex;
-            flex-direction:column;
-            gap:8px;
-            max-height:80vh;
-            overflow-y:auto
-        }
-        .modal-box button{
-            background:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:10px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:14px;
-            width:100%
-        }
-        .modal-box button:hover{
-            background:var(--accent-btn);
-            color:#fff
-        }
-        .star-text{
-            font-size:14px;
-            color:var(--text2);
-            margin-bottom:4px;
-            line-height:1.5
-        }
-        .star-links{
-            display:flex;
-            gap:6px
-        }
-        .star-link{
-            flex:1;
-            background:var(--btn);
-            color:var(--text2);
-            border:1px solid var(--border);
-            padding:10px;
-            border-radius:0px;
-            cursor:pointer;
-            font-size:14px;
-            text-decoration:none;
-            text-align:center;
-            transition:all 0.2s
-        }
-        .star-link:hover{
-            background:var(--accent-btn);
-            color:#fff
-        }
-        .dns-grid{
-            display:flex;
-            flex-direction:column;
-            gap:8px;
-            text-align:left
-        }
-        .dns-grid label{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            font-size:14px;
-            cursor:pointer;
-            color:var(--text2);
-            padding:8px;
-            border-radius:0px;
-            background:var(--btn)
-        }
-        .dns-grid label:hover{
-            background:var(--btn2)
-        }
-        .dns-grid input[type="checkbox"]{
-            accent-color:var(--accent-btn);
-            width:18px;
-            height:18px
-        }
-        .dns-done-btn{
-            background:var(--accent-btn)!important;
-            color:#fff!important;
-            margin-top:6px
-        }
-        .drop-box{
-            background:var(--bg2);
-            border:2px dashed var(--accent-btn);
-            border-radius:0px;
-            padding:40px;
-            text-align:center;
-            color:var(--text2);
-            font-size:16px;
-            cursor:pointer
-        }
-        .drop-box.drag-over{
-            border-color:var(--accent);
-            background:var(--btn2)
-        }
-        
-        /* ===== TOAST ===== */
-        .toast{
-            position:fixed;
-            bottom:30px;
-            left:50%;
-            transform:translateX(-50%) translateY(20px);
-            background:var(--accent-btn);
-            color:#fff;
-            padding:10px 20px;
-            border-radius:0px;
-            font-size:13px;
-            z-index:1000;
-            box-shadow:0 4px 20px rgba(0,0,0,0.3);
-            opacity:0;
-            pointer-events:none
-        }
-        .toast.show{
-            animation:toastIn 0.3s forwards,toastOut 0.3s 1.7s forwards
-        }
-        @keyframes toastIn{
-            to{opacity:1;transform:translateX(-50%) translateY(0)}
-        }
-        @keyframes toastOut{
-            to{opacity:0;transform:translateX(-50%) translateY(-20px)}
-        }
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;justify-content:center;align-items:center}
+        .modal-overlay.show{display:flex}
+        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:0px;padding:20px;text-align:center;color:var(--text2);font-size:14px;max-width:400px;width:90%;display:flex;flex-direction:column;gap:8px;max-height:80vh;overflow-y:auto}
+        .modal-box button{background:var(--btn);color:var(--text2);border:1px solid var(--border);padding:10px;border-radius:0px;cursor:pointer;font-size:14px;width:100%}
+        .modal-box button:hover{background:var(--accent-btn);color:#fff}
+        .star-text{font-size:14px;color:var(--text2);margin-bottom:4px;line-height:1.5}
+        .star-links{display:flex;gap:6px}
+        .star-link{flex:1;background:var(--btn);color:var(--text2);border:1px solid var(--border);padding:10px;border-radius:0px;cursor:pointer;font-size:14px;text-decoration:none;text-align:center;transition:all 0.2s}
+        .star-link:hover{background:var(--accent-btn);color:#fff}
+        .dns-grid,.view-grid{display:flex;flex-direction:column;gap:8px;text-align:left}
+        .dns-grid label,.view-grid label{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;color:var(--text2);padding:8px;border-radius:0px;background:var(--btn)}
+        .dns-grid label:hover,.view-grid label:hover{background:var(--btn2)}
+        .dns-grid input[type="checkbox"],.view-grid input[type="checkbox"]{accent-color:var(--accent-btn);width:18px;height:18px}
+        .dns-done-btn{background:var(--accent-btn)!important;color:#fff!important;margin-top:6px}
+        .drop-box{background:var(--bg2);border:2px dashed var(--accent-btn);border-radius:0px;padding:40px;text-align:center;color:var(--text2);font-size:16px;cursor:pointer}
+        .drop-box.drag-over{border-color:var(--accent);background:var(--btn2)}
+        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent-btn);color:#fff;padding:10px 20px;border-radius:0px;font-size:13px;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.3);opacity:0;pointer-events:none}
+        .toast.show{animation:toastIn 0.3s forwards,toastOut 0.3s 1.7s forwards}
+        @keyframes toastIn{to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        @keyframes toastOut{to{opacity:0;transform:translateX(-50%) translateY(-20px)}}
     </style>
 </head>
 <body>
@@ -814,6 +120,7 @@
 <div class="modal-overlay" id="dropOverlay" onclick="hideModal('dropOverlay')"><div class="drop-box" id="dropBox" onclick="event.stopPropagation()"><span id="dropText"></span><input type="file" id="dropFileInput" accept="*" onchange="handleFile(this,true)" style="display:none"></div></div>
 <div class="modal-overlay" id="exportMenu" onclick="hideModal('exportMenu')"><div class="modal-box" onclick="event.stopPropagation()"><div style="font-weight:bold" id="exportTitle"></div><button onclick="exportFile('txt')">📄 TXT</button><button onclick="exportFile('csv')">📊 CSV</button><button onclick="exportFile('json')">📋 JSON</button><button onclick="exportFile('md')">📝 Markdown</button></div></div>
 <div class="modal-overlay" id="dnsMenu" onclick="hideModal('dnsMenu')"><div class="modal-box" onclick="event.stopPropagation()"><div style="font-weight:bold" id="dnsMenuTitle"></div><div class="dns-grid" id="dnsGrid"></div><button class="dns-done-btn" onclick="hideModal('dnsMenu')" id="dnsDoneBtn"></button></div></div>
+<div class="modal-overlay" id="viewMenu" onclick="hideModal('viewMenu')"><div class="modal-box" onclick="event.stopPropagation()"><div style="font-weight:bold" id="viewMenuTitle"></div><div class="view-grid" id="viewGrid"></div><button class="dns-done-btn" onclick="hideModal('viewMenu')" id="viewDoneBtn"></button></div></div>
 <div class="modal-overlay" id="starMenu" onclick="hideModal('starMenu')"><div class="modal-box" onclick="event.stopPropagation()"><div class="star-text" id="starText"></div><div class="star-links"><a href="https://github.com/Michi-Mochirellune/dns-resolver-michigan" target="_blank" class="star-link">⭐ GitHub</a><a href="https://t.me/MichiMochirellune" target="_blank" class="star-link">📢 Telegram</a></div></div></div>
 <div class="fullscreen-overlay" id="fsInput"><button class="fullscreen-close" onclick="closeFS('fsInput')">✕</button><textarea id="fsInputBox"></textarea></div>
 <div class="fullscreen-overlay" id="fsResults"><button class="fullscreen-close" onclick="closeFS('fsResults')">✕</button><textarea id="fsResultsBox" readonly></textarea></div>
@@ -833,42 +140,45 @@
     <div class="settings-box" id="settingsBox">
         <div class="s-label" id="dnsLabel"></div>
         <button class="dns-select-btn" onclick="showDNSMenu()" id="dnsSelectBtn"></button>
-        <div class="s-label" id="showDNSNamesLabel"><button class="tip-btn" onclick="toggleTip('dnsNamesTip')">?</button></div>
-        <div class="tip-content" id="dnsNamesTip"><span id="dnsNamesTipText"></span></div>
-        <div class="btn-group"><button class="tgl-btn" id="dnsNamesOn" onclick="setShowDNSNames(true)"><span id="dnsNamesOnText"></span></button><button class="tgl-btn active" id="dnsNamesOff" onclick="setShowDNSNames(false)"><span id="dnsNamesOffText"></span></button></div>
-        <div class="s-label" id="showSepLabel"><button class="tip-btn" onclick="toggleTip('sepTip')">?</button></div>
-        <div class="tip-content" id="sepTip"><span id="sepTipText"></span></div>
-        <div class="btn-group"><button class="tgl-btn" id="sepOn" onclick="setShowSep(true)"><span id="sepOnText"></span></button><button class="tgl-btn active" id="sepOff" onclick="setShowSep(false)"><span id="sepOffText"></span></button></div>
-        <div class="s-label" id="typeLabel"></div>
-        <div class="compact-row">
-            <select id="recordType" onchange="setRecordType(this.value)">
-                <option value="A">🌐 A (IPv4)</option>
-                <option value="AAAA">🌍 AAAA (IPv6)</option>
-                <option value="MX">📧 MX (<span id="mxLabel"></span>)</option>
-                <option value="NS">🗄️ NS (<span id="nsLabel"></span>)</option>
-                <option value="SOA">📋 SOA (<span id="soaLabel"></span>)</option>
-                <option value="TXT">📝 TXT (<span id="txtLabel"></span>)</option>
-            </select>
-            <select id="timeoutSelect" onchange="setTimeoutVal(parseInt(this.value))">
-                <option value="5">⏰ 5 сек</option>
-                <option value="10">⏰ 10 сек</option>
-                <option value="15">⏰ 15 сек</option>
-            </select>
-            <select id="delaySelect" onchange="setDelay(parseInt(this.value))">
-                <option value="0">🐌 Без задержки</option>
-                <option value="500">🐌 0.5 сек</option>
-                <option value="1000">🐌 1 сек</option>
-            </select>
+        <button class="view-select-btn" onclick="showViewMenu()" id="viewSelectBtn">👁️ Вид результатов</button>
+        <div class="settings-row">
+            <div class="settings-item">
+                <div class="settings-label" id="typeLabel">📝 Тип записи</div>
+                <select id="recordType" onchange="setRecordType(this.value)">
+                    <option value="A">🌐 A (IPv4)</option>
+                    <option value="AAAA">🌍 AAAA (IPv6)</option>
+                    <option value="MX">📧 MX (<span id="mxLabel"></span>)</option>
+                    <option value="NS">🗄️ NS (<span id="nsLabel"></span>)</option>
+                    <option value="SOA">📋 SOA (<span id="soaLabel"></span>)</option>
+                    <option value="TXT">📝 TXT (<span id="txtLabel"></span>)</option>
+                </select>
+            </div>
+            <div class="settings-item">
+                <div class="settings-label" id="timeoutLabel">⏰ Таймаут</div>
+                <select id="timeoutSelect" onchange="setTimeoutVal(parseInt(this.value))">
+                    <option value="5">5 сек</option>
+                    <option value="10">10 сек</option>
+                    <option value="15">15 сек</option>
+                </select>
+            </div>
+            <div class="settings-item">
+                <div class="settings-label" id="delayLabel">🐌 Задержка</div>
+                <select id="delaySelect" onchange="setDelay(parseInt(this.value))">
+                    <option value="0">Без задержки</option>
+                    <option value="500">0.5 сек</option>
+                    <option value="1000">1 сек</option>
+                </select>
+            </div>
         </div>
-        <div class="s-label" id="showTTLLabel"><button class="tip-btn" onclick="toggleTip('ttlTip')">?</button></div>
-        <div class="tip-content" id="ttlTip"><span id="ttlTipText"></span></div>
-        <div class="btn-group"><button class="tgl-btn" id="ttlOn" onclick="setShowTTL(true)"><span id="ttlOnText"></span></button><button class="tgl-btn active" id="ttlOff" onclick="setShowTTL(false)"><span id="ttlOffText"></span></button></div>
-        <div class="s-label" id="formatLabel"><button class="tip-btn" onclick="toggleTip('formatTip')">?</button></div>
-        <div class="tip-content" id="formatTip"><span id="formatTipText"></span></div>
+        <div class="s-label" id="formatLabel">🎨 Формат вывода</div>
         <div class="btn-group"><button class="tgl-btn" id="formatBtn" onclick="toggleFormat()">🔢 Формат: Only IP</button></div>
     </div>
-    <div class="quick-actions"><button class="q-btn" onclick="dedupDomains()" id="dedupBtn"></button><button class="q-btn" onclick="showModal('dropOverlay')" id="uploadBtn"></button></div>
+    <div class="quick-actions">
+        <button class="q-btn" onclick="dedupDomains()" id="dedupBtn"></button>
+        <button class="q-btn" onclick="showModal('dropOverlay')" id="uploadBtn"></button>
+    </div>
     <input type="file" id="fileInput" accept="*" onchange="handleFile(this,false)">
+    <div class="search-row"><input type="text" class="search-input" id="inputSearch" placeholder="🔍 Поиск по доменам..." oninput="filterInputDomains()"></div>
     <div class="input-row"><textarea id="inputDomains" placeholder="..." oninput="updateLineCounter()"></textarea><div class="side-btns"><button class="side-btn" onclick="openFS('fsInput','inputDomains','fsInputBox')" title="Раскрыть">⛶</button><button class="side-btn" onclick="copyTextarea('inputDomains')" title="Копировать">📋</button><button class="side-btn danger" onclick="clearInputOnly()" title="Очистить">🗑️</button></div></div>
     <div class="line-counter" id="lineCounter"></div>
     <button class="main-btn start" id="startBtn" onclick="startResolving()"></button>
@@ -878,100 +188,117 @@
     <div class="stats" id="stats"></div>
     <div class="time-info" id="timeInfo"></div>
     <div class="results-container" id="resultsContainer">
-        <div class="results-header"><div class="results-actions"><button class="a-btn" onclick="cycleFilter()" id="filterBtn"></button><button class="a-btn" onclick="dedupResults()" id="dedupResultsBtn">♻️ Убрать дубли</button><button class="a-btn" onclick="showModal('exportMenu')" id="exportMenuBtn"></button></div></div>
+        <div class="search-row"><input type="text" class="search-input" id="resultsSearch" placeholder="🔍 Поиск по результатам..." oninput="applyAllFilters()"></div>
+        <div class="results-header">
+            <div class="results-actions">
+                <button class="a-btn" onclick="cycleFilter()" id="filterBtn"></button>
+                <select class="a-btn" id="providerFilter" onchange="applyAllFilters()" style="padding:7px 12px">
+                    <option value="all">🏢 Все провайдеры</option>
+                </select>
+                <button class="a-btn" onclick="dedupResults()" id="dedupResultsBtn">♻️ Убрать дубли</button>
+                <button class="a-btn" onclick="showModal('exportMenu')" id="exportMenuBtn"></button>
+            </div>
+        </div>
         <div class="results-row"><textarea id="resultsBox" class="results-textarea" readonly placeholder="..."></textarea><div class="side-btns"><button class="side-btn" onclick="openFS('fsResults','resultsBox','fsResultsBox')" title="Раскрыть">⛶</button><button class="side-btn" onclick="copyTextarea('resultsBox')" title="Копировать">📋</button><button class="side-btn danger" onclick="clearResultsOnly()" title="Очистить">🗑️</button></div></div>
     </div>
 </div>
 <script>
-let outputFormat='onlyip',currentLanguage='ru',recordType='A',timeout=5000,delay=0,themeMode='system',easterClicks=0,filterMode='all',currentResults=[],abortController=null,resolveStartTime=0,showTTL=false,showDNSNames=false,showSep=false,activeServers=['cloudflare'];
+let outputFormat='onlyip',currentLanguage='ru',recordType='A',timeout=5000,delay=0,themeMode='system',easterClicks=0,filterMode='all',showSpeed=false,currentResults=[],allInputDomains='',abortController=null,resolveStartTime=0,showTTL=false,showDNSNames=false,showSep=false,activeServers=['cloudflare'];
 const allDNSServers={cloudflare:{name:'☁️ Cloudflare',short:'CF',url:'https://cloudflare-dns.com/dns-query'},google:{name:'🔴 Google',short:'G',url:'https://dns.google/resolve'},dnssb:{name:'🟢 DNS.SB',short:'SB',url:'https://doh.dns.sb/dns-query'}};
 const recordTypes={A:1,AAAA:28,MX:15,NS:2,SOA:6,TXT:16};
-const L={ru:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Выбор DNS серверов',dnsSelectBtn:'📡 Выбрать DNS серверы',showDNSNamesLabel:'🏷️ Показывать названия DNS',dnsNamesTipText:'Добавляет краткое название DNS перед IP-адресом',dnsNamesOn:'✅ Вкл',dnsNamesOff:'❌ Выкл',showSepLabel:'↕️ Разделитель строк',sepTipText:'Добавляет пустую строку между результатами',sepOn:'✅ Вкл',sepOff:'❌ Выкл',dnsMenuTitle:'📡 Выберите DNS серверы',dnsDoneBtn:'✅ Готово',typeLabel:'📝 Тип записи',showTTLLabel:'⏱️ Показывать TTL',ttlTipText:'Время жизни DNS-записи в секундах',ttlOn:'✅ Вкл',ttlOff:'❌ Выкл',formatLabel:'🎨 Формат вывода',formatBtn:['📁 Формат: Hosts','🔢 Формат: Only IP'],formatTipText:'Hosts — для hosts-файла (IP домен), Only IP — только адреса',inputPlaceholder:'📝 Вставь список доменов сюда...',startBtnA:'🚀 Узнать IP адреса',startBtnAAAA:'🚀 Узнать IPv6 адреса',startBtnMX:'📧 Узнать почтовые серверы',startBtnNS:'🗄️ Узнать DNS-серверы',startBtnSOA:'📋 Узнать зоны',startBtnTXT:'📝 Узнать TXT-записи',stopBtn:'⏹️ Стоп',resultsPlaceholder:'📊 Результаты появятся здесь...',resolving:'⏳ Идет проверка...\n',empty:'📭 Список пуст',error:'❌ Ошибка/Не найден',errorHosts:'# ❌ Ошибка',presetBtn:'📋 Тест сайтов',dedupBtn:'♻️ Убрать дубли',uploadBtn:'📂 Импорт',dedupResultsBtn:'♻️ Убрать дубли',filterBtn:['🔍 Все','✅ Успешные','❌ Ошибки'],exportTitle:'📥 Экспорт',exportBtn:'📥 Экспорт',dnsIndicator:p=>`🔍 Проверено через: ${p}`,starText:'Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р',easter:'Спасибо за использование',mxLabel:'Почта',nsLabel:'DNS-серверы',soaLabel:'Зона',txtLabel:'Текст',timeoutOptions:['⏰ 5 сек','⏰ 10 сек','⏰ 15 сек'],delayOptions:['🐌 Без задержки','🐌 0.5 сек','🐌 1 сек'],dropText:'📂 Перетащите файл сюда или нажмите, чтобы выбрать',timeInfo:(s,z)=>`⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,stats:(f,e,t)=>`✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${t}`,copied:'✅ Скопировано',copyFail:'❌ Не удалось',emptyToast:'📭 Нечего копировать',imported:'✅ Файл загружен',importFail:'❌ Ошибка загрузки',cleared:'🗑️ Очищено',started:'🚀 Проверка началась',exported:'📥 Экспорт сохранён',dupsRemoved:'♻️ Дубли удалены',presetAdded:'📋 Тестовые сайты добавлены'},en:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Select DNS servers',dnsSelectBtn:'📡 Choose DNS servers',showDNSNamesLabel:'🏷️ Show DNS names',dnsNamesTipText:'Adds short DNS name before IP address',dnsNamesOn:'✅ On',dnsNamesOff:'❌ Off',showSepLabel:'↕️ Line separator',sepTipText:'Adds empty line between results',sepOn:'✅ On',sepOff:'❌ Off',dnsMenuTitle:'📡 Select DNS servers',dnsDoneBtn:'✅ Done',typeLabel:'📝 Record type',showTTLLabel:'⏱️ Show TTL',ttlTipText:'DNS record Time To Live in seconds',ttlOn:'✅ On',ttlOff:'❌ Off',formatLabel:'🎨 Output format',formatBtn:['📁 Format: Hosts','🔢 Format: Only IP'],formatTipText:'Hosts — for hosts file (IP domain), Only IP — just addresses',inputPlaceholder:'📝 Paste domain list here...',startBtnA:'🚀 Resolve IP addresses',startBtnAAAA:'🚀 Resolve IPv6 addresses',startBtnMX:'📧 Resolve mail servers',startBtnNS:'🗄️ Resolve DNS servers',startBtnSOA:'📋 Resolve zones',startBtnTXT:'📝 Resolve TXT records',stopBtn:'⏹ Stop',resultsPlaceholder:'📊 Results will appear here...',resolving:'⏳ Resolving...\n',empty:'📭 List is empty',error:'❌ Error/Not found',errorHosts:'# ❌ Error',presetBtn:'📋 Test sites',dedupBtn:'♻️ Remove duplicates',uploadBtn:'📂 Import',dedupResultsBtn:'♻️ Remove duplicates',filterBtn:['🔍 All','✅ Success','❌ Errors'],exportTitle:'📥 Export',exportBtn:'📥 Export',dnsIndicator:p=>`🔍 Resolved via: ${p}`,starText:"Hey! Star my completely free project or I'll bite your ear :P",easter:'Thank you for using',mxLabel:'Mail',nsLabel:'DNS servers',soaLabel:'Zone',txtLabel:'Text',timeoutOptions:['⏰ 5 sec','⏰ 10 sec','⏰ 15 sec'],delayOptions:['🐌 No delay','🐌 0.5 sec','🐌 1 sec'],dropText:'📂 Drop file here or click to select',timeInfo:(s,z)=>`⏱️ Time: ${s}s | 📦 Response: ${z}KB`,stats:(f,e,t)=>`✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${t}`,copied:'✅ Copied',copyFail:'❌ Failed',emptyToast:'📭 Nothing to copy',imported:'✅ File loaded',importFail:'❌ Load error',cleared:'🗑️ Cleared',started:'🚀 Resolving started',exported:'📥 Export saved',dupsRemoved:'♻️ Duplicates removed',presetAdded:'📋 Test sites added'}};
+const L={ru:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Выбор DNS серверов',dnsSelectBtn:'📡 Выбрать DNS серверы',viewSelectBtn:'👁️ Вид результатов',viewMenuTitle:'👁️ Вид результатов',viewDoneBtn:'✅ Готово',showDNSNamesLabel:'🏷️ Названия DNS',showSepLabel:'↕️ Разделитель строк',showTTLLabel:'⏱️ Показывать TTL',showSpeedLabel:'⚡ Показывать скорость',dnsNamesOn:'✅ Вкл',dnsNamesOff:'❌ Выкл',sepOn:'✅ Вкл',sepOff:'❌ Выкл',ttlOn:'✅ Вкл',ttlOff:'❌ Выкл',speedOn:'✅ Вкл',speedOff:'❌ Выкл',dnsMenuTitle:'📡 Выберите DNS серверы',dnsDoneBtn:'✅ Готово',typeLabel:'📝 Тип записи',formatLabel:'🎨 Формат вывода',formatBtn:['📁 Формат: Hosts','🔢 Формат: Only IP'],inputPlaceholder:'📝 Вставь список доменов сюда...',startBtn:'🚀 Проверить',stopBtn:'⏹️ Стоп',resultsPlaceholder:'📊 Результаты появятся здесь...',resolving:'⏳ Идет проверка...\n',empty:'📭 Список пуст',error:'❌ Ошибка/Не найден',errorHosts:'# ❌ Ошибка',noServers:'Вот чего ты ожидаешь? Думаешь тебе сам бог ответы даст? Бога нету, смирись <3',noDomainsToast:'📭 Нечего искать',presetBtn:'📋 Тест сайтов',dedupBtn:'♻️ Убрать дубли',uploadBtn:'📂 Импорт',dedupResultsBtn:'♻️ Убрать дубли',filterBtn:['🔍 Все','✅ Успешные','❌ Ошибки'],exportTitle:'📥 Экспорт',exportBtn:'📥 Экспорт',dnsIndicator:p=>`🔍 Проверено через: ${p}`,starText:'Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р',easter:'Спасибо за использование',mxLabel:'Почта',nsLabel:'DNS-серверы',soaLabel:'Зона',txtLabel:'Текст',timeoutLabel:'⏰ Таймаут',delayLabel:'🐌 Задержка',timeoutOptions:['5 сек','10 сек','15 сек'],delayOptions:['Без задержки','0.5 сек','1 сек'],inputSearchPlaceholder:'🔍 Поиск по доменам...',resultsSearchPlaceholder:'🔍 Поиск по результатам...',dropText:'📂 Перетащите файл сюда или нажмите, чтобы выбрать',timeInfo:(s,z)=>`⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,stats:(f,e,t,u)=>`✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${t} / 🌐 Уникальных IP: ${u}`,copied:'✅ Скопировано',copyFail:'❌ Не удалось',emptyToast:'📭 Нечего копировать',imported:'✅ Файл загружен',importFail:'❌ Ошибка загрузки',cleared:'🗑️ Очищено',started:'🚀 Проверка началась',exported:'📥 Экспорт сохранён',dupsRemoved:'♻️ Дубли удалены',presetAdded:'📋 Тестовые сайты добавлены'},en:{settings:'⚙️',closeSettings:'❌',dnsLabel:'🌐 Select DNS servers',dnsSelectBtn:'📡 Choose DNS servers',viewSelectBtn:'👁️ View options',viewMenuTitle:'👁️ View options',viewDoneBtn:'✅ Done',showDNSNamesLabel:'🏷️ DNS names',showSepLabel:'↕️ Line separator',showTTLLabel:'⏱️ Show TTL',showSpeedLabel:'⚡ Show speed',dnsNamesOn:'✅ On',dnsNamesOff:'❌ Off',sepOn:'✅ On',sepOff:'❌ Off',ttlOn:'✅ On',ttlOff:'❌ Off',speedOn:'✅ On',speedOff:'❌ Off',dnsMenuTitle:'📡 Select DNS servers',dnsDoneBtn:'✅ Done',typeLabel:'📝 Record type',formatLabel:'🎨 Output format',formatBtn:['📁 Format: Hosts','🔢 Format: Only IP'],inputPlaceholder:'📝 Paste domain list here...',startBtn:'🚀 Resolve',stopBtn:'⏹ Stop',resultsPlaceholder:'📊 Results will appear here...',resolving:'⏳ Resolving...\n',empty:'📭 List is empty',error:'❌ Error/Not found',errorHosts:'# ❌ Error',noServers:'What do you expect? Think God himself will give you answers? There is no God, deal with it <3',noDomainsToast:'📭 Nothing to search',presetBtn:'📋 Test sites',dedupBtn:'♻️ Remove duplicates',uploadBtn:'📂 Import',dedupResultsBtn:'♻️ Remove duplicates',filterBtn:['🔍 All','✅ Success','❌ Errors'],exportTitle:'📥 Export',exportBtn:'📥 Export',dnsIndicator:p=>`🔍 Resolved via: ${p}`,starText:"Hey! Star my completely free project or I'll bite your ear :P",easter:'Thank you for using',mxLabel:'Mail',nsLabel:'DNS servers',soaLabel:'Zone',txtLabel:'Text',timeoutLabel:'⏰ Timeout',delayLabel:'🐌 Delay',timeoutOptions:['5 sec','10 sec','15 sec'],delayOptions:['No delay','0.5 sec','1 sec'],inputSearchPlaceholder:'🔍 Search domains...',resultsSearchPlaceholder:'🔍 Search results...',dropText:'📂 Drop file here or click to select',timeInfo:(s,z)=>`⏱️ Time: ${s}s | 📦 Response: ${z}KB`,stats:(f,e,t,u)=>`✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${t} / 🌐 Unique IPs: ${u}`,copied:'✅ Copied',copyFail:'❌ Failed',emptyToast:'📭 Nothing to copy',imported:'✅ File loaded',importFail:'❌ Load error',cleared:'🗑️ Cleared',started:'🚀 Resolving started',exported:'📥 Export saved',dupsRemoved:'♻️ Duplicates removed',presetAdded:'📋 Test sites added'}};
 function t(key,...args){let str=L[currentLanguage][key];if(typeof str==='function')return str(...args);return str}
 function toast(msg){let el=document.querySelector('.toast');if(!el){el=document.createElement('div');el.className='toast';document.body.appendChild(el)}el.textContent=msg;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000)}
 function updateLogo(){const el=document.getElementById('logo');if(document.body.classList.contains('light')){el.src='https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png'}else if(document.body.classList.contains('xp')){el.src='https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png'}else{el.src='https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png'}}
-function setShowTTL(v){showTTL=v;document.getElementById('ttlOn').classList.toggle('active',v);document.getElementById('ttlOff').classList.toggle('active',!v)}
-function setShowDNSNames(v){showDNSNames=v;document.getElementById('dnsNamesOn').classList.toggle('active',v);document.getElementById('dnsNamesOff').classList.toggle('active',!v)}
-function setShowSep(v){showSep=v;document.getElementById('sepOn').classList.toggle('active',v);document.getElementById('sepOff').classList.toggle('active',!v)}
+function setShowTTL(v){showTTL=v;applyAllFilters()}
+function setShowDNSNames(v){showDNSNames=v;applyAllFilters()}
+function setShowSep(v){showSep=v;applyAllFilters()}
+function setShowSpeed(v){showSpeed=v;applyAllFilters()}
 function copyTextarea(id){const ta=document.getElementById(id);const text=ta.value;if(!text.trim()){toast(t('emptyToast'));return}ta.select();ta.setSelectionRange(0,99999);try{document.execCommand('copy');toast(t('copied'))}catch(e){toast(t('copyFail'))}ta.blur()}
 function showModal(id){document.getElementById(id).classList.add('show')}
 function hideModal(id){document.getElementById(id).classList.remove('show')}
 function openFS(overlayId,sourceId,targetId){document.getElementById(targetId).value=document.getElementById(sourceId).value;document.getElementById(overlayId).classList.add('show')}
 function closeFS(id){document.getElementById(id).classList.remove('show')}
 function showDNSMenu(){const grid=document.getElementById('dnsGrid');grid.innerHTML='';for(let key in allDNSServers){const s=allDNSServers[key];const checked=activeServers.includes(key)?'checked':'';grid.innerHTML+=`<label><input type="checkbox" value="${key}" ${checked} onchange="toggleServer('${key}',this.checked)">${s.name}</label>`}document.getElementById('dnsMenuTitle').innerText=t('dnsMenuTitle');document.getElementById('dnsDoneBtn').innerText=t('dnsDoneBtn');showModal('dnsMenu')}
-function toggleServer(key,checked){if(checked){if(!activeServers.includes(key))activeServers.push(key)}else{activeServers=activeServers.filter(k=>k!==key);if(activeServers.length===0)activeServers=['cloudflare']}}
+function toggleServer(key,checked){if(checked){if(!activeServers.includes(key))activeServers.push(key)}else{activeServers=activeServers.filter(k=>k!==key)}updateDNSButtonText();updateProviderFilter()}
+function updateDNSButtonText(){const btn=document.getElementById('dnsSelectBtn');btn.textContent=t('dnsSelectBtn')+` (${activeServers.length})`}
+function showViewMenu(){const grid=document.getElementById('viewGrid');grid.innerHTML=`<label><input type="checkbox" ${showDNSNames?'checked':''} onchange="setShowDNSNames(this.checked)">${t('showDNSNamesLabel')}</label><label><input type="checkbox" ${showSep?'checked':''} onchange="setShowSep(this.checked)">${t('showSepLabel')}</label><label><input type="checkbox" ${showTTL?'checked':''} onchange="setShowTTL(this.checked)">${t('showTTLLabel')}</label><label><input type="checkbox" ${showSpeed?'checked':''} onchange="setShowSpeed(this.checked)">${t('showSpeedLabel')}</label>`;document.getElementById('viewMenuTitle').innerText=t('viewMenuTitle');document.getElementById('viewDoneBtn').innerText=t('viewDoneBtn');showModal('viewMenu')}
 function updateAllTexts(){
-document.getElementById('stopBtn').textContent=t('stopBtn');document.getElementById('easterText').innerText=t('easter');document.getElementById('starText').innerText=t('starText');
-if(currentResults.length>0){const names=activeServers.map(k=>allDNSServers[k]?allDNSServers[k].name:k).join(', ');document.getElementById('dnsIndicator').innerText=t('dnsIndicator',names);const found=currentResults.filter(r=>!r.error).length,errors=currentResults.length-found;document.getElementById('stats').innerText=t('stats',found,errors,currentResults.length);const totalSize=currentResults.reduce((s,r)=>s+(r.size||0),0);const sizeKB=(totalSize/1024).toFixed(1);const elapsed=((resolveStartTime>0?(Date.now()-resolveStartTime)/1000:0)).toFixed(1);document.getElementById('timeInfo').innerText=t('timeInfo',elapsed,sizeKB)}
+document.getElementById('stopBtn').textContent=t('stopBtn');document.getElementById('easterText').innerText=t('easter');document.getElementById('starText').innerText=t('starText');updateDNSButtonText();
+document.getElementById('inputSearch').placeholder=t('inputSearchPlaceholder');document.getElementById('resultsSearch').placeholder=t('resultsSearchPlaceholder');
+if(currentResults.length>0){applyAllFilters()}else{updateStatsDisplay()}
 document.getElementById('inputDomains').placeholder=t('inputPlaceholder');document.getElementById('resultsBox').placeholder=t('resultsPlaceholder');
-document.getElementById('dnsLabel').innerText=t('dnsLabel');document.getElementById('dnsSelectBtn').innerText=t('dnsSelectBtn');
-document.getElementById('showDNSNamesLabel').innerHTML=t('showDNSNamesLabel')+' <button class="tip-btn" onclick="toggleTip(\'dnsNamesTip\')">?</button>';
-document.getElementById('dnsNamesTipText').innerText=t('dnsNamesTipText');document.getElementById('dnsNamesOnText').innerText=t('dnsNamesOn');document.getElementById('dnsNamesOffText').innerText=t('dnsNamesOff');
-document.getElementById('showSepLabel').innerHTML=t('showSepLabel')+' <button class="tip-btn" onclick="toggleTip(\'sepTip\')">?</button>';
-document.getElementById('sepTipText').innerText=t('sepTipText');document.getElementById('sepOnText').innerText=t('sepOn');document.getElementById('sepOffText').innerText=t('sepOff');
+document.getElementById('dnsLabel').innerText=t('dnsLabel');document.getElementById('viewSelectBtn').textContent=t('viewSelectBtn');
 document.getElementById('typeLabel').innerText=t('typeLabel');
-document.getElementById('showTTLLabel').innerHTML=t('showTTLLabel')+' <button class="tip-btn" onclick="toggleTip(\'ttlTip\')">?</button>';
-document.getElementById('ttlTipText').innerText=t('ttlTipText');document.getElementById('ttlOnText').innerText=t('ttlOn');document.getElementById('ttlOffText').innerText=t('ttlOff');
-document.getElementById('formatLabel').innerHTML=t('formatLabel')+' <button class="tip-btn" onclick="toggleTip(\'formatTip\')">?</button>';
+document.getElementById('timeoutLabel').innerText=t('timeoutLabel');document.getElementById('delayLabel').innerText=t('delayLabel');
+document.getElementById('formatLabel').innerHTML=t('formatLabel');
 document.getElementById('presetBtn').innerText=t('presetBtn');document.getElementById('dedupBtn').innerText=t('dedupBtn');document.getElementById('uploadBtn').innerText=t('uploadBtn');
 document.getElementById('dedupResultsBtn').innerText=t('dedupResultsBtn');
 document.getElementById('exportMenuBtn').innerText=t('exportBtn');document.getElementById('filterBtn').innerText=t('filterBtn')[filterMode==='all'?0:filterMode==='success'?1:2];
 document.getElementById('exportTitle').innerText=t('exportTitle');
 document.getElementById('mxLabel').innerText=t('mxLabel');document.getElementById('nsLabel').innerText=t('nsLabel');document.getElementById('soaLabel').innerText=t('soaLabel');document.getElementById('txtLabel').innerText=t('txtLabel');
-document.getElementById('formatTipText').innerText=t('formatTipText');document.getElementById('dropText').innerText=t('dropText');
-updateStartBtnText();updateFormatButtonText();updateCompactSelects();document.getElementById('langToggleBtn').innerText=currentLanguage==='ru'?'🇷🇺 RU':'🇺🇸 EN';updateSettingsButtonText();updateLineCounter()}
-function updateStartBtnText(){document.getElementById('startBtn').innerText=t('startBtn'+recordType)}
+document.getElementById('dropText').innerText=t('dropText');
+document.getElementById('startBtn').innerText=t('startBtn');updateFormatButtonText();updateCompactSelects();updateProviderFilter();document.getElementById('langToggleBtn').innerText=currentLanguage==='ru'?'🇷🇺 RU':'🇺🇸 EN';updateSettingsButtonText();updateLineCounter()}
 function updateSettingsButtonText(){const stb=document.getElementById('settingsToggleBtn'),sbt=document.getElementById('settingsBtnText'),sb=document.getElementById('settingsBox');if(sb.style.display==='flex'){sbt.innerText=t('closeSettings');stb.classList.add('active')}else{sbt.innerText=t('settings');stb.classList.remove('active')}}
 function updateFormatButtonText(){const b=document.getElementById('formatBtn');b.innerText=t('formatBtn')[outputFormat==='hosts'?0:1];b.classList.toggle('active',outputFormat==='hosts')}
 function updateCompactSelects(){const ts=document.getElementById('timeoutSelect');const ds=document.getElementById('delaySelect');const to=t('timeoutOptions');const dl=t('delayOptions');for(let i=0;i<ts.options.length;i++){ts.options[i].text=to[i]}for(let i=0;i<ds.options.length;i++){ds.options[i].text=dl[i]}ts.value=String(timeout/1000);ds.value=String(delay)}
+function updateProviderFilter(){const sel=document.getElementById('providerFilter');while(sel.options.length>1)sel.remove(1);for(let s of activeServers){const opt=document.createElement('option');opt.value=s;opt.textContent=allDNSServers[s]?allDNSServers[s].name:s;sel.appendChild(opt)}}
+function updateStatsDisplay(){if(!currentResults.length){document.getElementById('stats').innerText='';return}const found=currentResults.filter(r=>!r.error).length;const errors=currentResults.length-found;const ips=new Set();for(let r of currentResults){if(!r.error&&r.ip)ips.add(r.ip)}document.getElementById('stats').innerText=t('stats',found,errors,currentResults.length,ips.size)}
 function toggleLanguage(){currentLanguage=currentLanguage==='ru'?'en':'ru';updateAllTexts();localStorage.setItem('dnsresolver_lang',currentLanguage)}
-function applyTheme(){
-document.body.classList.remove('light','xp');
-if(themeMode==='system'){if(window.matchMedia('(prefers-color-scheme: light)').matches){document.body.classList.add('light')}}else if(themeMode==='light'){document.body.classList.add('light')}else if(themeMode==='xp'){document.body.classList.add('xp')}
-updateThemeIcon();updateLogo()}
+function applyTheme(){document.body.classList.remove('light','xp');if(themeMode==='system'){if(window.matchMedia('(prefers-color-scheme: light)').matches){document.body.classList.add('light')}}else if(themeMode==='light'){document.body.classList.add('light')}else if(themeMode==='xp'){document.body.classList.add('xp')}updateThemeIcon();updateLogo()}
 function updateThemeIcon(){const btn=document.getElementById('themeToggleBtn');if(themeMode==='system')btn.textContent='🔄';else if(themeMode==='light')btn.textContent='☀️';else if(themeMode==='xp')btn.textContent='XP';else btn.textContent='🌙'}
 function cycleTheme(){if(themeMode==='system')themeMode='light';else if(themeMode==='light')themeMode='xp';else if(themeMode==='xp')themeMode='dark';else themeMode='system';applyTheme();localStorage.setItem('dnsresolver_theme',themeMode)}
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if(themeMode==='system')applyTheme()});
 function toggleSettings(){const b=document.getElementById('settingsBox');b.style.display=b.style.display==='flex'?'none':'flex';updateSettingsButtonText()}
-function toggleTip(id){document.getElementById(id).classList.toggle('show')}
-function setRecordType(t){recordType=t;updateStartBtnText();document.getElementById('inputDomains').placeholder=t('inputPlaceholder')}
+function setRecordType(t){recordType=t;updateAllTexts()}
 function setTimeoutVal(s){timeout=s*1000;document.getElementById('timeoutSelect').value=String(s)}
 function setDelay(d){delay=d;document.getElementById('delaySelect').value=String(d)}
-function toggleFormat(){outputFormat=outputFormat==='hosts'?'onlyip':'hosts';updateFormatButtonText()}
-function addPreset(text){document.getElementById('inputDomains').value=text;updateLineCounter();toast(t('presetAdded'))}
-function dedupDomains(){const ta=document.getElementById('inputDomains');const lines=ta.value.split('\n').map(l=>l.trim().toLowerCase()).filter(l=>l.length>0);ta.value=[...new Set(lines)].join('\n');updateLineCounter();toast(t('dupsRemoved'))}
-function dedupResults(){if(!currentResults.length)return;const seen=new Set();const unique=[];for(let r of currentResults){if(!r.error&&r.ip){if(!seen.has(r.ip)){seen.add(r.ip);unique.push(r)}}else{unique.push(r)}}currentResults=unique;displayResults(currentResults);toast(t('dupsRemoved'))}
-function clearInputOnly(){document.getElementById('inputDomains').value='';updateLineCounter();toast(t('cleared'))}
-function clearResultsOnly(){document.getElementById('resultsBox').value='';document.getElementById('resultsContainer').style.display='none';document.getElementById('stats').innerText='';document.getElementById('timeInfo').innerText='';document.getElementById('dnsIndicator').innerText='';currentResults=[];toast(t('cleared'))}
+function toggleFormat(){outputFormat=outputFormat==='hosts'?'onlyip':'hosts';updateFormatButtonText();applyAllFilters()}
+function addPreset(text){document.getElementById('inputDomains').value=text;allInputDomains=text;updateLineCounter();toast(t('presetAdded'))}
+function dedupDomains(){const ta=document.getElementById('inputDomains');const lines=ta.value.split('\n').map(l=>l.trim().toLowerCase()).filter(l=>l.length>0);ta.value=[...new Set(lines)].join('\n');allInputDomains=ta.value;updateLineCounter();toast(t('dupsRemoved'))}
+function dedupResults(){if(!currentResults.length)return;const seen=new Set();const unique=[];for(let r of currentResults){if(!r.error&&r.ip){if(!seen.has(r.ip)){seen.add(r.ip);unique.push(r)}}else{unique.push(r)}}currentResults=unique;applyAllFilters();toast(t('dupsRemoved'))}
+function clearInputOnly(){document.getElementById('inputDomains').value='';document.getElementById('inputSearch').value='';allInputDomains='';updateLineCounter();toast(t('cleared'))}
+function clearResultsOnly(){document.getElementById('resultsBox').value='';document.getElementById('resultsContainer').style.display='none';document.getElementById('stats').innerText='';document.getElementById('timeInfo').innerText='';document.getElementById('dnsIndicator').innerText='';document.getElementById('resultsSearch').value='';currentResults=[];toast(t('cleared'))}
 function updateLineCounter(){const ta=document.getElementById('inputDomains');const lines=ta.value.split('\n').filter(l=>l.trim().length>0);document.getElementById('lineCounter').innerText=lines.length>0?(currentLanguage==='ru'?`📊 Строк: ${lines.length}`:`📊 Lines: ${lines.length}`):''}
-function handleFile(input,isDrop){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){document.getElementById('inputDomains').value=e.target.result;updateLineCounter();if(isDrop)hideModal('dropOverlay');toast(t('imported'))};reader.onerror=function(){toast(t('importFail'))};reader.readAsText(file);input.value=''}
-function cycleFilter(){filterMode=filterMode==='all'?'success':filterMode==='success'?'errors':'all';document.getElementById('filterBtn').innerText=t('filterBtn')[filterMode==='all'?0:filterMode==='success'?1:2];applyFilter()}
-function applyFilter(){if(!currentResults.length)return;let filtered=[...currentResults];if(filterMode==='success')filtered=currentResults.filter(r=>!r.error);else if(filterMode==='errors')filtered=currentResults.filter(r=>r.error);displayResults(filtered)}
-function displayResults(results){const rb=document.getElementById('resultsBox');let lines=[];for(let i=0;i<results.length;i++){let r=results[i];let line;if(r.error){line=outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}`:t('errorHosts')+' '+r.domain}else{let extras='';if(showTTL&&r.ttl)extras+=' [TTL:'+r.ttl+'s]';if(r.dnssec)extras+=' [🔒 DNSSEC]';let prefix='';if(showDNSNames&&r.server&&allDNSServers[r.server]){prefix=allDNSServers[r.server].short+': '}line=outputFormat==='hosts'?`${prefix}${r.ip} ${r.domain}${extras}`:prefix+r.ip+extras}lines.push(line);if(showSep&&i<results.length-1)lines.push('')}rb.value=lines.join('\n')}
+function filterInputDomains(){const query=document.getElementById('inputSearch').value.toLowerCase();const ta=document.getElementById('inputDomains');if(!allInputDomains&&ta.value)allInputDomains=ta.value;const source=allInputDomains||ta.value;const lines=source.split('\n');if(!query.trim()){ta.value=source;updateLineCounter();return}const filtered=lines.filter(l=>l.toLowerCase().includes(query));ta.value=filtered.join('\n');updateLineCounter()}
+function handleFile(input,isDrop){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){document.getElementById('inputDomains').value=e.target.result;allInputDomains=e.target.result;updateLineCounter();if(isDrop)hideModal('dropOverlay');toast(t('imported'))};reader.onerror=function(){toast(t('importFail'))};reader.readAsText(file);input.value=''}
+function cycleFilter(){filterMode=filterMode==='all'?'success':filterMode==='success'?'errors':'all';document.getElementById('filterBtn').innerText=t('filterBtn')[filterMode==='all'?0:filterMode==='success'?1:2];applyAllFilters()}
+function applyAllFilters(){
+if(!currentResults.length){document.getElementById('resultsBox').value='';updateStatsDisplay();return}
+let filtered=[...currentResults];
+if(filterMode==='success')filtered=filtered.filter(r=>!r.error);else if(filterMode==='errors')filtered=filtered.filter(r=>r.error);
+const providerFilter=document.getElementById('providerFilter').value;
+if(providerFilter!=='all')filtered=filtered.filter(r=>r.server===providerFilter);
+const query=document.getElementById('resultsSearch').value.toLowerCase();
+if(query.trim()){filtered=filtered.filter(r=>r.domain.toLowerCase().includes(query)||(r.ip||'').toLowerCase().includes(query)||(r.server||'').toLowerCase().includes(query))}
+displayResults(filtered);updateStatsDisplay()}
+function displayResults(results){const rb=document.getElementById('resultsBox');let lines=[];for(let i=0;i<results.length;i++){let r=results[i];let line;if(r.error){line=outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}`:t('errorHosts')+' '+r.domain}else{let extras='';if(showTTL&&r.ttl)extras+=' | TTL: '+r.ttl+'s';if(showSpeed&&r.responseTime)extras+=' | ⚡ '+r.responseTime+' ms';let prefix='';if(showDNSNames&&r.server&&allDNSServers[r.server]){prefix=allDNSServers[r.server].short+': '}line=outputFormat==='hosts'?`${prefix}${r.ip} ${r.domain}${extras}`:prefix+r.ip+extras}lines.push(line);if(showSep&&i<results.length-1)lines.push('')}rb.value=lines.join('\n');updateStatsDisplay()}
 function easterClick(){easterClicks++;if(easterClicks>=3){document.getElementById('easterEgg').classList.add('show');setTimeout(()=>document.getElementById('easterEgg').classList.remove('show'),2500);easterClicks=0}}
-function exportFile(format){if(!currentResults.length){toast(t('emptyToast'));return}let content='',mime='text/plain',ext='txt';if(format==='csv'){content='Domain,IP,Status';if(showTTL)content+=',TTL';content+='\n';for(let r of currentResults){content+=`${r.domain},${r.ip||''},${r.error?'Error':'OK'}`;if(showTTL)content+=`,${r.ttl||''}`;content+='\n'}mime='text/csv';ext='csv'}else if(format==='json'){content=JSON.stringify(currentResults.map(r=>({domain:r.domain,ip:r.ip||null,error:r.error,ttl:showTTL?r.ttl||null:undefined,dnssec:r.dnssec||false})),null,2);mime='application/json';ext='json'}else if(format==='md'){content='| Domain | IP | Status |';if(showTTL)content+=' TTL |';content+='\n|:---|:---|:---|';if(showTTL)content+=':---|';content+='\n';for(let r of currentResults){content+=`| ${r.domain} | ${r.ip||'-'} | ${r.error?'❌':'✅'} |`;if(showTTL)content+=` ${r.ttl||''} |`;content+='\n'}mime='text/markdown';ext='md'}else{content=document.getElementById('resultsBox').value||'';if(!content.trim()){for(let r of currentResults){if(r.error){content+=outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}\n`:t('errorHosts')+' '+r.domain+'\n'}else{let extras='';if(showTTL&&r.ttl)extras+=' [TTL:'+r.ttl+'s]';if(r.dnssec)extras+=' [🔒 DNSSEC]';content+=outputFormat==='hosts'?`${r.ip} ${r.domain}${extras}\n`:r.ip+extras+'\n'}}}}const blob=new Blob([content],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`dns-results.${ext}`;a.click();URL.revokeObjectURL(url);toast(t('exported'))}
+function exportFile(format){if(!currentResults.length){toast(t('emptyToast'));return}let content='',mime='text/plain',ext='txt';if(format==='csv'){content='Domain,IP,Status';if(showTTL)content+=',TTL';content+='\n';for(let r of currentResults){content+=`${r.domain},${r.ip||''},${r.error?'Error':'OK'}`;if(showTTL)content+=`,${r.ttl||''}`;content+='\n'}mime='text/csv';ext='csv'}else if(format==='json'){content=JSON.stringify(currentResults.map(r=>({domain:r.domain,ip:r.ip||null,error:r.error,ttl:showTTL?r.ttl||null:undefined,dnssec:r.dnssec||false,responseTime:r.responseTime||null,server:r.server||null})),null,2);mime='application/json';ext='json'}else if(format==='md'){content='| Domain | IP | Status |';if(showTTL)content+=' TTL |';content+='\n|:---|:---|:---|';if(showTTL)content+=':---|';content+='\n';for(let r of currentResults){content+=`| ${r.domain} | ${r.ip||'-'} | ${r.error?'❌':'✅'} |`;if(showTTL)content+=` ${r.ttl||''} |`;content+='\n'}mime='text/markdown';ext='md'}else{content=document.getElementById('resultsBox').value||'';if(!content.trim()){for(let r of currentResults){if(r.error){content+=outputFormat==='hosts'?`${t('errorHosts')} ${r.domain}\n`:t('errorHosts')+' '+r.domain+'\n'}else{let extras='';if(showTTL&&r.ttl)extras+=' | TTL: '+r.ttl+'s';if(showSpeed&&r.responseTime)extras+=' | ⚡ '+r.responseTime+' ms';content+=outputFormat==='hosts'?`${r.ip} ${r.domain}${extras}\n`:r.ip+extras+'\n'}}}}const blob=new Blob([content],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`dns-results.${ext}`;a.click();URL.revokeObjectURL(url);toast(t('exported'))}
 function stopResolving(){if(abortController){abortController.abort();abortController=null}document.getElementById('startBtn').style.display='inline-block';document.getElementById('stopBtn').style.display='none';document.getElementById('progressBar').style.display='none';document.getElementById('startBtn').disabled=false}
 async function resolveSingle(domain,serverKey,type){
+const startTime=Date.now();
 try{let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);let apiUrl=allDNSServers[serverKey]?allDNSServers[serverKey].url:'https://cloudflare-dns.com/dns-query';let r=await fetch(`${apiUrl}?name=${encodeURIComponent(domain)}&type=${type}`,{headers:{'Accept':'application/dns-json'},signal:controller.signal});clearTimeout(timer);let d=await r.json();let result=null,ttl=null,dnssec=!!d.AD;if(d.Answer&&d.Answer.length>0){
 if(type==='MX'){let mx=d.Answer.filter(r=>r.type===15).sort((a,b)=>a.preference-b.preference);if(mx.length>0){result=mx.map(r=>r.data).join(', ');ttl=mx[0].TTL}}
 else if(type==='NS'){let ns=d.Answer.filter(r=>r.type===2);if(ns.length>0){result=ns.map(r=>r.data).join(', ');ttl=ns[0].TTL}}
 else if(type==='TXT'){let txt=d.Answer.filter(r=>r.type===16);if(txt.length>0){result=txt.map(r=>r.data).join(' | ');ttl=txt[0].TTL}}
 else if(type==='SOA'){let soa=d.Answer.find(r=>r.type===6);if(soa){result=soa.data;ttl=soa.TTL}}
 else{let rec=d.Answer.find(r=>r.type===recordTypes[type]);if(rec){result=rec.data;ttl=rec.TTL}}}
-return{result,ttl,dnssec,size:JSON.stringify(d).length}}catch(e){return null}}
+return{result,ttl,dnssec,size:JSON.stringify(d).length,responseTime:Date.now()-startTime}}catch(e){return{error:true,responseTime:Date.now()-startTime}}}
 async function startResolving(){
 const it=document.getElementById('inputDomains').value,rb=document.getElementById('resultsBox'),rc=document.getElementById('resultsContainer'),stats=document.getElementById('stats'),timeInfo=document.getElementById('timeInfo'),dnsIndicator=document.getElementById('dnsIndicator'),startBtn=document.getElementById('startBtn'),stopBtn=document.getElementById('stopBtn'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill');
+if(activeServers.length===0){document.getElementById('inputDomains').value='';allInputDomains='';updateLineCounter();rc.style.display='flex';stats.innerText='';timeInfo.innerText='';dnsIndicator.innerText='';rb.value=t('noServers');updateStatsDisplay();return}
 let inputText=it.replace(/https?:\/\//g,'').replace(/\/.*/g,'');const lines=inputText.split('\n');let domains=lines.map(l=>l.trim()).filter(l=>l.length>0);
-if(domains.length===0){rc.style.display='none';rb.value=t('empty');toast(t('emptyToast'));return}
-rc.style.display='flex';stats.innerText='';timeInfo.innerText='';dnsIndicator.innerText='';rb.value='';startBtn.style.display='none';stopBtn.style.display='inline-block';stopBtn.textContent=t('stopBtn');progressBar.style.display='block';progressFill.style.width='0%';stopBtn.disabled=false;currentResults=[];resolveStartTime=Date.now();
+if(domains.length===0){rc.style.display='none';rb.value=t('empty');toast(t('noDomainsToast'));return}
+allInputDomains=it;rc.style.display='flex';stats.innerText='';timeInfo.innerText='';dnsIndicator.innerText='';rb.value='';startBtn.style.display='none';stopBtn.style.display='inline-block';stopBtn.textContent=t('stopBtn');progressBar.style.display='block';progressFill.style.width='0%';stopBtn.disabled=false;currentResults=[];resolveStartTime=Date.now();
 const names=activeServers.map(k=>allDNSServers[k]?allDNSServers[k].name:k).join(', ');dnsIndicator.innerText=t('dnsIndicator',names);toast(t('started'));
 let found=0,errors=0,totalSize=0;abortController=new AbortController();
 for(let i=0;i<domains.length;i++){if(abortController.signal.aborted)break;let domain=domains[i];
 for(let s of activeServers){let res=await resolveSingle(domain,s,recordType);
-if(res&&res.result){found++;totalSize+=res.size;currentResults.push({domain,ip:res.result,error:false,ttl:res.ttl||null,dnssec:res.dnssec,size:res.size,server:s})}else{errors++;currentResults.push({domain,ip:null,error:true,size:0,server:s})}}
-stats.innerText=t('stats',found,errors,i+1);progressFill.style.width=((i+1)/domains.length*100)+'%';
+if(res&&res.result){found++;totalSize+=res.size;currentResults.push({domain,ip:res.result,error:false,ttl:res.ttl||null,dnssec:res.dnssec,size:res.size,server:s,responseTime:res.responseTime||null})}else{errors++;currentResults.push({domain,ip:null,error:true,size:0,server:s,responseTime:res.responseTime||null})}}
+stats.innerText=t('stats',found,errors,i+1,new Set(currentResults.filter(r=>!r.error&&r.ip).map(r=>r.ip)).size);progressFill.style.width=((i+1)/domains.length*100)+'%';
 if(delay>0&&i<domains.length-1&&!abortController.signal.aborted)await new Promise(r=>setTimeout(r,delay))}
-displayResults(currentResults);
+updateProviderFilter();applyAllFilters();
 const elapsed=((Date.now()-resolveStartTime)/1000).toFixed(1),sizeKB=(totalSize/1024).toFixed(1);timeInfo.innerText=t('timeInfo',elapsed,sizeKB);abortController=null;stopResolving()}
 document.getElementById('dropBox').addEventListener('click',()=>document.getElementById('dropFileInput').click());
 document.getElementById('dropBox').addEventListener('dragover',e=>{e.preventDefault();e.currentTarget.classList.add('drag-over')});
