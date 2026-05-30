@@ -759,6 +759,8 @@ let allInputDomains  = '';
 let abortController  = null;
 let resolveStartTime = 0;
 let activeServers    = ['cloudflare'];
+let lastElapsed      = '0';
+let lastSizeKB       = '0';
 
 // ─────────────────────────────────────────────
 //  DNS Servers & record type map
@@ -903,7 +905,7 @@ const L = {
         inputSearchPlaceholder: '🔍 Search domains...',
         resultsSearchPlaceholder: '🔍 Search results...',
         dropText: '📂 Drop file here or click to select',
-        timeInfo: (s, z) => `⏱️ Time: ${s}s | 📦 Response: ${z}KB`,
+        timeInfo: (s, z) => `⏱️ Time: ${s}s | 📦 Response: ${z} KB`,
         stats: (f, e, total, u) => `✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${total} / 🌐 Unique IPs: ${u}`,
         copied: '✅ Copied',
         copyFail: '❌ Failed',
@@ -1053,15 +1055,32 @@ function toggleLanguage() {
     try { localStorage.setItem('dnsresolver_lang', currentLanguage); } catch (e) {}
 }
 
+// ═══════════════════════════════════════════
+//  Update all dynamic/stateful texts
+// ═══════════════════════════════════════════
 function updateDynamicTexts() {
     updateProviderFilter();
     updateFormatButtonText();
     updateDNSButtonText();
     updateRecordTypeOptions();
+    updateStatusTexts();
     if (currentResults.length > 0) applyAllFilters();
     updateStatsDisplay();
     updateLineCounter();
     updateSettingsButtonText();
+}
+
+function updateStatusTexts() {
+    const dnsInd = document.getElementById('dnsIndicator');
+    if (dnsInd.innerText && activeServers.length > 0) {
+        const names = activeServers.map(k => allDNSServers[k]?.name ?? k).join(', ');
+        dnsInd.innerText = t('dnsIndicator', names);
+    }
+
+    const ti = document.getElementById('timeInfo');
+    if (ti.innerText && resolveStartTime > 0) {
+        ti.innerText = t('timeInfo', lastElapsed, lastSizeKB);
+    }
 }
 
 // ═══════════════════════════════════════════
@@ -1264,6 +1283,7 @@ function clearResultsOnly() {
     document.getElementById('dnsIndicator').innerText = '';
     document.getElementById('resultsSearch').value = '';
     currentResults = [];
+    resolveStartTime = 0;
     toast(t('cleared'));
 }
 
@@ -1546,9 +1566,9 @@ async function startResolving() {
     updateProviderFilter();
     applyAllFilters();
 
-    const elapsed = ((Date.now() - resolveStartTime) / 1000).toFixed(1);
-    const sizeKB  = (totalSize / 1024).toFixed(1);
-    timeInfo.innerText = t('timeInfo', elapsed, sizeKB);
+    lastElapsed = ((Date.now() - resolveStartTime) / 1000).toFixed(1);
+    lastSizeKB  = (totalSize / 1024).toFixed(1);
+    timeInfo.innerText = t('timeInfo', lastElapsed, lastSizeKB);
 
     abortController = null;
     stopResolving();
