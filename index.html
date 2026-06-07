@@ -39,6 +39,8 @@
             --progress-bg: #251a3a; --progress-fill: #782ec7;
             --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png');
             --theme-icon: '🌙';
+            --label-color: #c4aaee;
+            --info-bg: rgba(11, 7, 18, 0.55);
         }
 
         .light {
@@ -62,6 +64,8 @@
             --progress-bg: #e0e0e0; --progress-fill: #888;
             --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png');
             --theme-icon: '☀️';
+            --label-color: #444;
+            --info-bg: rgba(255, 255, 255, 0.6);
         }
 
         .xp {
@@ -85,6 +89,8 @@
             --progress-bg: #1a4ab0; --progress-fill: #6aafff;
             --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png');
             --theme-icon: 'XP';
+            --label-color: #ffffff;
+            --info-bg: rgba(0, 0, 0, 0.3);
         }
 
         *, *::before, *::after {
@@ -129,10 +135,18 @@
             z-index: 1;
         }
 
+        @media (min-width: 900px) {
+            .container { max-width: 560px; }
+        }
+        @media (min-width: 1400px) {
+            .container { max-width: 680px; }
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            align-content: flex-start;
             width: 100%;
             margin-bottom: 3px;
             flex-wrap: wrap;
@@ -140,7 +154,7 @@
             position: relative;
         }
 
-        .header-left { display: flex; align-items: center; gap: 8px; }
+        .header-left { display: flex; align-items: center; gap: 8px; align-self: center; }
 
         .logo {
             height: 50px;
@@ -150,20 +164,25 @@
         }
         .logo:hover { filter: drop-shadow(0 0 8px var(--shadow)); }
 
-        .header-buttons { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-buttons { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; align-self: center; }
 
         .h-btn {
             background-color: var(--btn2);
             color: var(--text2);
-            padding: 8px 10px;
+            padding: 6px 10px;
             border-radius: 0;
             cursor: pointer;
             font-size: 13px;
             white-space: nowrap;
             display: inline-flex;
+            flex-direction: row;
             align-items: center;
-            justify-content: center;
+            gap: 4px;
+            min-width: unset;
         }
+        .h-icon { font-size: 16px; line-height: 1; }
+        .h-label { font-size: inherit; color: var(--label-color); line-height: 1; }
+        .h-btn:hover .h-label { color: var(--hover-text); }
         .h-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
         .h-btn.active { background-color: var(--settings-active-bg); }
         .h-btn.lang { background-color: var(--btn3); }
@@ -188,6 +207,13 @@
             z-index: 100;
             margin-top: 8px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 900px) {
+            .settings-box { max-width: 560px; }
+        }
+        @media (min-width: 1400px) {
+            .settings-box { max-width: 680px; }
         }
 
         .s-label { font-size: 14px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
@@ -325,14 +351,30 @@
             transition: width 0.3s ease;
         }
 
-        .dns-indicator, .stats, .time-info {
-            color: var(--text3);
+        .info-row { text-align: center; }
+        .line-counter-row { text-align: right; }
+
+        .dns-indicator, .stats, .time-info, .line-counter {
+            display: none;
+            color: var(--text2);
             font-size: 12px;
-            text-align: center;
-            min-height: 14px;
+            padding: 0;
+            background: none;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
-        .stats { font-size: 13px; }
-        .line-counter { color: var(--text3); font-size: 11px; text-align: right; min-height: 12px; }
+        .dns-indicator.has-content,
+        .stats.has-content,
+        .time-info.has-content,
+        .line-counter.has-content {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--info-bg);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
 
         .search-row { display: flex; gap: 4px; align-items: center; }
         .search-input {
@@ -360,7 +402,7 @@
             font-size: 13px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 4px;
             white-space: nowrap;
         }
         .a-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
@@ -601,6 +643,24 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="historyMenu" onclick="hideModal('historyMenu')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div style="font-weight:bold" data-i18n="historyTitle">📜 История</div>
+        <div id="historyBox" style="display:flex;flex-direction:column;gap:6px;max-height:60vh;overflow-y:auto"></div>
+        <button onclick="hideModal('historyMenu')" data-i18n="historyClose">✅ Закрыть</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="langMenu" onclick="hideModal('langMenu')">
+    <div class="modal-box" onclick="event.stopPropagation()" style="max-width:280px">
+        <div style="font-weight:bold" data-i18n="langMenuTitle">🌐 Язык / Language</div>
+        <button onclick="selectLanguage('ru')">🇷🇺 Русский</button>
+        <button onclick="selectLanguage('en')">🇬🇧 English</button>
+        <button onclick="selectLanguage('es')">🇪🇸 Español</button>
+        <button onclick="selectLanguage('zh')">🇨🇳 中文</button>
+    </div>
+</div>
+
 <div class="modal-overlay" id="starMenu" onclick="hideModal('starMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <div class="star-text" data-i18n="starText">Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р</div>
@@ -628,14 +688,31 @@
                 src="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png"
                 alt="Dns resolver Michigan"
                 onclick="easterClick()">
-            <button class="h-btn star-btn" onclick="showModal('starMenu')" title="Поддержать проект">⭐</button>
+            <button class="h-btn star-btn" onclick="showModal('starMenu')" title="Поддержать проект">
+                <span class="h-icon">⭐</span>
+                <span class="h-label" data-i18n="btnSupport">Поддержка</span>
+            </button>
         </div>
         <div class="header-buttons">
-            <button class="h-btn preset" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')" data-i18n="presetBtn">📋 Тест сайтов</button>
-            <button class="h-btn theme-btn" id="themeToggleBtn" onclick="cycleTheme()">🔄</button>
-            <button class="h-btn lang" id="langToggleBtn" onclick="toggleLanguage()" data-i18n-format="langBtn">🇷🇺 RU</button>
+            <button class="h-btn preset" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')">
+                <span class="h-icon">📋</span>
+                <span class="h-label" data-i18n="presetBtnShort">Тест</span>
+            </button>
+            <button class="h-btn" onclick="showHistory()">
+                <span class="h-icon">📜</span>
+                <span class="h-label" data-i18n="btnHistory">История</span>
+            </button>
+            <button class="h-btn theme-btn" id="themeToggleBtn" onclick="cycleTheme()">
+                <span class="h-icon">🔄</span>
+                <span class="h-label" data-i18n="btnTheme">Тема</span>
+            </button>
+            <button class="h-btn lang" id="langToggleBtn" onclick="showModal('langMenu')">
+                <span class="h-icon" id="langIcon">🇷🇺</span>
+                <span class="h-label" data-i18n="btnLang">Язык</span>
+            </button>
             <button class="h-btn" id="settingsToggleBtn" onclick="toggleSettings()">
-                <span data-i18n="settings">⚙️</span>
+                <span class="h-icon">⚙️</span>
+                <span class="h-label" data-i18n="btnSettings">Настройки</span>
             </button>
         </div>
         <div class="settings-box" id="settingsBox">
@@ -651,6 +728,9 @@
                         <option value="NS"></option>
                         <option value="SOA"></option>
                         <option value="TXT"></option>
+                        <option value="CNAME">🔗 CNAME</option>
+                        <option value="CAA">🔒 CAA</option>
+                        <option value="PTR">↩️ PTR</option>
                     </select>
                 </div>
                 <div class="settings-item">
@@ -698,7 +778,9 @@
         </div>
     </div>
 
-    <div class="line-counter" id="lineCounter"></div>
+    <div class="line-counter-row">
+        <div class="line-counter" id="lineCounter"></div>
+    </div>
 
     <button class="main-btn start" id="startBtn" onclick="startResolving()" data-i18n="startBtn">🚀 Проверить</button>
     <button class="main-btn stop" id="stopBtn" onclick="stopResolving()" data-i18n="stopBtn">⏹️ Стоп</button>
@@ -707,25 +789,29 @@
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <div class="dns-indicator" id="dnsIndicator"></div>
-    <div class="stats" id="stats"></div>
-    <div class="time-info" id="timeInfo"></div>
+    <div class="info-row"><div class="dns-indicator" id="dnsIndicator"></div></div>
+    <div class="info-row"><div class="stats" id="stats"></div></div>
+    <div class="info-row"><div class="time-info" id="timeInfo"></div></div>
 
     <div class="results-container" id="resultsContainer">
+        <div class="results-header">
+            <div class="results-actions">
+                <button class="a-btn" onclick="cycleFilter()" id="filterBtn">🔍 Все</button>
+                <select class="a-btn" id="providerFilter" onchange="applyAllFilters()" style="padding:7px 12px">
+                    <option value="all" data-i18n="providerAll">🏢 Все провайдеры</option>
+                </select>
+                <button class="a-btn" onclick="dedupResults()">
+                    ♻️ <span data-i18n="aBtnDedup">Дубли</span>
+                </button>
+                <button class="a-btn" onclick="showModal('exportMenu')">
+                    📥 <span data-i18n="aBtnExport">Экспорт</span>
+                </button>
+            </div>
+        </div>
         <div class="search-row">
             <input type="text" class="search-input" id="resultsSearch"
                 data-i18n-placeholder="resultsSearchPlaceholder" placeholder="🔍 Поиск по результатам..."
                 oninput="applyAllFilters()">
-        </div>
-        <div class="results-header">
-            <div class="results-actions">
-                <button class="a-btn" onclick="cycleFilter()" id="filterBtn" data-i18n-format="filterBtn" data-format-param="all">🔍 Все</button>
-                <select class="a-btn" id="providerFilter" onchange="applyAllFilters()" style="padding:7px 12px">
-                    <option value="all" data-i18n="providerAll">🏢 Все провайдеры</option>
-                </select>
-                <button class="a-btn" onclick="dedupResults()" data-i18n="dedupResultsBtn">♻️ Убрать дубли</button>
-                <button class="a-btn" onclick="showModal('exportMenu')" data-i18n="exportMenuBtn">📥 Экспорт</button>
-            </div>
         </div>
         <div class="results-row">
             <textarea id="resultsBox" class="results-textarea" readonly data-i18n-placeholder="resultsPlaceholder" placeholder="📊 Результаты появятся здесь..."></textarea>
@@ -761,6 +847,7 @@ let resolveStartTime = 0;
 let activeServers    = ['cloudflare'];
 let lastElapsed      = '0';
 let lastSizeKB       = '0';
+let lastRttStr       = '';   // сохраняем RTT строку, чтобы не терялась при смене языка
 
 // ─────────────────────────────────────────────
 //  DNS Servers & record type map
@@ -771,13 +858,14 @@ const allDNSServers = {
     dnssb:      { name: '🟢 DNS.SB',     short: 'SB', url: 'https://doh.dns.sb/dns-query' },
 };
 
-const recordTypes = { A: 1, AAAA: 28, MX: 15, NS: 2, SOA: 6, TXT: 16 };
+const recordTypes = { A: 1, AAAA: 28, MX: 15, NS: 2, SOA: 6, TXT: 16, CNAME: 5, CAA: 257, PTR: 12 };
 
 // ─────────────────────────────────────────────
 //  Localisation
 // ─────────────────────────────────────────────
 const L = {
     ru: {
+        filterBtn: mode => ({ all: '🔍 Все', success: '✅ Успешные', errors: '❌ Ошибки' })[mode] || '🔍 Все',
         settings: '⚙️',
         dnsSelectBtn: count => `📡 Выбрать DNS серверы (${count})`,
         viewSelectBtn: '👁️ Вид результатов',
@@ -813,10 +901,6 @@ const L = {
         dedupBtn: '♻️ Убрать дубли',
         uploadBtn: '📂 Импорт',
         dedupResultsBtn: '♻️ Убрать дубли',
-        filterBtn: mode => {
-            const map = { all: '🔍 Все', success: '✅ Успешные', errors: '❌ Ошибки' };
-            return map[mode] || '🔍 Все';
-        },
         exportTitle: '📥 Экспорт',
         exportMenuBtn: '📥 Экспорт',
         dnsIndicator: p => `🔍 Проверено через: ${p}`,
@@ -834,7 +918,11 @@ const L = {
         resultsSearchPlaceholder: '🔍 Поиск по результатам...',
         dropText: '📂 Перетащите файл сюда или нажмите, чтобы выбрать',
         timeInfo: (s, z) => `⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,
-        stats: (f, e, total, u) => `✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${total} / 🌐 Уникальных IP: ${u}`,
+        stats: (f, e, total, u, d) => {
+            let s = `✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${total} / ✨ Уникальных: ${u}`;
+            if (d > 0) s += ` / 🔁 Дублей: ${d}`;
+            return s;
+        },
         copied: '✅ Скопировано',
         copyFail: '❌ Не удалось',
         emptyToast: '📭 Нечего копировать',
@@ -848,8 +936,26 @@ const L = {
         langBtn: '🇷🇺 RU',
         providerAll: '🏢 Все провайдеры',
         closeSettings: '❌',
+        historyTitle: '📜 История',
+        historyClose: '✅ Закрыть',
+        historyEmpty: '📭 История пуста',
+        historyDomains: 'доменов',
+        btnSupport: 'Поддержка',
+        btnHistory: 'История',
+        btnTheme: 'Тема',
+        btnLang: 'Язык',
+        btnSettings: 'Настройки',
+        langMenuTitle: '🌐 Выбор языка',
+        cnameLabel: 'Псевдоним',
+        caaLabel: 'Центр сертификации',
+        ptrLabel: 'Обратный',
+        presetBtnShort: 'Тест',
+        aBtnFilter: 'Фильтр',
+        aBtnDedup: 'Дубли',
+        aBtnExport: 'Экспорт',
     },
     en: {
+        filterBtn: mode => ({ all: '🔍 All', success: '✅ Success', errors: '❌ Errors' })[mode] || '🔍 All',
         settings: '⚙️',
         dnsSelectBtn: count => `📡 Choose DNS servers (${count})`,
         viewSelectBtn: '👁️ View options',
@@ -885,10 +991,6 @@ const L = {
         dedupBtn: '♻️ Remove duplicates',
         uploadBtn: '📂 Import',
         dedupResultsBtn: '♻️ Remove duplicates',
-        filterBtn: mode => {
-            const map = { all: '🔍 All', success: '✅ Success', errors: '❌ Errors' };
-            return map[mode] || '🔍 All';
-        },
         exportTitle: '📥 Export',
         exportMenuBtn: '📥 Export',
         dnsIndicator: p => `🔍 Resolved via: ${p}`,
@@ -906,7 +1008,11 @@ const L = {
         resultsSearchPlaceholder: '🔍 Search results...',
         dropText: '📂 Drop file here or click to select',
         timeInfo: (s, z) => `⏱️ Time: ${s} s | 📦 Response: ${z} KB`,
-        stats: (f, e, total, u) => `✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${total} / 🌐 Unique IPs: ${u}`,
+        stats: (f, e, total, u, d) => {
+            let s = `✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${total} / ✨ Unique: ${u}`;
+            if (d > 0) s += ` / 🔁 Dupes: ${d}`;
+            return s;
+        },
         copied: '✅ Copied',
         copyFail: '❌ Failed',
         emptyToast: '📭 Nothing to copy',
@@ -920,6 +1026,203 @@ const L = {
         langBtn: '🇬🇧 EN',
         providerAll: '🏢 All providers',
         closeSettings: '❌',
+        historyTitle: '📜 History',
+        historyClose: '✅ Close',
+        historyEmpty: '📭 No history yet',
+        historyDomains: 'domains',
+        btnSupport: 'Support',
+        btnHistory: 'History',
+        btnTheme: 'Theme',
+        btnLang: 'Language',
+        btnSettings: 'Settings',
+        langMenuTitle: '🌐 Language',
+        cnameLabel: 'Alias',
+        caaLabel: 'Cert Authority',
+        ptrLabel: 'Reverse',
+        presetBtnShort: 'Test',
+        aBtnFilter: 'Filter',
+        aBtnDedup: 'Dupes',
+        aBtnExport: 'Export',
+    },
+    es: {
+        filterBtn: mode => ({ all: '🔍 Todos', success: '✅ Exitosos', errors: '❌ Errores' })[mode] || '🔍 Todos',
+        settings: '⚙️',
+        dnsSelectBtn: count => `📡 Elegir servidores DNS (${count})`,
+        viewSelectBtn: '👁️ Opciones de vista',
+        viewMenuTitle: '👁️ Opciones de vista',
+        viewDoneBtn: '✅ Listo',
+        showDNSNamesLabel: '🏷️ Nombres DNS',
+        showSepLabel: '↕️ Separador de líneas',
+        showTTLLabel: '⏱️ Mostrar TTL',
+        showSpeedLabel: '⚡ Mostrar velocidad',
+        dnsNamesOn: '✅ Sí',
+        dnsNamesOff: '❌ No',
+        sepOn: '✅ Sí',
+        sepOff: '❌ No',
+        ttlOn: '✅ Sí',
+        ttlOff: '❌ No',
+        speedOn: '✅ Sí',
+        speedOff: '❌ No',
+        dnsMenuTitle: '📡 Seleccionar servidores DNS',
+        dnsDoneBtn: '✅ Listo',
+        typeLabel: '📝 Tipo de registro',
+        formatBtn: val => val === 'hosts' ? '📁 Formato: Hosts' : '🔢 Formato: Solo IP',
+        inputPlaceholder: '📝 Pega tu lista de dominios aquí...',
+        startBtn: '🚀 Resolver',
+        stopBtn: '⏹ Detener',
+        resultsPlaceholder: '📊 Los resultados aparecerán aquí...',
+        resolving: '⏳ Resolviendo...\n',
+        empty: '📭 La lista está vacía',
+        error: '❌ Error/No encontrado',
+        errorHosts: '# ❌ Error',
+        noServers: '¿Qué esperas? ¿Que Dios te dé las respuestas? No hay Dios, asúmelo <3',
+        noDomainsToast: '📭 Nada que buscar',
+        presetBtn: '📋 Sitios de prueba',
+        dedupBtn: '♻️ Quitar duplicados',
+        uploadBtn: '📂 Importar',
+        dedupResultsBtn: '♻️ Quitar duplicados',
+        exportTitle: '📥 Exportar',
+        exportMenuBtn: '📥 Exportar',
+        dnsIndicator: p => `🔍 Resuelto vía: ${p}`,
+        starText: '¡Hola! Apoya mi proyecto gratuito con una estrella, o te morderé la oreja :P',
+        easter: 'Gracias por usar',
+        mxLabel: 'Correo',
+        nsLabel: 'Servidores DNS',
+        soaLabel: 'Zona',
+        txtLabel: 'Texto',
+        timeoutLabel: '⏰ Tiempo límite',
+        delayLabel: '🐌 Retardo',
+        timeoutOptions: ['5 seg', '10 seg', '15 seg'],
+        delayOptions: ['Sin retardo', '0.5 seg', '1 seg'],
+        inputSearchPlaceholder: '🔍 Buscar dominios...',
+        resultsSearchPlaceholder: '🔍 Buscar resultados...',
+        dropText: '📂 Arrastra un archivo aquí o haz clic para seleccionar',
+        timeInfo: (s, z) => `⏱️ Tiempo: ${s} s | 📦 Respuesta: ${z} KB`,
+        stats: (f, e, total, u, d) => {
+            let s = `✅ Encontrados: ${f} / ❌ Errores: ${e} / 📊 Total: ${total} / ✨ Únicos: ${u}`;
+            if (d > 0) s += ` / 🔁 Duplicados: ${d}`;
+            return s;
+        },
+        copied: '✅ Copiado',
+        copyFail: '❌ Error al copiar',
+        emptyToast: '📭 Nada que copiar',
+        imported: '✅ Archivo cargado',
+        importFail: '❌ Error de carga',
+        cleared: '🗑️ Limpiado',
+        started: '🚀 Resolución iniciada',
+        exported: '📥 Exportación guardada',
+        dupsRemoved: '♻️ Duplicados eliminados',
+        presetAdded: '📋 Sitios de prueba añadidos',
+        langBtn: '🇪🇸 ES',
+        providerAll: '🏢 Todos los proveedores',
+        closeSettings: '❌',
+        historyTitle: '📜 Historial',
+        historyClose: '✅ Cerrar',
+        historyEmpty: '📭 Sin historial',
+        historyDomains: 'dominios',
+        btnSupport: 'Soporte',
+        btnHistory: 'Historial',
+        btnTheme: 'Tema',
+        btnLang: 'Idioma',
+        btnSettings: 'Ajustes',
+        langMenuTitle: '🌐 Idioma',
+        cnameLabel: 'Alias',
+        caaLabel: 'Cert. autoridad',
+        ptrLabel: 'Inverso',
+        presetBtnShort: 'Test',
+        aBtnFilter: 'Filtro',
+        aBtnDedup: 'Dupes',
+        aBtnExport: 'Exportar',
+    },
+    zh: {
+        filterBtn: mode => ({ all: '🔍 全部', success: '✅ 成功', errors: '❌ 失败' })[mode] || '🔍 全部',
+        settings: '⚙️',
+        dnsSelectBtn: count => `📡 选择 DNS 服务器 (${count})`,
+        viewSelectBtn: '👁️ 显示选项',
+        viewMenuTitle: '👁️ 显示选项',
+        viewDoneBtn: '✅ 完成',
+        showDNSNamesLabel: '🏷️ 显示 DNS 名称',
+        showSepLabel: '↕️ 行分隔符',
+        showTTLLabel: '⏱️ 显示 TTL',
+        showSpeedLabel: '⚡ 显示速度',
+        dnsNamesOn: '✅ 开',
+        dnsNamesOff: '❌ 关',
+        sepOn: '✅ 开',
+        sepOff: '❌ 关',
+        ttlOn: '✅ 开',
+        ttlOff: '❌ 关',
+        speedOn: '✅ 开',
+        speedOff: '❌ 关',
+        dnsMenuTitle: '📡 选择 DNS 服务器',
+        dnsDoneBtn: '✅ 完成',
+        typeLabel: '📝 记录类型',
+        formatBtn: val => val === 'hosts' ? '📁 输出格式：Hosts' : '🔢 输出格式：仅 IP',
+        inputPlaceholder: '📝 在此粘贴域名列表...',
+        startBtn: '🚀 解析',
+        stopBtn: '⏹ 停止',
+        resultsPlaceholder: '📊 结果将显示在此处...',
+        resolving: '⏳ 解析中...\n',
+        empty: '📭 列表为空',
+        error: '❌ 出错/未找到',
+        errorHosts: '# ❌ 出错',
+        noServers: '你在期待什么？上帝给你答案？上帝不存在，接受现实吧 <3',
+        noDomainsToast: '📭 没有可搜索的内容',
+        presetBtn: '📋 测试站点',
+        dedupBtn: '♻️ 去重',
+        uploadBtn: '📂 导入',
+        dedupResultsBtn: '♻️ 去重',
+        exportTitle: '📥 导出',
+        exportMenuBtn: '📥 导出',
+        dnsIndicator: p => `🔍 通过以下服务器解析：${p}`,
+        starText: '嘿！给我的免费项目点个星吧，不然我咬你耳朵哦 :P',
+        easter: '感谢使用',
+        mxLabel: '邮件',
+        nsLabel: 'DNS 服务器',
+        soaLabel: '区域',
+        txtLabel: '文本',
+        timeoutLabel: '⏰ 超时',
+        delayLabel: '🐌 延迟',
+        timeoutOptions: ['5 秒', '10 秒', '15 秒'],
+        delayOptions: ['无延迟', '0.5 秒', '1 秒'],
+        inputSearchPlaceholder: '🔍 搜索域名...',
+        resultsSearchPlaceholder: '🔍 搜索结果...',
+        dropText: '📂 将文件拖到此处或点击选择',
+        timeInfo: (s, z) => `⏱️ 用时：${s} 秒 | 📦 响应：${z} KB`,
+        stats: (f, e, total, u, d) => {
+            let s = `✅ 成功：${f} / ❌ 失败：${e} / 📊 总计：${total} / ✨ 唯一：${u}`;
+            if (d > 0) s += ` / 🔁 重复：${d}`;
+            return s;
+        },
+        copied: '✅ 已复制',
+        copyFail: '❌ 复制失败',
+        emptyToast: '📭 无内容可复制',
+        imported: '✅ 文件已加载',
+        importFail: '❌ 加载出错',
+        cleared: '🗑️ 已清空',
+        started: '🚀 解析已开始',
+        exported: '📥 导出已保存',
+        dupsRemoved: '♻️ 重复项已删除',
+        presetAdded: '📋 测试站点已添加',
+        langBtn: '🇨🇳 中文',
+        providerAll: '🏢 所有服务商',
+        closeSettings: '❌',
+        historyTitle: '📜 历史记录',
+        historyClose: '✅ 关闭',
+        historyEmpty: '📭 暂无历史记录',
+        historyDomains: '个域名',
+        btnSupport: '支持',
+        btnHistory: '历史',
+        btnTheme: '主题',
+        btnLang: '语言',
+        btnSettings: '设置',
+        langMenuTitle: '🌐 语言选择',
+        cnameLabel: '别名',
+        caaLabel: '证书颁发机构',
+        ptrLabel: '反向',
+        presetBtnShort: '测试',
+        aBtnFilter: '筛选',
+        aBtnDedup: '去重',
+        aBtnExport: '导出',
     },
 };
 
@@ -967,14 +1270,18 @@ function applyI18N() {
     });
 
     updateRecordTypeOptions();
+    updateFilterButtonText();
 }
 
 function updateRecordTypeOptions() {
     const labels = {
-        MX:  '📧 MX (' + t('mxLabel') + ')',
-        NS:  '🗄️ NS (' + t('nsLabel') + ')',
-        SOA: '📋 SOA (' + t('soaLabel') + ')',
-        TXT: '📝 TXT (' + t('txtLabel') + ')',
+        MX:    '📧 MX (' + t('mxLabel') + ')',
+        NS:    '🗄️ NS (' + t('nsLabel') + ')',
+        SOA:   '📋 SOA (' + t('soaLabel') + ')',
+        TXT:   '📝 TXT (' + t('txtLabel') + ')',
+        CNAME: '🔗 CNAME (' + t('cnameLabel') + ')',
+        CAA:   '🔒 CAA (' + t('caaLabel') + ')',
+        PTR:   '↩️ PTR (' + t('ptrLabel') + ')',
     };
     const sel = document.getElementById('recordType');
     for (let i = 0; i < sel.options.length; i++) {
@@ -1021,7 +1328,9 @@ function applyTheme() {
 function updateThemeIcon() {
     const btn = document.getElementById('themeToggleBtn');
     const icons = { system: '🔄', light: '☀️', xp: 'XP', dark: '🌙' };
-    btn.textContent = icons[themeMode] || '🌙';
+    const icon = btn.querySelector('.h-icon');
+    if (icon) icon.textContent = icons[themeMode] || '🌙';
+    else btn.textContent = icons[themeMode] || '🌙';
 }
 
 function cycleTheme() {
@@ -1048,15 +1357,35 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ()
 // ═══════════════════════════════════════════
 //  Language
 // ═══════════════════════════════════════════
-function toggleLanguage() {
-    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+function selectLanguage(lang) {
+    currentLanguage = lang;
+    updateLangIcon();
     applyI18N();
     updateDynamicTexts();
+    hideModal('langMenu');
     try { localStorage.setItem('dnsresolver_lang', currentLanguage); } catch (e) {}
 }
 
+function updateLangIcon() {
+    const flags = { ru: '🇷🇺', en: '🇬🇧', es: '🇪🇸', zh: '🇨🇳' };
+    const el = document.getElementById('langIcon');
+    if (el) el.textContent = flags[currentLanguage] || '🌐';
+}
+
+function detectInitialLanguage() {
+    try {
+        const saved = localStorage.getItem('dnsresolver_lang');
+        if (saved && L[saved]) { currentLanguage = saved; return; }
+        const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        if (nav.startsWith('ru')) currentLanguage = 'ru';
+        else if (nav.startsWith('zh')) currentLanguage = 'zh';
+        else if (nav.startsWith('es')) currentLanguage = 'es';
+        else currentLanguage = 'en';
+    } catch(e) { currentLanguage = 'en'; }
+}
+
 // ═══════════════════════════════════════════
-//  Update all dynamic/stateful texts
+//  Update dynamic texts
 // ═══════════════════════════════════════════
 function updateDynamicTexts() {
     updateProviderFilter();
@@ -1064,6 +1393,7 @@ function updateDynamicTexts() {
     updateDNSButtonText();
     updateRecordTypeOptions();
     updateStatusTexts();
+    updateFilterButtonText();
     if (currentResults.length > 0) applyAllFilters();
     updateStatsDisplay();
     updateLineCounter();
@@ -1074,12 +1404,25 @@ function updateStatusTexts() {
     const dnsInd = document.getElementById('dnsIndicator');
     if (dnsInd.innerText && activeServers.length > 0) {
         const names = activeServers.map(k => allDNSServers[k]?.name ?? k).join(', ');
-        dnsInd.innerText = t('dnsIndicator', names);
+        setElementText(dnsInd, t('dnsIndicator', names));
     }
 
     const ti = document.getElementById('timeInfo');
-    if (ti.innerText && resolveStartTime > 0) {
-        ti.innerText = t('timeInfo', lastElapsed, lastSizeKB);
+    if (resolveStartTime > 0) {
+        // Пересобираем строку времени с сохранённым RTT
+        setElementText(ti, t('timeInfo', lastElapsed, lastSizeKB) + lastRttStr);
+    }
+}
+
+function setElementText(el, text) {
+    if (!el) return;
+    el.innerText = text;
+    if (text && text.trim()) {
+        el.style.display = 'inline-block';
+        el.classList.add('has-content');
+    } else {
+        el.style.display = 'none';
+        el.classList.remove('has-content');
     }
 }
 
@@ -1213,7 +1556,6 @@ function handleFile(input, isDrop) {
     input.value = '';
 }
 
-// Drop zone
 document.getElementById('dropBox').addEventListener('click', () => document.getElementById('dropFileInput').click());
 document.getElementById('dropBox').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
 document.getElementById('dropBox').addEventListener('dragleave', e => { e.currentTarget.classList.remove('drag-over'); });
@@ -1233,9 +1575,24 @@ document.getElementById('dropBox').addEventListener('drop', e => {
 //  Domain input helpers
 // ═══════════════════════════════════════════
 function updateLineCounter() {
-    const lines = document.getElementById('inputDomains').value.split('\n').filter(l => l.trim().length > 0);
-    const label = currentLanguage === 'ru' ? `📊 Строк: ${lines.length}` : `📊 Lines: ${lines.length}`;
-    document.getElementById('lineCounter').innerText = lines.length > 0 ? label : '';
+    const lines = document.getElementById('inputDomains').value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    const counter = document.getElementById('lineCounter');
+    if (!lines.length) {
+        setElementText(counter, '');
+        return;
+    }
+    const unique = new Set(lines.map(l => l.toLowerCase())).size;
+    const dupes  = lines.length - unique;
+    const loc = {
+        ru: { lines: 'Строк', dupes: 'Дублей', unique: 'Уникальных' },
+        en: { lines: 'Lines', dupes: 'Dupes', unique: 'Unique' },
+        es: { lines: 'Líneas', dupes: 'Dupes', unique: 'Únicos' },
+        zh: { lines: '行数', dupes: '重复', unique: '唯一' },
+    }[currentLanguage] || { lines: 'Lines', dupes: 'Dupes', unique: 'Unique' };
+    let label = `📊 ${loc.lines}: ${lines.length}`;
+    if (dupes > 0) label += ` | 🔁 ${loc.dupes}: ${dupes}`;
+    label += ` | ✨ ${loc.unique}: ${unique}`;
+    setElementText(counter, label);
 }
 
 function filterInputDomains() {
@@ -1278,22 +1635,28 @@ function clearInputOnly() {
 function clearResultsOnly() {
     document.getElementById('resultsBox').value = '';
     document.getElementById('resultsContainer').style.display = 'none';
-    document.getElementById('stats').innerText = '';
-    document.getElementById('timeInfo').innerText = '';
-    document.getElementById('dnsIndicator').innerText = '';
+    setElementText(document.getElementById('stats'), '');
+    setElementText(document.getElementById('timeInfo'), '');
+    setElementText(document.getElementById('dnsIndicator'), '');
     document.getElementById('resultsSearch').value = '';
     currentResults = [];
     resolveStartTime = 0;
+    lastRttStr = '';   // сбрасываем RTT при очистке
     toast(t('cleared'));
 }
 
 function cycleFilter() {
     const order = ['all', 'success', 'errors'];
     filterMode = order[(order.indexOf(filterMode) + 1) % order.length];
-    const btn = document.getElementById('filterBtn');
-    btn.setAttribute('data-format-param', filterMode);
-    btn.textContent = t('filterBtn', filterMode);
+    updateFilterButtonText();
     applyAllFilters();
+}
+
+function updateFilterButtonText() {
+    const btn = document.getElementById('filterBtn');
+    if (btn) {
+        btn.textContent = t('filterBtn', filterMode);
+    }
 }
 
 function dedupResults() {
@@ -1344,6 +1707,7 @@ function displayResults(results) {
             let extras = '';
             if (showTTL && r.ttl) extras += ` | TTL: ${r.ttl}s`;
             if (showSpeed && r.responseTime) extras += ` | ⚡ ${r.responseTime} ms`;
+            if (r.cnameChain) extras += ` | CNAME: ${r.cnameChain}`;
             const prefix = showDNSNames && r.server && allDNSServers[r.server]
                 ? allDNSServers[r.server].short + ': '
                 : '';
@@ -1359,11 +1723,16 @@ function displayResults(results) {
 }
 
 function updateStatsDisplay() {
-    if (!currentResults.length) { document.getElementById('stats').innerText = ''; return; }
+    const statsEl = document.getElementById('stats');
+    if (!currentResults.length) {
+        setElementText(statsEl, '');
+        return;
+    }
     const found  = currentResults.filter(r => !r.error).length;
     const errors = currentResults.length - found;
     const ips    = new Set(currentResults.filter(r => !r.error && r.ip).map(r => r.ip));
-    document.getElementById('stats').innerText = t('stats', found, errors, currentResults.length, ips.size);
+    const dupes  = found - ips.size;
+    setElementText(statsEl, t('stats', found, errors, currentResults.length, ips.size, dupes));
 }
 
 function updateProviderFilter() {
@@ -1430,7 +1799,8 @@ function exportFile(format) {
 // ═══════════════════════════════════════════
 //  DNS Resolution
 // ═══════════════════════════════════════════
-async function resolveSingle(domain, serverKey, type, externalSignal) {
+async function resolveSingle(domain, serverKey, type, externalSignal, attempt = 0) {
+    const MAX_RETRIES = 2;
     const startTime = Date.now();
     const localController = new AbortController();
     const timer = setTimeout(() => localController.abort(), timeout);
@@ -1446,7 +1816,13 @@ async function resolveSingle(domain, serverKey, type, externalSignal) {
         if (externalSignal) externalSignal.removeEventListener('abort', onGlobalAbort);
         const data   = await res.json();
         const dnssec = !!data.AD;
-        let result = null, ttl = null;
+        let result = null, ttl = null, cnameChain = null;
+
+        const cnameRecords = data.Answer?.filter(r => r.type === 5) ?? [];
+        if (cnameRecords.length > 0) {
+            cnameChain = cnameRecords.map(r => r.data.replace(/\.$/, '')).join(' → ');
+        }
+
         if (data.Answer?.length > 0) {
             if (type === 'MX') {
                 const mx = data.Answer.filter(r => r.type === 15).sort((a, b) => a.preference - b.preference);
@@ -1460,15 +1836,43 @@ async function resolveSingle(domain, serverKey, type, externalSignal) {
             } else if (type === 'SOA') {
                 const soa = data.Answer.find(r => r.type === 6);
                 if (soa) { result = soa.data; ttl = soa.TTL; }
+            } else if (type === 'CNAME') {
+                const cname = data.Answer.filter(r => r.type === 5);
+                if (cname.length) {
+                    result = cname.map(r => r.data.replace(/\.$/, '')).join(' → ');
+                    ttl = cname[0].TTL;
+                } else {
+                    const any = data.Answer[0];
+                    result = any.data.replace(/\.$/, '');
+                    ttl = any.TTL;
+                }
+            } else if (type === 'CAA') {
+                const caa = data.Answer.filter(r => r.type === 257);
+                if (caa.length) { result = caa.map(r => r.data).join(', '); ttl = caa[0].TTL; }
+                else {
+                    const any = data.Answer[0];
+                    if (any) { result = any.data; ttl = any.TTL; }
+                }
+            } else if (type === 'PTR') {
+                const ptr = data.Answer.filter(r => r.type === 12);
+                if (ptr.length) { result = ptr.map(r => r.data.replace(/\.$/, '')).join(', '); ttl = ptr[0].TTL; }
+                else {
+                    const any = data.Answer[0];
+                    if (any) { result = any.data.replace(/\.$/, ''); ttl = any.TTL; }
+                }
             } else {
                 const rec = data.Answer.find(r => r.type === recordTypes[type]);
                 if (rec) { result = rec.data; ttl = rec.TTL; }
             }
         }
-        return { result, ttl, dnssec, size: JSON.stringify(data).length, responseTime: Date.now() - startTime };
+        return { result, ttl, dnssec, cnameChain, size: JSON.stringify(data).length, responseTime: Date.now() - startTime };
     } catch (e) {
         clearTimeout(timer);
         if (externalSignal) externalSignal.removeEventListener('abort', onGlobalAbort);
+        if (attempt < MAX_RETRIES && !externalSignal?.aborted) {
+            await new Promise(r => setTimeout(r, 300 * (attempt + 1)));
+            return resolveSingle(domain, serverKey, type, externalSignal, attempt + 1);
+        }
         return { error: true, responseTime: Date.now() - startTime };
     }
 }
@@ -1486,9 +1890,9 @@ async function startResolving() {
 
     if (activeServers.length === 0) {
         rc.style.display = 'flex';
-        stats.innerText = '';
-        timeInfo.innerText = '';
-        dnsInd.innerText = '';
+        setElementText(stats, '');
+        setElementText(timeInfo, '');
+        setElementText(dnsInd, '');
         rb.value = t('noServers');
         updateStatsDisplay();
         return;
@@ -1506,11 +1910,18 @@ async function startResolving() {
         return;
     }
 
+    const invalidDomains = domains.filter(d => !/^[a-zA-Z0-9._\-]+$/.test(d));
+    if (invalidDomains.length > 0) {
+        toast(`⚠️ ${invalidDomains.length} ${currentLanguage === 'ru' ? 'невалидных доменов пропущено' : 'invalid domains skipped'}`);
+    }
+    const validDomains = domains.filter(d => /^[a-zA-Z0-9._\-]+$/.test(d));
+    if (validDomains.length === 0) { toast(t('noDomainsToast')); return; }
+
     allInputDomains = document.getElementById('inputDomains').value;
     rc.style.display = 'flex';
-    stats.innerText = '';
-    timeInfo.innerText = '';
-    dnsInd.innerText = '';
+    setElementText(stats, '');
+    setElementText(timeInfo, '');
+    setElementText(dnsInd, '');
     rb.value = '';
     startBtn.style.display = 'none';
     stopBtn.style.display = 'inline-block';
@@ -1522,43 +1933,57 @@ async function startResolving() {
     resolveStartTime = Date.now();
 
     const names = activeServers.map(k => allDNSServers[k]?.name ?? k).join(', ');
-    dnsInd.innerText = t('dnsIndicator', names);
+    setElementText(dnsInd, t('dnsIndicator', names));
     toast(t('started'));
 
     abortController = new AbortController();
     const signal = abortController.signal;
 
     let found = 0, errors = 0, totalSize = 0;
+    const allResponseTimes = [];
+    const BATCH_SIZE = 5;
 
-    for (let i = 0; i < domains.length; i++) {
+    for (let i = 0; i < validDomains.length; i += BATCH_SIZE) {
         if (signal.aborted) break;
-        const domain = domains[i];
-        const tasks = activeServers.map(s => resolveSingle(domain, s, recordType, signal));
-        const results = await Promise.all(tasks);
-        for (let j = 0; j < results.length; j++) {
+        const batch = validDomains.slice(i, i + BATCH_SIZE);
+
+        const batchTasks = batch.map(domain =>
+            Promise.all(activeServers.map(s => resolveSingle(domain, s, recordType, signal)))
+                .then(results => ({ domain, results }))
+        );
+        const batchResolved = await Promise.all(batchTasks);
+
+        for (const { domain, results } of batchResolved) {
             if (signal.aborted) break;
-            const res = results[j];
-            const s   = activeServers[j];
-            if (res && res.result) {
-                found++;
-                totalSize += res.size;
-                currentResults.push({
-                    domain, ip: res.result, error: false,
-                    ttl: res.ttl ?? null, dnssec: res.dnssec,
-                    size: res.size, server: s, responseTime: res.responseTime ?? null,
-                });
-            } else {
-                errors++;
-                currentResults.push({
-                    domain, ip: null, error: true,
-                    size: 0, server: s, responseTime: res?.responseTime ?? null,
-                });
+            for (let j = 0; j < results.length; j++) {
+                const res = results[j];
+                const s   = activeServers[j];
+                if (res && res.result) {
+                    found++;
+                    totalSize += res.size;
+                    if (res.responseTime) allResponseTimes.push(res.responseTime);
+                    currentResults.push({
+                        domain, ip: res.result, error: false,
+                        ttl: res.ttl ?? null, dnssec: res.dnssec,
+                        cnameChain: res.cnameChain ?? null,
+                        size: res.size, server: s, responseTime: res.responseTime ?? null,
+                    });
+                } else {
+                    errors++;
+                    currentResults.push({
+                        domain, ip: null, error: true,
+                        size: 0, server: s, responseTime: res?.responseTime ?? null,
+                    });
+                }
             }
         }
+
+        const processed = Math.min(i + BATCH_SIZE, validDomains.length);
         const uniqueIPs = new Set(currentResults.filter(r => !r.error && r.ip).map(r => r.ip));
-        stats.innerText = t('stats', found, errors, i + 1, uniqueIPs.size);
-        progressFill.style.width = `${((i + 1) / domains.length) * 100}%`;
-        if (delay > 0 && i < domains.length - 1 && !signal.aborted) {
+        setElementText(stats, t('stats', found, errors, processed, uniqueIPs.size, found - uniqueIPs.size));
+        progressFill.style.width = `${(processed / validDomains.length) * 100}%`;
+
+        if (delay > 0 && i + BATCH_SIZE < validDomains.length && !signal.aborted) {
             await new Promise(r => setTimeout(r, delay));
         }
     }
@@ -1568,7 +1993,18 @@ async function startResolving() {
 
     lastElapsed = ((Date.now() - resolveStartTime) / 1000).toFixed(1);
     lastSizeKB  = (totalSize / 1024).toFixed(1);
-    timeInfo.innerText = t('timeInfo', lastElapsed, lastSizeKB);
+
+    if (allResponseTimes.length > 0) {
+        const minRtt = Math.min(...allResponseTimes);
+        const maxRtt = Math.max(...allResponseTimes);
+        const avgRtt = Math.round(allResponseTimes.reduce((a, b) => a + b, 0) / allResponseTimes.length);
+        lastRttStr = ` | ⚡ RTT: ${minRtt}/${avgRtt}/${maxRtt} ms`;
+    } else {
+        lastRttStr = '';
+    }
+    setElementText(timeInfo, t('timeInfo', lastElapsed, lastSizeKB) + lastRttStr);
+
+    saveHistory(validDomains.length, found, errors);
 
     abortController = null;
     stopResolving();
@@ -1600,6 +2036,73 @@ function easterClick() {
 }
 
 // ═══════════════════════════════════════════
+//  History
+// ═══════════════════════════════════════════
+function saveHistory(total, found, errors) {
+    try {
+        const history = JSON.parse(localStorage.getItem('dnsresolver_history') || '[]');
+        history.unshift({
+            date: new Date().toLocaleString(),
+            domains: total,
+            found,
+            errors,
+            servers: activeServers.slice(),
+            recordType,
+            elapsed: lastElapsed,
+        });
+        if (history.length > 20) history.length = 20;
+        localStorage.setItem('dnsresolver_history', JSON.stringify(history));
+    } catch(e) {}
+}
+
+function showHistory() {
+    try {
+        const history = JSON.parse(localStorage.getItem('dnsresolver_history') || '[]');
+        const box = document.getElementById('historyBox');
+        if (!history.length) {
+            box.innerHTML = `<div style="color:var(--text3);font-size:13px">${t('historyEmpty')}</div>`;
+        } else {
+            box.innerHTML = history.map((h, i) => `
+                <div style="background:var(--btn);border:1px solid var(--border);padding:8px;font-size:12px;text-align:left">
+                    <div style="color:var(--text2);font-weight:bold">#${i+1} — ${h.date}</div>
+                    <div style="color:var(--text3)">${h.recordType} | ${(h.servers||[]).join(', ')} | ⏱️ ${h.elapsed}s</div>
+                    <div style="color:var(--text3)">📊 ${h.domains} ${t('historyDomains')} | ✅ ${h.found} | ❌ ${h.errors}</div>
+                </div>`).join('');
+        }
+        showModal('historyMenu');
+    } catch(e) {}
+}
+
+// ═══════════════════════════════════════════
+//  Export errors only
+// ═══════════════════════════════════════════
+function exportErrors() {
+    const errors = currentResults.filter(r => r.error).map(r => r.domain);
+    if (!errors.length) { toast(t('emptyToast')); return; }
+    const blob = new Blob([errors.join('\n')], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = Object.assign(document.createElement('a'), { href: url, download: 'dns-errors.txt' });
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(t('exported'));
+}
+
+// ═══════════════════════════════════════════
+//  Keyboard shortcuts
+// ═══════════════════════════════════════════
+document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        if (document.getElementById('startBtn').style.display !== 'none') startResolving();
+    }
+    if (e.key === 'Escape') {
+        const openModal = document.querySelector('.modal-overlay.show, .fullscreen-overlay.show');
+        if (openModal) { openModal.classList.remove('show'); return; }
+        if (abortController) stopResolving();
+    }
+});
+
+// ═══════════════════════════════════════════
 //  Format button
 // ═══════════════════════════════════════════
 function toggleFormat() {
@@ -1617,25 +2120,21 @@ function updateFormatButtonText() {
 
 function updateSettingsButtonText() {
     const sb  = document.getElementById('settingsBox');
-    const span = document.querySelector('#settingsToggleBtn span');
-    if (sb.style.display === 'flex') {
-        span.textContent = t('closeSettings');
-    } else {
-        span.textContent = t('settings');
-    }
+    const icon = document.querySelector('#settingsToggleBtn .h-icon');
+    if (icon) icon.textContent = sb.style.display === 'flex' ? '❌' : '⚙️';
 }
 
 // ═══════════════════════════════════════════
 //  Boot
 // ═══════════════════════════════════════════
 try {
-    const savedLang = localStorage.getItem('dnsresolver_lang');
-    if (savedLang === 'ru' || savedLang === 'en') currentLanguage = savedLang;
     const savedTheme = localStorage.getItem('dnsresolver_theme');
     if (['system', 'light', 'dark', 'xp'].includes(savedTheme)) themeMode = savedTheme;
 } catch (e) {}
 
+detectInitialLanguage();
 applyTheme();
+updateLangIcon();
 applyI18N();
 updateDynamicTexts();
 </script>
