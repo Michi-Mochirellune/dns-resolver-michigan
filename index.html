@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-	<link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/icon-512.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/icon-192.png">
-    <link rel="manifest" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/manifest.json">
+	<link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-512.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-192.png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Dns resolver Michigan</title>
     <style>
@@ -20,7 +20,7 @@
             --accent: #d4a8ff; --accent2: #e0c4ff;
             --accent-btn: #782ec7; --accent-btn2: #8c3be0;
             --input: #1f142e; --input-text: #e6e1ff; --placeholder: #665980;
-            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');
+            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/bgb.jpg');
             --overlay: rgba(11, 7, 18, 0.6);
             --preset-bg: #2c8c3c; --preset-text: #fff; --preset-hover: #1e7a45;
             --shadow: rgba(212, 168, 255, 0.3);
@@ -41,7 +41,7 @@
             --accent: #666; --accent2: #777;
             --accent-btn: #888; --accent-btn2: #999;
             --input: #f5f5f5; --input-text: #333; --placeholder: #aaa;
-            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');
+            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/bgw.jpg');
             --overlay: rgba(254, 254, 254, 0.7);
             --preset-bg: #2c8c3c; --preset-text: #fff; --preset-hover: #1e7a45;
             --shadow: rgba(0, 0, 0, 0.1);
@@ -61,7 +61,7 @@
             --accent: #6aafff; --accent2: #8ac0ff;
             --accent-btn: #4a8ae5; --accent-btn2: #3a7ad5;
             --input: #2360c4; --input-text: #ffffff; --placeholder: #e0e8ff;
-            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgxp.png');
+            --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/bgxp.png');
             --overlay: rgba(0, 0, 0, 0.1);
             --preset-bg: #2c8c3c; --preset-text: #ffffff; --preset-hover: #1e7a45;
             --shadow: rgba(0, 0, 0, 0.3);
@@ -331,7 +331,7 @@
 <div class="container">
     <div class="header">
         <div class="header-left">
-            <img class="logo" id="logo" src="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png" onclick="easterClick()">
+            <img class="logo" id="logo" src="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/logop.png" onclick="easterClick()">
             <button class="h-btn star-btn" onclick="showModal('starMenu')">⭐ <span data-i18n="btnSupport">Проект</span></button>
         </div>
         <div class="header-buttons">
@@ -882,12 +882,12 @@ function applyTheme() {
         btn.innerHTML = (icons[themeMode] || '🌙') + ' <span data-i18n="btnTheme">' + t('btnTheme') + '</span>';
     }
     const logos = {
-        light: 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png',
-        xp:    'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png'
+        light: 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/logow.png',
+        xp:    'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/logoxp.png'
     };
     const logo = document.getElementById('logo');
     if (logo) {
-        logo.src = logos[themeMode] || 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png';
+        logo.src = logos[themeMode] || 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/logop.png';
     }
 }
 
