@@ -2,20 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Dns resolver Michigan</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" href="icon-192.png">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        button, select, textarea {
-            font-family: inherit; font-size: inherit; line-height: inherit;
-            border: none; background: none; color: inherit;
-            -webkit-appearance: none; -moz-appearance: none; appearance: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+        button, select, textarea { font-family: inherit; font-size: inherit; line-height: inherit; border: none; background: none; color: inherit; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 
         :root {
             --bg: #0b0712; --bg2: #160f24; --bg3: #1f142e; --bg4: #130c1f;
@@ -24,9 +15,7 @@
             --btn: #251a3a; --btn2: #402666; --btn3: #2d1a4a;
             --accent: #d4a8ff; --accent2: #e0c4ff;
             --accent-btn: #782ec7; --accent-btn2: #8c3be0;
-            --green: #1a6b3c; --green2: #2ecc71;
             --input: #1f142e; --input-text: #e6e1ff; --placeholder: #665980;
-            --dev-bg: #1a1130; --dev-border: #3d2760;
             --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bg.jpg');
             --overlay: rgba(11, 7, 18, 0.6);
             --preset-bg: #2c8c3c; --preset-text: #fff; --preset-hover: #1e7a45;
@@ -35,14 +24,11 @@
             --toggle-active-text: #fff; --hover-text: #fff;
             --active-border: #9445ff;
             --settings-active-bg: #402666;
-            --tooltip-bg: #251a3a; --tooltip-text: #bfa6ff;
             --progress-bg: #251a3a; --progress-fill: #782ec7;
-            --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png');
-            --theme-icon: '🌙';
             --label-color: #c4aaee;
-            --info-bg: rgba(11, 7, 18, 0.55);
+            --card-bg: rgba(11, 7, 18, 0.55);
+            --stats-value-color: var(--accent-btn);
         }
-
         .light {
             --bg: #fefefe; --bg2: #f5f5f5; --bg3: #eee; --bg4: #f5f5f5;
             --text: #333; --text2: #555; --text3: #939394; --text4: #444;
@@ -50,9 +36,7 @@
             --btn: #f0f0f0; --btn2: #e8e8e8; --btn3: #eee;
             --accent: #666; --accent2: #777;
             --accent-btn: #888; --accent-btn2: #999;
-            --green: #1a6b3c; --green2: #2ecc71;
             --input: #f5f5f5; --input-text: #333; --placeholder: #aaa;
-            --dev-bg: #f0f0f0; --dev-border: #ddd;
             --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgw.jpg');
             --overlay: rgba(254, 254, 254, 0.7);
             --preset-bg: #2c8c3c; --preset-text: #fff; --preset-hover: #1e7a45;
@@ -60,14 +44,11 @@
             --clear-hover: #c0392b;
             --toggle-active-text: #333; --hover-text: #333;
             --active-border: #aaa; --settings-active-bg: #d5d5d5;
-            --tooltip-bg: #e8e8e8; --tooltip-text: #555;
             --progress-bg: #e0e0e0; --progress-fill: #888;
-            --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png');
-            --theme-icon: '☀️';
             --label-color: #444;
-            --info-bg: rgba(255, 255, 255, 0.6);
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --stats-value-color: var(--accent-btn);
         }
-
         .xp {
             --bg: #3881f4; --bg2: #2360c4; --bg3: #1a4ab0; --bg4: #1a3a6a;
             --text: #ffffff; --text2: #ffffff; --text3: #e0e8ff; --text4: #ffffff;
@@ -75,9 +56,7 @@
             --btn: #2d6cd4; --btn2: #2360c4; --btn3: #1a4ab0;
             --accent: #6aafff; --accent2: #8ac0ff;
             --accent-btn: #4a8ae5; --accent-btn2: #3a7ad5;
-            --green: #2c8c3c; --green2: #1e7a45;
-            --input: #2360c4; --input-text: #ffffff; --placeholder: #a0c8ff;
-            --dev-bg: #2d6cd4; --dev-border: #5a9af5;
+            --input: #2360c4; --input-text: #ffffff; --placeholder: #e0e8ff;
             --bg-img: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/bgxp.png');
             --overlay: rgba(0, 0, 0, 0.1);
             --preset-bg: #2c8c3c; --preset-text: #ffffff; --preset-hover: #1e7a45;
@@ -85,18 +64,10 @@
             --clear-hover: #c0392b;
             --toggle-active-text: #ffffff; --hover-text: #ffffff;
             --active-border: #6aafff; --settings-active-bg: #1a4ab0;
-            --tooltip-bg: #1a4ab0; --tooltip-text: #e0e8ff;
             --progress-bg: #1a4ab0; --progress-fill: #6aafff;
-            --logo-url: url('https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png');
-            --theme-icon: 'XP';
             --label-color: #ffffff;
-            --info-bg: rgba(0, 0, 0, 0.3);
-        }
-
-        *, *::before, *::after {
-            transition: background-color 0.2s ease, color 0.2s ease,
-                        border-color 0.2s ease, box-shadow 0.2s ease,
-                        opacity 0.2s ease;
+            --card-bg: rgba(0, 0, 0, 0.3);
+            --stats-value-color: #ffffff;
         }
 
         body {
@@ -104,7 +75,6 @@
             background-image: var(--bg-img);
             background-size: cover;
             background-position: center;
-            background-attachment: scroll;
             color: var(--text);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -114,8 +84,8 @@
             align-items: center;
             min-height: 100vh;
             position: relative;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-
         body::before {
             content: '';
             position: absolute;
@@ -123,510 +93,210 @@
             width: 100%; height: 100%;
             background-color: var(--overlay);
             z-index: 0;
+            transition: background-color 0.4s ease;
         }
-
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             position: relative;
             z-index: 1;
         }
+        @media (min-width: 900px) { .container { max-width: 650px; } }
 
-        @media (min-width: 900px) {
-            .container { max-width: 560px; }
-        }
-        @media (min-width: 1400px) {
-            .container { max-width: 680px; }
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            align-content: flex-start;
-            width: 100%;
-            margin-bottom: 3px;
-            flex-wrap: wrap;
-            gap: 6px;
-            position: relative;
-        }
-
-        .header-left { display: flex; align-items: center; gap: 8px; align-self: center; }
-
-        .logo {
-            height: 50px;
-            cursor: pointer;
-            user-select: none;
-            transition: filter 0.2s ease;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; position: relative; }
+        .header-left { display: flex; align-items: center; gap: 8px; }
+        .logo { height: 45px; cursor: pointer; transition: filter 0.3s ease; }
         .logo:hover { filter: drop-shadow(0 0 8px var(--shadow)); }
-
-        .header-buttons { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; align-self: center; }
-
+        .header-buttons { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
         .h-btn {
-            background-color: var(--btn2);
-            color: var(--text2);
-            padding: 6px 10px;
-            border-radius: 0;
-            cursor: pointer;
-            font-size: 13px;
-            white-space: nowrap;
-            display: inline-flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 4px;
-            min-width: unset;
+            background-color: var(--btn2); color: var(--text2); padding: 6px 12px;
+            cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        .h-icon { font-size: 16px; line-height: 1; }
-        .h-label { font-size: inherit; color: var(--label-color); line-height: 1; }
-        .h-btn:hover .h-label { color: var(--hover-text); }
-        .h-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-        .h-btn.active { background-color: var(--settings-active-bg); }
-        .h-btn.lang { background-color: var(--btn3); }
-        .h-btn.preset { background-color: var(--preset-bg); color: var(--preset-text); }
-        .h-btn.preset:hover { background-color: var(--preset-hover); color: #fff; }
-        .h-btn.star-btn { background-color: var(--accent-btn); color: #fff; font-size: 16px; padding: 8px 12px; }
-        .h-btn.star-btn:hover { background-color: var(--accent-btn2); transform: scale(1.05); }
+        .h-btn:hover { background-color: var(--accent-btn); color: #fff; }
+        .h-btn.preset { background-color: var(--preset-bg); color: #fff; }
+        .h-btn.preset:hover { background-color: var(--preset-hover); }
+        .h-btn.star-btn { background-color: var(--accent-btn); color: #fff; }
 
         .settings-box {
-            background-color: var(--bg2);
-            padding: 14px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            border: 1px solid var(--border);
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            z-index: 100;
-            margin-top: 8px;
+            background-color: var(--bg2); padding: 14px; display: none; flex-direction: column; gap: 10px;
+            border: 1px solid var(--border); position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%); width: 100%; z-index: 100; margin-top: 8px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.4s ease, border-color 0.4s ease;
         }
-
-        @media (min-width: 900px) {
-            .settings-box { max-width: 560px; }
+        .settings-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .settings-item { flex: 1; min-width: 100px; display: flex; flex-direction: column; gap: 4px; }
+        .settings-label { font-size: 12px; color: var(--text3); text-align: center; }
+        .settings-item select, .settings-item button {
+            background: var(--btn); color: var(--text2); border: 1px solid var(--border);
+            padding: 8px; font-size: 12px; cursor: pointer; text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        @media (min-width: 1400px) {
-            .settings-box { max-width: 680px; }
+        .settings-item select:hover, .settings-item button:hover { background: var(--accent-btn); color: #fff; }
+        .dns-select-btn, .view-select-btn { background: var(--accent-btn); color: #fff; padding: 10px; cursor: pointer; text-align: center; }
+        .tgl-btn { background: var(--btn); color: var(--text2); border: 1px solid var(--border); padding: 8px; cursor: pointer; font-size: 12px; transition: background-color 0.3s ease, color 0.3s ease; }
+        .tgl-btn:hover { background: var(--accent-btn); color: #fff; }
+
+        .glass-card {
+            background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border);
+            padding: 14px; display: flex; flex-direction: column; gap: 12px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
         }
+        .xp .glass-card { backdrop-filter: none; }
 
-        .s-label { font-size: 14px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
-
-        .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
-
-        .tgl-btn {
-            flex: 1;
-            min-width: 60px;
-            background-color: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 8px 6px;
-            font-size: 12px;
-            cursor: pointer;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tgl-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-        .tgl-btn.active {
-            background-color: var(--accent-btn);
-            color: var(--toggle-active-text);
-            border-color: var(--active-border);
-            box-shadow: 0 0 8px var(--shadow);
-        }
-
-        .dns-select-btn {
-            background: var(--accent-btn);
-            color: #fff;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .dns-select-btn:hover { background: var(--accent-btn2); }
-
-        .view-select-btn {
-            background: var(--btn);
-            color: var(--text2);
-            padding: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .view-select-btn:hover { background: var(--accent-btn); color: #fff; }
-
-        .settings-row { display: flex; gap: 8px; align-items: stretch; width: 100%; }
-        .settings-item { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
-
-        .settings-label { font-size: 13px; color: var(--text3); text-align: center; line-height: 1.3; }
-
-        .settings-item select {
-            width: 100%;
-            background-color: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 10px 8px;
-            font-size: 13px;
-            cursor: pointer;
-            text-align: center;
-            text-align-last: center;
-            box-sizing: border-box;
-        }
-        .settings-item select:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-
-        textarea {
-            width: 100%;
-            height: 160px;
-            background-color: var(--input);
-            color: var(--input-text);
-            border: 1px solid var(--border2);
-            padding: 10px;
-            font-size: 15px;
-            box-sizing: border-box;
-            resize: vertical;
-            outline: none;
-        }
-        textarea::placeholder { color: var(--placeholder); }
-        textarea:focus { border-color: var(--accent-btn); box-shadow: 0 0 10px var(--shadow); }
-
-        .input-row, .results-row { display: flex; gap: 4px; align-items: stretch; }
-
-        .side-btns { display: flex; flex-direction: column; gap: 4px; flex: 0 0 auto; }
-        .side-btn {
-            background-color: var(--btn2);
-            color: var(--text2);
-            padding: 6px 8px;
-            cursor: pointer;
-            font-size: 14px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .side-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-        .side-btn.danger:hover { background-color: var(--clear-hover); color: #fff; }
-
-        .main-btn {
-            color: #fff;
-            padding: 14px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--shadow);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .main-btn.start { background-color: var(--accent-btn); width: 100%; }
-        .main-btn.start:hover { background-color: var(--accent-btn2); }
-        .main-btn.stop { background-color: #c0392b; display: none; }
-        .main-btn.stop:hover { background-color: #e74c3c; }
-        .main-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .progress-bar {
-            display: none;
-            height: 6px;
-            background: var(--progress-bg);
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--progress-fill);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .info-row { text-align: center; }
-        .line-counter-row { text-align: right; }
-
-        .dns-indicator, .stats, .time-info, .line-counter {
-            display: none;
-            color: var(--text2);
-            font-size: 12px;
-            padding: 0;
-            background: none;
-            white-space: normal;
-            word-break: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
-        }
-        .dns-indicator.has-content,
-        .stats.has-content,
-        .time-info.has-content,
-        .line-counter.has-content {
-            display: inline-block;
-            padding: 4px 8px;
-            background: var(--info-bg);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        .search-row { display: flex; gap: 4px; align-items: center; }
         .search-input {
-            flex: 1;
-            background-color: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 6px 8px;
-            font-size: 12px;
-            outline: none;
+            width: 100%; background: var(--btn); color: var(--text2); border: 1px solid var(--border);
+            padding: 12px; font-size: 14px; outline: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .search-input::placeholder { color: var(--placeholder); }
         .search-input:focus { border-color: var(--accent-btn); }
 
-        .results-container { display: none; flex-direction: column; gap: 6px; margin-top: 2px; }
-        .results-header { display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 2px; }
-        .results-actions { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+        .input-wrapper { display: flex; gap: 8px; align-items: stretch; }
+        textarea {
+            flex: 1; height: 140px; background: var(--input); color: var(--input-text);
+            border: 1px solid var(--border2); padding: 10px; font-size: 13px;
+            font-family: monospace; resize: vertical; outline: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        textarea::placeholder { color: var(--placeholder); }
+        textarea:focus { border-color: var(--accent-btn); }
 
+        .side-btns { display: flex; flex-direction: column; gap: 6px; }
+        .side-btn {
+            background: var(--btn2); color: var(--text2); padding: 8px 12px;
+            cursor: pointer; text-align: center; font-size: 14px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .side-btn:hover { background: var(--accent-btn); color: #fff; }
+        .side-btn.danger:hover { background: var(--clear-hover); }
+
+        .card-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .line-counter { font-size: 12px; color: var(--text2); padding: 6px 14px; display: none; }
+        .line-counter.has-content { display: inline-block; background: var(--btn); }
+        .card-buttons { display: flex; gap: 8px; margin-left: auto; }
+        .card-btn {
+            background: var(--btn); color: var(--text2); border: 1px solid var(--border);
+            padding: 6px 14px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .card-btn:hover { background: var(--accent-btn); color: #fff; }
+
+        .main-btn { color: #fff; padding: 14px; font-size: 18px; font-weight: bold; cursor: pointer; text-align: center; transition: background-color 0.3s ease, opacity 0.3s ease; }
+        .main-btn.start { background: var(--accent-btn); width: 100%; }
+        .main-btn.start:hover { background: var(--accent-btn2); }
+        .main-btn.stop { background: #c0392b; display: none; width: 100%; }
+        .main-btn.stop:hover { background: #e74c3c; }
+
+        .progress-bar { display: none; height: 4px; background: var(--progress-bg); margin: 4px 0; transition: background-color 0.3s ease; }
+        .progress-fill { height: 100%; background: var(--progress-fill); width: 0%; transition: width 0.3s ease, background-color 0.3s ease; }
+
+        .tabs-container { background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border); transition: background-color 0.4s ease, border-color 0.4s ease; }
+        .xp .tabs-container { backdrop-filter: none; }
+        .tabs-header { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); transition: background-color 0.4s ease, border-color 0.4s ease; }
+        .tab-btn {
+            flex: 1; padding: 12px 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+            text-align: center; color: var(--text3); background: transparent;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .tab-btn.active { color: var(--accent-btn); border-bottom: 2px solid var(--accent-btn); background: var(--card-bg); }
+        .tab-btn:hover:not(.active) { color: var(--text2); background: var(--btn3); }
+        .tab-content { display: none; padding: 14px; }
+        .tab-content.active { display: block; }
+
+        .results-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
         .a-btn {
-            background-color: var(--btn3);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 7px 12px;
-            cursor: pointer;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
+            background: var(--btn3); color: var(--text2); border: 1px solid var(--border);
+            padding: 6px 12px; cursor: pointer; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        .a-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-        .a-btn.toggled { background-color: var(--accent-btn); color: #fff; }
-
+        .a-btn:hover { background: var(--accent-btn); color: #fff; }
+        .results-search {
+            width: 100%; background: var(--btn); color: var(--text2); border: 1px solid var(--border);
+            padding: 12px; font-size: 14px; margin-bottom: 8px; outline: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .results-search::placeholder { color: var(--placeholder); }
+        .results-search:focus { border-color: var(--accent-btn); }
+        .results-row { display: flex; gap: 8px; align-items: stretch; }
         .results-textarea {
-            width: 100%;
-            height: 160px;
-            background-color: var(--bg4);
-            border: 1px solid var(--border3);
-            color: var(--text4);
-            padding: 10px;
-            font-size: 15px;
-            box-sizing: border-box;
-            resize: vertical;
-            outline: none;
-            font-family: monospace;
+            flex: 1; height: 140px; background: var(--bg4); border: 1px solid var(--border3);
+            color: var(--text4); padding: 10px; font-size: 13px; font-family: monospace; resize: vertical; outline: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        .results-textarea:focus { border-color: var(--accent-btn); box-shadow: 0 0 10px var(--shadow); }
+        .results-textarea::placeholder { color: var(--placeholder); }
+        .results-textarea:focus { border-color: var(--accent-btn); }
+
+        .stats-grid { display: flex; flex-direction: column; gap: 10px; }
+        .stats-card-row {
+            background: var(--btn); padding: 10px; display: flex;
+            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .stats-label { font-size: 13px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+        .stats-value { font-size: 16px; font-weight: bold; color: var(--stats-value-color); }
+        .dns-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .dns-badge { background: var(--bg3); padding: 4px 10px; font-size: 11px; }
 
         .fullscreen-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 997;
-            background: var(--bg);
-            padding: 40px 20px;
-            box-sizing: border-box;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 997;
+            background: var(--bg); padding: 40px 20px; display: none; flex-direction: column;
+            transition: background-color 0.4s ease;
         }
         .fullscreen-overlay.show { display: flex; }
-        .fullscreen-overlay textarea {
-            height: 100%;
-            background: var(--bg4);
-            color: var(--text4);
-            border: 1px solid var(--border3);
-            padding: 15px;
-            font-size: 16px;
-            font-family: monospace;
-            resize: none;
-        }
-        .fullscreen-close {
-            position: absolute;
-            top: 10px; right: 20px;
-            background: var(--accent-btn);
-            color: #fff;
-            padding: 10px 16px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+        .fullscreen-overlay textarea { flex: 1; background: var(--bg4); border: 1px solid var(--border3); padding: 15px; font-size: 14px; font-family: monospace; resize: none; }
+        .fullscreen-close { position: absolute; top: 10px; right: 20px; background: var(--accent-btn); color: #fff; padding: 8px 16px; cursor: pointer; transition: background-color 0.3s ease; }
         .fullscreen-close:hover { background: var(--accent-btn2); }
-
-        .quick-actions { display: flex; gap: 4px; flex-wrap: wrap; }
-        .q-btn {
-            background-color: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 6px 10px;
-            cursor: pointer;
-            font-size: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .q-btn:hover { background-color: var(--accent-btn); color: var(--hover-text); }
-        .q-btn.toggled { background-color: var(--accent-btn); color: #fff; }
-
-        select {
-            background-color: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 8px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .easter-egg {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--accent-btn);
-            color: #fff;
-            padding: 20px 40px;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 999;
-            text-align: center;
-            box-shadow: 0 0 40px var(--shadow);
-            pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 998; justify-content: center; align-items: center; }
+        .modal-overlay.show { display: flex; }
+        .modal-box { background: var(--bg2); border: 1px solid var(--border); padding: 20px; max-width: 350px; width: 90%; display: flex; flex-direction: column; gap: 10px; transition: background-color 0.4s ease, border-color 0.4s ease; }
+        .modal-box button { background: var(--btn); padding: 10px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; }
+        .modal-box button:hover { background: var(--accent-btn); color: #fff; }
+        .dns-grid, .view-grid { display: flex; flex-direction: column; gap: 8px; }
+        .dns-grid label, .view-grid label { display: flex; align-items: center; gap: 10px; padding: 8px; background: var(--btn); cursor: pointer; transition: background-color 0.3s ease; }
+        .drop-box { background: var(--bg2); border: 2px dashed var(--accent-btn); padding: 40px; text-align: center; cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent-btn); color: #fff; padding: 8px 20px; font-size: 13px; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+        .toast.show { opacity: 1; }
+        .easter-egg { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); 
+            background: var(--accent-btn); color: #fff; padding: 20px 40px; font-size: 24px; font-weight: bold; 
+            z-index: 999; text-align: center; pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
         .easter-egg.show { transform: translate(-50%, -50%) scale(1); }
         .easter-egg .heart { display: inline-block; animation: pulse 0.6s ease-in-out infinite alternate; }
         @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.3); } }
-
         input[type="file"] { display: none; }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 998;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-overlay.show { display: flex; }
-
-        .modal-box {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            padding: 20px;
-            text-align: center;
-            color: var(--text2);
-            font-size: 14px;
-            max-width: 400px;
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .modal-box button {
-            background: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-        }
-        .modal-box button:hover { background: var(--accent-btn); color: #fff; }
-
-        .star-text { font-size: 14px; color: var(--text2); margin-bottom: 4px; line-height: 1.5; }
-        .star-links { display: flex; gap: 6px; }
-        .star-link {
-            flex: 1;
-            background: var(--btn);
-            color: var(--text2);
-            border: 1px solid var(--border);
-            padding: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            text-align: center;
-        }
-        .star-link:hover { background: var(--accent-btn); color: #fff; }
-
-        .dns-grid, .view-grid { display: flex; flex-direction: column; gap: 8px; text-align: left; }
-        .dns-grid label, .view-grid label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            color: var(--text2);
-            padding: 8px;
-            background: var(--btn);
-        }
-        .dns-grid label:hover, .view-grid label:hover { background: var(--btn2); }
-        .dns-grid input[type="checkbox"], .view-grid input[type="checkbox"] {
-            accent-color: var(--accent-btn);
-            width: 18px;
-            height: 18px;
-        }
-
-        .dns-done-btn { background: var(--accent-btn) !important; color: #fff !important; margin-top: 6px; }
-
-        .drop-box {
-            background: var(--bg2);
-            border: 2px dashed var(--accent-btn);
-            padding: 40px;
-            text-align: center;
-            color: var(--text2);
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .drop-box.drag-over { border-color: var(--accent); background: var(--btn2); }
-
-        .toast {
-            position: fixed;
-            bottom: 30px; left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--accent-btn);
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 13px;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .toast.show { animation: toastIn 0.3s forwards, toastOut 0.3s 1.7s forwards; }
-        @keyframes toastIn { to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-        @keyframes toastOut { to { opacity: 0; transform: translateX(-50%) translateY(-20px); } }
+        
+        @media (max-width: 550px) { body { padding: 12px; } .tab-btn { font-size: 12px; padding: 10px 4px; } .stats-value { font-size: 16px; } }
     </style>
 </head>
 <body>
 
 <div class="easter-egg" id="easterEgg">
-    <span data-i18n="easter">Спасибо за использование</span> <span class="heart">❤️</span>
+    <span data-i18n="easterText">Спасибо за использование</span> <span class="heart">❤️</span>
 </div>
-
 <div class="modal-overlay" id="dropOverlay" onclick="hideModal('dropOverlay')">
     <div class="drop-box" id="dropBox" onclick="event.stopPropagation()">
-        <span data-i18n="dropText">📂 Перетащите файл сюда или нажмите, чтобы выбрать</span>
-        <input type="file" id="dropFileInput" accept="*" onchange="handleFile(this, true)" style="display:none">
+        <span data-i18n="dropText">📂 Перетащите файл сюда или нажмите</span>
+        <input type="file" id="dropFileInput" accept="*" onchange="handleFile(this, true)">
     </div>
 </div>
-
 <div class="modal-overlay" id="exportMenu" onclick="hideModal('exportMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <div style="font-weight:bold" data-i18n="exportTitle">📥 Экспорт</div>
         <button onclick="exportFile('txt')">📄 TXT</button>
         <button onclick="exportFile('csv')">📊 CSV</button>
         <button onclick="exportFile('json')">📋 JSON</button>
-        <button onclick="exportFile('md')">📝 Markdown</button>
+        <button onclick="exportFile('md')">📝 MD</button>
     </div>
 </div>
-
 <div class="modal-overlay" id="dnsMenu" onclick="hideModal('dnsMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <div style="font-weight:bold" data-i18n="dnsMenuTitle">📡 Выберите DNS серверы</div>
@@ -634,7 +304,6 @@
         <button class="dns-done-btn" onclick="hideModal('dnsMenu')" data-i18n="dnsDoneBtn">✅ Готово</button>
     </div>
 </div>
-
 <div class="modal-overlay" id="viewMenu" onclick="hideModal('viewMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <div style="font-weight:bold" data-i18n="viewMenuTitle">👁️ Вид результатов</div>
@@ -642,107 +311,51 @@
         <button class="dns-done-btn" onclick="hideModal('viewMenu')" data-i18n="viewDoneBtn">✅ Готово</button>
     </div>
 </div>
-
-<div class="modal-overlay" id="historyMenu" onclick="hideModal('historyMenu')">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <div style="font-weight:bold" data-i18n="historyTitle">📜 История</div>
-        <div id="historyBox" style="display:flex;flex-direction:column;gap:6px;max-height:60vh;overflow-y:auto"></div>
-        <button onclick="hideModal('historyMenu')" data-i18n="historyClose">✅ Закрыть</button>
-    </div>
-</div>
-
-<div class="modal-overlay" id="langMenu" onclick="hideModal('langMenu')">
-    <div class="modal-box" onclick="event.stopPropagation()" style="max-width:280px">
-        <div style="font-weight:bold" data-i18n="langMenuTitle">🌐 Язык / Language</div>
-        <button onclick="selectLanguage('ru')">🇷🇺 Русский</button>
-        <button onclick="selectLanguage('en')">🇬🇧 English</button>
-        <button onclick="selectLanguage('es')">🇪🇸 Español</button>
-        <button onclick="selectLanguage('zh')">🇨🇳 中文</button>
-    </div>
-</div>
-
 <div class="modal-overlay" id="starMenu" onclick="hideModal('starMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
-        <div class="star-text" data-i18n="starText">Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р</div>
-        <div class="star-links">
-            <a href="https://github.com/Michi-Mochirellune/dns-resolver-michigan" target="_blank" class="star-link">⭐ GitHub</a>
-            <a href="https://t.me/MichiMochirellune" target="_blank" class="star-link">📢 Telegram</a>
+        <div class="star-text" data-i18n="starText">⭐ Поддержи проект</div>
+        <div class="star-links" style="display:flex; gap:8px">
+            <a href="https://github.com/Michi-Mochirellune/dns-resolver-michigan" target="_blank" style="flex:1; text-align:center; background:var(--btn); padding:8px; text-decoration:none; color:var(--text2)">⭐ GitHub</a>
+            <a href="https://t.me/MichiMochirellune" target="_blank" style="flex:1; text-align:center; background:var(--btn); padding:8px; text-decoration:none; color:var(--text2)">📢 Telegram</a>
         </div>
     </div>
 </div>
 
-<div class="fullscreen-overlay" id="fsInput">
-    <button class="fullscreen-close" onclick="closeFS('fsInput')">✕</button>
-    <textarea id="fsInputBox"></textarea>
-</div>
+<div class="fullscreen-overlay" id="fsInput"><button class="fullscreen-close" onclick="closeFS('fsInput')">✕</button><textarea id="fsInputBox"></textarea></div>
+<div class="fullscreen-overlay" id="fsResults"><button class="fullscreen-close" onclick="closeFS('fsResults')">✕</button><textarea id="fsResultsBox" readonly></textarea></div>
 
-<div class="fullscreen-overlay" id="fsResults">
-    <button class="fullscreen-close" onclick="closeFS('fsResults')">✕</button>
-    <textarea id="fsResultsBox" readonly></textarea>
-</div>
-
-<div class="container" id="mainContainer">
+<div class="container">
     <div class="header">
         <div class="header-left">
-            <img class="logo" id="logo"
-                src="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png"
-                alt="Dns resolver Michigan"
-                onclick="easterClick()">
-            <button class="h-btn star-btn" onclick="showModal('starMenu')" title="Поддержать проект">
-                <span class="h-icon">⭐</span>
-                <span class="h-label" data-i18n="btnSupport">Поддержка</span>
-            </button>
+            <img class="logo" id="logo" src="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png" onclick="easterClick()">
+            <button class="h-btn star-btn" onclick="showModal('starMenu')">⭐ <span data-i18n="btnSupport">Проект</span></button>
         </div>
         <div class="header-buttons">
-            <button class="h-btn preset" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')">
-                <span class="h-icon">📋</span>
-                <span class="h-label" data-i18n="presetBtnShort">Тест</span>
-            </button>
-            <button class="h-btn" onclick="showHistory()">
-                <span class="h-icon">📜</span>
-                <span class="h-label" data-i18n="btnHistory">История</span>
-            </button>
-            <button class="h-btn theme-btn" id="themeToggleBtn" onclick="cycleTheme()">
-                <span class="h-icon">🔄</span>
-                <span class="h-label" data-i18n="btnTheme">Тема</span>
-            </button>
-            <button class="h-btn lang" id="langToggleBtn" onclick="showModal('langMenu')">
-                <span class="h-icon" id="langIcon">🇷🇺</span>
-                <span class="h-label" data-i18n="btnLang">Язык</span>
-            </button>
-            <button class="h-btn" id="settingsToggleBtn" onclick="toggleSettings()">
-                <span class="h-icon">⚙️</span>
-                <span class="h-label" data-i18n="btnSettings">Настройки</span>
-            </button>
+            <button class="h-btn preset" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')">📋 <span data-i18n="presetBtnShort">Тест</span></button>
+            <button class="h-btn" id="themeToggleBtn" onclick="cycleTheme()">🔄 <span data-i18n="btnTheme">Тема</span></button>
+            <button class="h-btn lang" id="langToggleBtn" onclick="toggleLanguage()"><span id="langIcon">🇷🇺</span> <span id="langCode">RU</span></button>
+            <button class="h-btn" id="settingsToggleBtn" onclick="toggleSettings()"><span id="settingsIcon">⚙️</span> <span data-i18n="btnSettings">Настройки</span></button>
         </div>
         <div class="settings-box" id="settingsBox">
             <button class="dns-select-btn" onclick="showDNSMenu()" data-i18n-format="dnsSelectBtn" data-format-param="1">📡 Выбрать DNS серверы (1)</button>
             <button class="view-select-btn" onclick="showViewMenu()" data-i18n="viewSelectBtn">👁️ Вид результатов</button>
             <div class="settings-row">
-                <div class="settings-item">
-                    <div class="settings-label" data-i18n="typeLabel">📝 Тип записи</div>
+                <div class="settings-item"><div class="settings-label" data-i18n="typeLabel">📝 Тип записи</div>
                     <select id="recordType" onchange="setRecordType(this.value)">
-                        <option value="A">🌐 A (IPv4)</option>
-                        <option value="AAAA">🌍 AAAA (IPv6)</option>
-                        <option value="MX"></option>
-                        <option value="NS"></option>
-                        <option value="SOA"></option>
-                        <option value="TXT"></option>
-                        <option value="CNAME">🔗 CNAME</option>
-                        <option value="CAA">🔒 CAA</option>
-                        <option value="PTR">↩️ PTR</option>
+                        <option value="A">🌐 A (IPv4)</option><option value="AAAA">🌍 AAAA (IPv6)</option>
+                        <option value="MX">📧 MX</option><option value="NS">🗄️ NS</option><option value="SOA">📋 SOA</option>
+                        <option value="TXT">📝 TXT</option><option value="CNAME">🔗 CNAME</option>
+                        <option value="CAA">🔒 CAA</option><option value="PTR">↩️ PTR</option>
                     </select>
                 </div>
-                <div class="settings-item">
-                    <div class="settings-label" data-i18n="timeoutLabel">⏰ Таймаут</div>
+                <div class="settings-item"><div class="settings-label" data-i18n="timeoutLabel">⏰ Таймаут</div>
                     <select id="timeoutSelect" onchange="setTimeoutVal(parseInt(this.value))">
                         <option value="5" data-i18n-options="timeoutOptions.0">5 сек</option>
                         <option value="10" data-i18n-options="timeoutOptions.1">10 сек</option>
                         <option value="15" data-i18n-options="timeoutOptions.2">15 сек</option>
                     </select>
                 </div>
-                <div class="settings-item">
-                    <div class="settings-label" data-i18n="delayLabel">🐌 Задержка</div>
+                <div class="settings-item"><div class="settings-label" data-i18n="delayLabel">🐌 Задержка</div>
                     <select id="delaySelect" onchange="setDelay(parseInt(this.value))">
                         <option value="0" data-i18n-options="delayOptions.0">Без задержки</option>
                         <option value="500" data-i18n-options="delayOptions.1">0.5 сек</option>
@@ -750,76 +363,59 @@
                     </select>
                 </div>
             </div>
-            <div class="btn-group">
-                <button class="tgl-btn" id="formatBtn" onclick="toggleFormat()" data-i18n-format="formatBtn" data-format-param="onlyip">🔢 Формат: Only IP</button>
+            <button class="tgl-btn" id="formatBtn" onclick="toggleFormat()" data-i18n-format="formatBtn" data-format-param="onlyip">🔢 Формат: Only IP</button>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <input type="text" class="search-input" id="inputSearch" data-i18n-placeholder="inputSearchPlaceholder" placeholder="🔍 Поиск по доменам..." oninput="filterInputDomains()">
+        <div class="input-wrapper">
+            <textarea id="inputDomains" data-i18n-placeholder="inputPlaceholder" placeholder="📝 Вставь список доменов сюда..." oninput="updateLineCounter()"></textarea>
+            <div class="side-btns">
+                <button class="side-btn" onclick="openFS('fsInput','inputDomains','fsInputBox')" title="Раскрыть">⛶</button>
+                <button class="side-btn" onclick="copyTextarea('inputDomains')" title="Копировать">📋</button>
+                <button class="side-btn danger" onclick="clearInputOnly()" title="Очистить">🗑️</button>
             </div>
         </div>
-    </div>
-
-    <div class="quick-actions">
-        <button class="q-btn" onclick="dedupDomains()" data-i18n="dedupBtn">♻️ Убрать дубли</button>
-        <button class="q-btn" onclick="showModal('dropOverlay')" data-i18n="uploadBtn">📂 Импорт</button>
-    </div>
-
-    <input type="file" id="fileInput" accept="*" onchange="handleFile(this, false)">
-
-    <div class="search-row">
-        <input type="text" class="search-input" id="inputSearch"
-            data-i18n-placeholder="inputSearchPlaceholder" placeholder="🔍 Поиск по доменам..."
-            oninput="filterInputDomains()">
-    </div>
-
-    <div class="input-row">
-        <textarea id="inputDomains" data-i18n-placeholder="inputPlaceholder" placeholder="📝 Вставь список доменов сюда..." oninput="updateLineCounter()"></textarea>
-        <div class="side-btns">
-            <button class="side-btn" onclick="openFS('fsInput','inputDomains','fsInputBox')" title="Раскрыть">⛶</button>
-            <button class="side-btn" onclick="copyTextarea('inputDomains')" title="Копировать">📋</button>
-            <button class="side-btn danger" onclick="clearInputOnly()" title="Очистить">🗑️</button>
+        <div class="card-footer">
+            <div class="line-counter" id="lineCounter"></div>
+            <div class="card-buttons">
+                <button class="card-btn" onclick="dedupDomains()">♻️ <span data-i18n="dedupBtn">Убрать дубли</span></button>
+                <button class="card-btn" onclick="showModal('dropOverlay')">📂 <span data-i18n="uploadBtn">Импорт</span></button>
+            </div>
         </div>
-    </div>
-
-    <div class="line-counter-row">
-        <div class="line-counter" id="lineCounter"></div>
     </div>
 
     <button class="main-btn start" id="startBtn" onclick="startResolving()" data-i18n="startBtn">🚀 Проверить</button>
     <button class="main-btn stop" id="stopBtn" onclick="stopResolving()" data-i18n="stopBtn">⏹️ Стоп</button>
+    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
 
-    <div class="progress-bar" id="progressBar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-    <div class="info-row"><div class="dns-indicator" id="dnsIndicator"></div></div>
-    <div class="info-row"><div class="stats" id="stats"></div></div>
-    <div class="info-row"><div class="time-info" id="timeInfo"></div></div>
-
-    <div class="results-container" id="resultsContainer">
-        <div class="results-header">
+    <div class="tabs-container">
+        <div class="tabs-header">
+            <button class="tab-btn active" data-tab="results" id="tabResultsBtn" data-i18n="tabResults">📊 Результаты</button>
+            <button class="tab-btn" data-tab="stats" id="tabStatsBtn" data-i18n="tabStats">📈 Статистика</button>
+        </div>
+        <div id="tabResults" class="tab-content active">
             <div class="results-actions">
-                <button class="a-btn" onclick="cycleFilter()" id="filterBtn">🔍 Все</button>
-                <select class="a-btn" id="providerFilter" onchange="applyAllFilters()" style="padding:7px 12px">
+                <button class="a-btn" id="filterBtn" onclick="cycleFilter()" data-i18n="filterBtn">🔍 Все</button>
+                <select class="a-btn" id="providerFilter" onchange="applyAllFilters()" style="padding:8px">
                     <option value="all" data-i18n="providerAll">🏢 Все провайдеры</option>
                 </select>
-                <button class="a-btn" onclick="dedupResults()">
-                    ♻️ <span data-i18n="aBtnDedup">Дубли</span>
-                </button>
-                <button class="a-btn" onclick="showModal('exportMenu')">
-                    📥 <span data-i18n="aBtnExport">Экспорт</span>
-                </button>
+                <button class="a-btn" onclick="dedupResults()">♻️ <span data-i18n="dedupResultsBtn">Убрать дубли</span></button>
+                <button class="a-btn" onclick="showModal('exportMenu')">📥 <span data-i18n="exportMenuBtn">Экспорт</span></button>
+            </div>
+            <input type="text" class="results-search" id="resultsSearch" data-i18n-placeholder="resultsSearchPlaceholder" placeholder="🔍 Поиск по результатам..." oninput="applyAllFilters()">
+            <div class="results-row">
+                <textarea id="resultsBox" class="results-textarea" readonly data-i18n-placeholder="resultsPlaceholder" placeholder="📊 Результаты появятся здесь..."></textarea>
+                <div class="side-btns">
+                    <button class="side-btn" onclick="openFS('fsResults','resultsBox','fsResultsBox')" title="Раскрыть">⛶</button>
+                    <button class="side-btn" onclick="copyTextarea('resultsBox')" title="Копировать">📋</button>
+                    <button class="side-btn danger" onclick="clearResultsOnly()" title="Очистить">🗑️</button>
+                </div>
             </div>
         </div>
-        <div class="search-row">
-            <input type="text" class="search-input" id="resultsSearch"
-                data-i18n-placeholder="resultsSearchPlaceholder" placeholder="🔍 Поиск по результатам..."
-                oninput="applyAllFilters()">
-        </div>
-        <div class="results-row">
-            <textarea id="resultsBox" class="results-textarea" readonly data-i18n-placeholder="resultsPlaceholder" placeholder="📊 Результаты появятся здесь..."></textarea>
-            <div class="side-btns">
-                <button class="side-btn" onclick="openFS('fsResults','resultsBox','fsResultsBox')" title="Раскрыть">⛶</button>
-                <button class="side-btn" onclick="copyTextarea('resultsBox')" title="Копировать">📋</button>
-                <button class="side-btn danger" onclick="clearResultsOnly()" title="Очистить">🗑️</button>
-            </div>
+        <div id="tabStats" class="tab-content">
+            <div class="stats-grid" id="statsGrid"></div>
         </div>
     </div>
 </div>
@@ -847,28 +443,79 @@ let resolveStartTime = 0;
 let activeServers    = ['cloudflare'];
 let lastElapsed      = '0';
 let lastSizeKB       = '0';
-let lastRttStr       = '';   // сохраняем RTT строку, чтобы не терялась при смене языка
+let lastRttStr       = '';
 
-// ─────────────────────────────────────────────
-//  DNS Servers & record type map
-// ─────────────────────────────────────────────
+let statsData = {
+    found: 0,
+    errors: 0,
+    total: 0,
+    unique: 0,
+    dupes: 0,
+    responseTimes: [],
+    servers: [],
+    ttlAvg: 0
+};
+
 const allDNSServers = {
     cloudflare: { name: '☁️ Cloudflare', short: 'CF', url: 'https://cloudflare-dns.com/dns-query' },
     google:     { name: '🔴 Google',     short: 'G',  url: 'https://dns.google/resolve' },
-    dnssb:      { name: '🟢 DNS.SB',     short: 'SB', url: 'https://doh.dns.sb/dns-query' },
+    dnssb:      { name: '🟢 DNS.SB',     short: 'SB', url: 'https://doh.dns.sb/dns-query' }
 };
 
-const recordTypes = { A: 1, AAAA: 28, MX: 15, NS: 2, SOA: 6, TXT: 16, CNAME: 5, CAA: 257, PTR: 12 };
+const recordTypes = {
+    A: 1,
+    AAAA: 28,
+    MX: 15,
+    NS: 2,
+    SOA: 6,
+    TXT: 16,
+    CNAME: 5,
+    CAA: 257,
+    PTR: 12
+};
 
 // ─────────────────────────────────────────────
 //  Localisation
 // ─────────────────────────────────────────────
 const L = {
     ru: {
-        filterBtn: mode => ({ all: '🔍 Все', success: '✅ Успешные', errors: '❌ Ошибки' })[mode] || '🔍 Все',
-        settings: '⚙️',
-        dnsSelectBtn: count => `📡 Выбрать DNS серверы (${count})`,
+        // Вкладки
+        tabResults: '📊 Результаты',
+        tabStats: '📈 Статистика',
+
+        // Статистика
+        statFound: '✅ Найдено',
+        statErrors: '❌ Ошибки',
+        statTotal: '📊 Всего запросов',
+        statUnique: '✨ Уникальных IP',
+        statDupes: '🔁 Дублей',
+        statRtt: '⚡ RTT (мин/сред/макс)',
+        statTime: '⏱️ Время выполнения',
+        statSize: '📦 Размер ответа',
+        statServers: '🌐 DNS серверы',
+        statTtl: '⏲️ Средний TTL',
+        ms: 'мс',
+        sec: 'сек',
+        kb: 'КБ',
+        rtt: (min, avg, max) => `⚡ RTT: ${min}/${avg}/${max} мс`,
+
+        // Кнопка фильтра
+        filterBtn: '🔍 Все',
+
+        // Типы записей
+        mxLabel: 'Почта',
+        nsLabel: 'DNS-серверы',
+        soaLabel: 'Зона',
+        txtLabel: 'Текст',
+        cnameLabel: 'Псевдоним',
+        caaLabel: 'Центр сертификации',
+        ptrLabel: 'Обратный',
+
+        // DNS настройки
+        dnsSelectBtn: (count) => `📡 Выбрать DNS серверы (${count})`,
         viewSelectBtn: '👁️ Вид результатов',
+
+        // Меню вида
         viewMenuTitle: '👁️ Вид результатов',
         viewDoneBtn: '✅ Готово',
         showDNSNamesLabel: '🏷️ Названия DNS',
@@ -883,82 +530,124 @@ const L = {
         ttlOff: '❌ Выкл',
         speedOn: '✅ Вкл',
         speedOff: '❌ Выкл',
+
+        // Меню DNS
         dnsMenuTitle: '📡 Выберите DNS серверы',
         dnsDoneBtn: '✅ Готово',
+
+        // Тип записи
         typeLabel: '📝 Тип записи',
-        formatBtn: val => val === 'hosts' ? '📁 Формат вывода: Hosts' : '🔢 Формат вывода: Only IP',
+
+        // Формат
+        formatBtn: (val) => val === 'hosts' ? '📁 Формат: Hosts' : '🔢 Формат: Only IP',
+
+        // Плейсхолдеры
         inputPlaceholder: '📝 Вставь список доменов сюда...',
-        startBtn: '🚀 Проверить',
-        stopBtn: '⏹️ Стоп',
         resultsPlaceholder: '📊 Результаты появятся здесь...',
-        resolving: '⏳ Идет проверка...\n',
-        empty: '📭 Список пуст',
-        error: '❌ Ошибка/Не найден',
-        errorHosts: '# ❌ Ошибка',
-        noServers: 'Вот чего ты ожидаешь? Думаешь тебе сам бог ответы даст? Бога нету, смирись <3',
-        noDomainsToast: '📭 Нечего искать',
-        presetBtn: '📋 Тест сайтов',
-        dedupBtn: '♻️ Убрать дубли',
-        uploadBtn: '📂 Импорт',
-        dedupResultsBtn: '♻️ Убрать дубли',
-        exportTitle: '📥 Экспорт',
-        exportMenuBtn: '📥 Экспорт',
-        dnsIndicator: p => `🔍 Проверено через: ${p}`,
-        starText: 'Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р',
-        easter: 'Спасибо за использование',
-        mxLabel: 'Почта',
-        nsLabel: 'DNS-серверы',
-        soaLabel: 'Зона',
-        txtLabel: 'Текст',
-        timeoutLabel: '⏰ Таймаут',
-        delayLabel: '🐌 Задержка',
-        timeoutOptions: ['5 сек', '10 сек', '15 сек'],
-        delayOptions: ['Без задержки', '0.5 сек', '1 сек'],
         inputSearchPlaceholder: '🔍 Поиск по доменам...',
         resultsSearchPlaceholder: '🔍 Поиск по результатам...',
-        dropText: '📂 Перетащите файл сюда или нажмите, чтобы выбрать',
-        timeInfo: (s, z) => `⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,
+
+        // Основные кнопки
+        startBtn: '🚀 Проверить',
+        stopBtn: '⏹️ Стоп',
+        presetBtnShort: 'Тест',
+        btnSupport: 'Проект',
+        btnTheme: 'Тема',
+        btnLang: 'Язык',
+        btnSettings: 'Настройки',
+
+        // Сообщения
+        empty: '📭 Список пуст',
+        error: '❌ Ошибка/Не найден',
+        noServers: 'Вот чего ты ожидал, когда решил сделать проверку без DNS-серверов? Думаешь тебе сам бог ответы даст? Бога нету, смирись <3\n\nВыбери хоть один DNS сервер в настройках',
+        noDomainsToast: '📭 Нечего искать',
+        dropText: '📂 Перетащите файл сюда или нажмите',
+        exportTitle: '📥 Экспорт',
+        copied: '✅ Скопировано',
+        copyFail: '❌ Не удалось',
+        emptyToast: '📭 Нечего копировать',
+        imported: '✅ Файл загружен',
+        cleared: '🗑️ Очищено',
+        started: '🚀 Проверка началась',
+        exported: '📥 Экспорт сохранён',
+        dupsRemoved: '♻️ Дубли удалены',
+        noDupesFound: '✨ Дублей не найдено',
+        presetAdded: '📋 Тестовые сайты добавлены',
+        providerAll: '🏢 Все провайдеры',
+
+        // Статистика в строке
         stats: (f, e, total, u, d) => {
             let s = `✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${total} / ✨ Уникальных: ${u}`;
             if (d > 0) s += ` / 🔁 Дублей: ${d}`;
             return s;
         },
-        copied: '✅ Скопировано',
-        copyFail: '❌ Не удалось',
-        emptyToast: '📭 Нечего копировать',
-        imported: '✅ Файл загружен',
-        importFail: '❌ Ошибка загрузки',
-        cleared: '🗑️ Очищено',
-        started: '🚀 Проверка началась',
-        exported: '📥 Экспорт сохранён',
-        dupsRemoved: '♻️ Дубли удалены',
-        presetAdded: '📋 Тестовые сайты добавлены',
-        langBtn: '🇷🇺 RU',
-        providerAll: '🏢 Все провайдеры',
-        closeSettings: '❌',
-        historyTitle: '📜 История',
-        historyClose: '✅ Закрыть',
-        historyEmpty: '📭 История пуста',
-        historyDomains: 'доменов',
-        btnSupport: 'Поддержка',
-        btnHistory: 'История',
-        btnTheme: 'Тема',
-        btnLang: 'Язык',
-        btnSettings: 'Настройки',
-        langMenuTitle: '🌐 Выбор языка',
-        cnameLabel: 'Псевдоним',
-        caaLabel: 'Центр сертификации',
-        ptrLabel: 'Обратный',
-        presetBtnShort: 'Тест',
-        aBtnFilter: 'Фильтр',
-        aBtnDedup: 'Дубли',
-        aBtnExport: 'Экспорт',
+
+        // Индикаторы
+        dnsIndicator: (p) => `🔍 Проверено через: ${p}`,
+        timeInfo: (s, z) => `⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,
+
+        // Таймаут и задержка
+        timeoutLabel: '⏰ Таймаут',
+        delayLabel: '🐌 Задержка',
+        timeoutOptions: ['5 сек', '10 сек', '15 сек'],
+        delayOptions: ['Без задержки', '0.5 сек', '1 сек'],
+
+        // Карточки
+        dedupBtn: 'Убрать дубли',
+        uploadBtn: 'Импорт',
+        dedupResultsBtn: 'Убрать дубли',
+        exportMenuBtn: 'Экспорт',
+
+        // Звёздочка и пасхалка
+        starText: 'Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р',
+        easterText: 'Спасибо за использование',
+
+        // Язык
+        langRu: '🇷🇺 RU',
+        langEn: '🇬🇧 EN',
+
+        // Настройки
+        settingsOpen: '❌',
+        settingsClosed: '⚙️'
     },
     en: {
-        filterBtn: mode => ({ all: '🔍 All', success: '✅ Success', errors: '❌ Errors' })[mode] || '🔍 All',
-        settings: '⚙️',
-        dnsSelectBtn: count => `📡 Choose DNS servers (${count})`,
+        // Вкладки
+        tabResults: '📊 Results',
+        tabStats: '📈 Statistics',
+
+        // Статистика
+        statFound: '✅ Found',
+        statErrors: '❌ Errors',
+        statTotal: '📊 Total queries',
+        statUnique: '✨ Unique IPs',
+        statDupes: '🔁 Dupes',
+        statRtt: '⚡ RTT (min/avg/max)',
+        statTime: '⏱️ Execution time',
+        statSize: '📦 Response size',
+        statServers: '🌐 DNS servers',
+        statTtl: '⏲️ Avg TTL',
+        ms: 'ms',
+        sec: 'sec',
+        kb: 'KB',
+        rtt: (min, avg, max) => `⚡ RTT: ${min}/${avg}/${max} ms`,
+
+        // Кнопка фильтра
+        filterBtn: '🔍 All',
+
+        // Типы записей
+        mxLabel: 'Mail',
+        nsLabel: 'DNS servers',
+        soaLabel: 'Zone',
+        txtLabel: 'Text',
+        cnameLabel: 'Alias',
+        caaLabel: 'Cert Authority',
+        ptrLabel: 'Reverse',
+
+        // DNS настройки
+        dnsSelectBtn: (count) => `📡 Choose DNS servers (${count})`,
         viewSelectBtn: '👁️ View options',
+
+        // Меню вида
         viewMenuTitle: '👁️ View options',
         viewDoneBtn: '✅ Done',
         showDNSNamesLabel: '🏷️ DNS names',
@@ -973,290 +662,122 @@ const L = {
         ttlOff: '❌ Off',
         speedOn: '✅ On',
         speedOff: '❌ Off',
+
+        // Меню DNS
         dnsMenuTitle: '📡 Select DNS servers',
         dnsDoneBtn: '✅ Done',
+
+        // Тип записи
         typeLabel: '📝 Record type',
-        formatBtn: val => val === 'hosts' ? '📁 Output Format: Hosts' : '🔢 Output Format: Only IP',
+
+        // Формат
+        formatBtn: (val) => val === 'hosts' ? '📁 Format: Hosts' : '🔢 Format: Only IP',
+
+        // Плейсхолдеры
         inputPlaceholder: '📝 Paste domain list here...',
-        startBtn: '🚀 Resolve',
-        stopBtn: '⏹ Stop',
         resultsPlaceholder: '📊 Results will appear here...',
-        resolving: '⏳ Resolving...\n',
-        empty: '📭 List is empty',
-        error: '❌ Error/Not found',
-        errorHosts: '# ❌ Error',
-        noServers: "What do you expect? Think God himself will give you answers? There is no God, deal with it <3",
-        noDomainsToast: '📭 Nothing to search',
-        presetBtn: '📋 Test sites',
-        dedupBtn: '♻️ Remove duplicates',
-        uploadBtn: '📂 Import',
-        dedupResultsBtn: '♻️ Remove duplicates',
-        exportTitle: '📥 Export',
-        exportMenuBtn: '📥 Export',
-        dnsIndicator: p => `🔍 Resolved via: ${p}`,
-        starText: "Hey! Star my completely free project or I'll bite your ear :P",
-        easter: 'Thank you for using',
-        mxLabel: 'Mail',
-        nsLabel: 'DNS servers',
-        soaLabel: 'Zone',
-        txtLabel: 'Text',
-        timeoutLabel: '⏰ Timeout',
-        delayLabel: '🐌 Delay',
-        timeoutOptions: ['5 sec', '10 sec', '15 sec'],
-        delayOptions: ['No delay', '0.5 sec', '1 sec'],
         inputSearchPlaceholder: '🔍 Search domains...',
         resultsSearchPlaceholder: '🔍 Search results...',
-        dropText: '📂 Drop file here or click to select',
-        timeInfo: (s, z) => `⏱️ Time: ${s} s | 📦 Response: ${z} KB`,
+
+        // Основные кнопки
+        startBtn: '🚀 Resolve',
+        stopBtn: '⏹️ Stop',
+        presetBtnShort: 'Test',
+        btnSupport: 'Project',
+        btnTheme: 'Theme',
+        btnLang: 'Language',
+        btnSettings: 'Settings',
+
+        // Сообщения
+        empty: '📭 List is empty',
+        error: '❌ Error/Not found',
+        noServers: "What did you expect when you decided to run a check without DNS servers? Think God himself will give you answers? There is no God, deal with it <3\n\nPick at least one DNS server in the settings",
+        noDomainsToast: '📭 Nothing to search',
+        dropText: '📂 Drop file here or click',
+        exportTitle: '📥 Export',
+        copied: '✅ Copied',
+        copyFail: '❌ Failed',
+        emptyToast: '📭 Nothing to copy',
+        imported: '✅ File loaded',
+        cleared: '🗑️ Cleared',
+        started: '🚀 Resolving started',
+        exported: '📥 Export saved',
+        dupsRemoved: '♻️ Duplicates removed',
+        noDupesFound: '✨ No duplicates found',
+        presetAdded: '📋 Test sites added',
+        providerAll: '🏢 All providers',
+
+        // Статистика в строке
         stats: (f, e, total, u, d) => {
             let s = `✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${total} / ✨ Unique: ${u}`;
             if (d > 0) s += ` / 🔁 Dupes: ${d}`;
             return s;
         },
-        copied: '✅ Copied',
-        copyFail: '❌ Failed',
-        emptyToast: '📭 Nothing to copy',
-        imported: '✅ File loaded',
-        importFail: '❌ Load error',
-        cleared: '🗑️ Cleared',
-        started: '🚀 Resolving started',
-        exported: '📥 Export saved',
-        dupsRemoved: '♻️ Duplicates removed',
-        presetAdded: '📋 Test sites added',
-        langBtn: '🇬🇧 EN',
-        providerAll: '🏢 All providers',
-        closeSettings: '❌',
-        historyTitle: '📜 History',
-        historyClose: '✅ Close',
-        historyEmpty: '📭 No history yet',
-        historyDomains: 'domains',
-        btnSupport: 'Support',
-        btnHistory: 'History',
-        btnTheme: 'Theme',
-        btnLang: 'Language',
-        btnSettings: 'Settings',
-        langMenuTitle: '🌐 Language',
-        cnameLabel: 'Alias',
-        caaLabel: 'Cert Authority',
-        ptrLabel: 'Reverse',
-        presetBtnShort: 'Test',
-        aBtnFilter: 'Filter',
-        aBtnDedup: 'Dupes',
-        aBtnExport: 'Export',
-    },
-    es: {
-        filterBtn: mode => ({ all: '🔍 Todos', success: '✅ Exitosos', errors: '❌ Errores' })[mode] || '🔍 Todos',
-        settings: '⚙️',
-        dnsSelectBtn: count => `📡 Elegir servidores DNS (${count})`,
-        viewSelectBtn: '👁️ Opciones de vista',
-        viewMenuTitle: '👁️ Opciones de vista',
-        viewDoneBtn: '✅ Listo',
-        showDNSNamesLabel: '🏷️ Nombres DNS',
-        showSepLabel: '↕️ Separador de líneas',
-        showTTLLabel: '⏱️ Mostrar TTL',
-        showSpeedLabel: '⚡ Mostrar velocidad',
-        dnsNamesOn: '✅ Sí',
-        dnsNamesOff: '❌ No',
-        sepOn: '✅ Sí',
-        sepOff: '❌ No',
-        ttlOn: '✅ Sí',
-        ttlOff: '❌ No',
-        speedOn: '✅ Sí',
-        speedOff: '❌ No',
-        dnsMenuTitle: '📡 Seleccionar servidores DNS',
-        dnsDoneBtn: '✅ Listo',
-        typeLabel: '📝 Tipo de registro',
-        formatBtn: val => val === 'hosts' ? '📁 Formato: Hosts' : '🔢 Formato: Solo IP',
-        inputPlaceholder: '📝 Pega tu lista de dominios aquí...',
-        startBtn: '🚀 Resolver',
-        stopBtn: '⏹ Detener',
-        resultsPlaceholder: '📊 Los resultados aparecerán aquí...',
-        resolving: '⏳ Resolviendo...\n',
-        empty: '📭 La lista está vacía',
-        error: '❌ Error/No encontrado',
-        errorHosts: '# ❌ Error',
-        noServers: '¿Qué esperas? ¿Que Dios te dé las respuestas? No hay Dios, asúmelo <3',
-        noDomainsToast: '📭 Nada que buscar',
-        presetBtn: '📋 Sitios de prueba',
-        dedupBtn: '♻️ Quitar duplicados',
-        uploadBtn: '📂 Importar',
-        dedupResultsBtn: '♻️ Quitar duplicados',
-        exportTitle: '📥 Exportar',
-        exportMenuBtn: '📥 Exportar',
-        dnsIndicator: p => `🔍 Resuelto vía: ${p}`,
-        starText: '¡Hola! Apoya mi proyecto gratuito con una estrella, o te morderé la oreja :P',
-        easter: 'Gracias por usar',
-        mxLabel: 'Correo',
-        nsLabel: 'Servidores DNS',
-        soaLabel: 'Zona',
-        txtLabel: 'Texto',
-        timeoutLabel: '⏰ Tiempo límite',
-        delayLabel: '🐌 Retardo',
-        timeoutOptions: ['5 seg', '10 seg', '15 seg'],
-        delayOptions: ['Sin retardo', '0.5 seg', '1 seg'],
-        inputSearchPlaceholder: '🔍 Buscar dominios...',
-        resultsSearchPlaceholder: '🔍 Buscar resultados...',
-        dropText: '📂 Arrastra un archivo aquí o haz clic para seleccionar',
-        timeInfo: (s, z) => `⏱️ Tiempo: ${s} s | 📦 Respuesta: ${z} KB`,
-        stats: (f, e, total, u, d) => {
-            let s = `✅ Encontrados: ${f} / ❌ Errores: ${e} / 📊 Total: ${total} / ✨ Únicos: ${u}`;
-            if (d > 0) s += ` / 🔁 Duplicados: ${d}`;
-            return s;
-        },
-        copied: '✅ Copiado',
-        copyFail: '❌ Error al copiar',
-        emptyToast: '📭 Nada que copiar',
-        imported: '✅ Archivo cargado',
-        importFail: '❌ Error de carga',
-        cleared: '🗑️ Limpiado',
-        started: '🚀 Resolución iniciada',
-        exported: '📥 Exportación guardada',
-        dupsRemoved: '♻️ Duplicados eliminados',
-        presetAdded: '📋 Sitios de prueba añadidos',
-        langBtn: '🇪🇸 ES',
-        providerAll: '🏢 Todos los proveedores',
-        closeSettings: '❌',
-        historyTitle: '📜 Historial',
-        historyClose: '✅ Cerrar',
-        historyEmpty: '📭 Sin historial',
-        historyDomains: 'dominios',
-        btnSupport: 'Soporte',
-        btnHistory: 'Historial',
-        btnTheme: 'Tema',
-        btnLang: 'Idioma',
-        btnSettings: 'Ajustes',
-        langMenuTitle: '🌐 Idioma',
-        cnameLabel: 'Alias',
-        caaLabel: 'Cert. autoridad',
-        ptrLabel: 'Inverso',
-        presetBtnShort: 'Test',
-        aBtnFilter: 'Filtro',
-        aBtnDedup: 'Dupes',
-        aBtnExport: 'Exportar',
-    },
-    zh: {
-        filterBtn: mode => ({ all: '🔍 全部', success: '✅ 成功', errors: '❌ 失败' })[mode] || '🔍 全部',
-        settings: '⚙️',
-        dnsSelectBtn: count => `📡 选择 DNS 服务器 (${count})`,
-        viewSelectBtn: '👁️ 显示选项',
-        viewMenuTitle: '👁️ 显示选项',
-        viewDoneBtn: '✅ 完成',
-        showDNSNamesLabel: '🏷️ 显示 DNS 名称',
-        showSepLabel: '↕️ 行分隔符',
-        showTTLLabel: '⏱️ 显示 TTL',
-        showSpeedLabel: '⚡ 显示速度',
-        dnsNamesOn: '✅ 开',
-        dnsNamesOff: '❌ 关',
-        sepOn: '✅ 开',
-        sepOff: '❌ 关',
-        ttlOn: '✅ 开',
-        ttlOff: '❌ 关',
-        speedOn: '✅ 开',
-        speedOff: '❌ 关',
-        dnsMenuTitle: '📡 选择 DNS 服务器',
-        dnsDoneBtn: '✅ 完成',
-        typeLabel: '📝 记录类型',
-        formatBtn: val => val === 'hosts' ? '📁 输出格式：Hosts' : '🔢 输出格式：仅 IP',
-        inputPlaceholder: '📝 在此粘贴域名列表...',
-        startBtn: '🚀 解析',
-        stopBtn: '⏹ 停止',
-        resultsPlaceholder: '📊 结果将显示在此处...',
-        resolving: '⏳ 解析中...\n',
-        empty: '📭 列表为空',
-        error: '❌ 出错/未找到',
-        errorHosts: '# ❌ 出错',
-        noServers: '你在期待什么？上帝给你答案？上帝不存在，接受现实吧 <3',
-        noDomainsToast: '📭 没有可搜索的内容',
-        presetBtn: '📋 测试站点',
-        dedupBtn: '♻️ 去重',
-        uploadBtn: '📂 导入',
-        dedupResultsBtn: '♻️ 去重',
-        exportTitle: '📥 导出',
-        exportMenuBtn: '📥 导出',
-        dnsIndicator: p => `🔍 通过以下服务器解析：${p}`,
-        starText: '嘿！给我的免费项目点个星吧，不然我咬你耳朵哦 :P',
-        easter: '感谢使用',
-        mxLabel: '邮件',
-        nsLabel: 'DNS 服务器',
-        soaLabel: '区域',
-        txtLabel: '文本',
-        timeoutLabel: '⏰ 超时',
-        delayLabel: '🐌 延迟',
-        timeoutOptions: ['5 秒', '10 秒', '15 秒'],
-        delayOptions: ['无延迟', '0.5 秒', '1 秒'],
-        inputSearchPlaceholder: '🔍 搜索域名...',
-        resultsSearchPlaceholder: '🔍 搜索结果...',
-        dropText: '📂 将文件拖到此处或点击选择',
-        timeInfo: (s, z) => `⏱️ 用时：${s} 秒 | 📦 响应：${z} KB`,
-        stats: (f, e, total, u, d) => {
-            let s = `✅ 成功：${f} / ❌ 失败：${e} / 📊 总计：${total} / ✨ 唯一：${u}`;
-            if (d > 0) s += ` / 🔁 重复：${d}`;
-            return s;
-        },
-        copied: '✅ 已复制',
-        copyFail: '❌ 复制失败',
-        emptyToast: '📭 无内容可复制',
-        imported: '✅ 文件已加载',
-        importFail: '❌ 加载出错',
-        cleared: '🗑️ 已清空',
-        started: '🚀 解析已开始',
-        exported: '📥 导出已保存',
-        dupsRemoved: '♻️ 重复项已删除',
-        presetAdded: '📋 测试站点已添加',
-        langBtn: '🇨🇳 中文',
-        providerAll: '🏢 所有服务商',
-        closeSettings: '❌',
-        historyTitle: '📜 历史记录',
-        historyClose: '✅ 关闭',
-        historyEmpty: '📭 暂无历史记录',
-        historyDomains: '个域名',
-        btnSupport: '支持',
-        btnHistory: '历史',
-        btnTheme: '主题',
-        btnLang: '语言',
-        btnSettings: '设置',
-        langMenuTitle: '🌐 语言选择',
-        cnameLabel: '别名',
-        caaLabel: '证书颁发机构',
-        ptrLabel: '反向',
-        presetBtnShort: '测试',
-        aBtnFilter: '筛选',
-        aBtnDedup: '去重',
-        aBtnExport: '导出',
-    },
+
+        // Индикаторы
+        dnsIndicator: (p) => `🔍 Resolved via: ${p}`,
+        timeInfo: (s, z) => `⏱️ Time: ${s} s | 📦 Response: ${z} KB`,
+
+        // Таймаут и задержка
+        timeoutLabel: '⏰ Timeout',
+        delayLabel: '🐌 Delay',
+        timeoutOptions: ['5 sec', '10 sec', '15 sec'],
+        delayOptions: ['No delay', '0.5 sec', '1 sec'],
+
+        // Карточки
+        dedupBtn: 'Remove duplicates',
+        uploadBtn: 'Import',
+        dedupResultsBtn: 'Remove duplicates',
+        exportMenuBtn: 'Export',
+
+        // Звёздочка и пасхалка
+        starText: "Hey! Star my completely free project or I'll bite your ear :P",
+        easterText: 'Thank you for using',
+
+        // Язык
+        langRu: '🇷🇺 RU',
+        langEn: '🇬🇧 EN',
+
+        // Настройки
+        settingsOpen: '❌',
+        settingsClosed: '⚙️'
+    }
 };
 
 function t(key, ...args) {
-    const str = L[currentLanguage][key];
-    return typeof str === 'function' ? str(...args) : str;
+    const val = L[currentLanguage] && L[currentLanguage][key];
+    if (typeof val === 'function') {
+        return val(...args);
+    }
+    return val !== undefined ? val : key;
 }
 
 // ─────────────────────────────────────────────
-//  🌍 i18n engine
+//  i18n engine
 // ─────────────────────────────────────────────
 function applyI18N() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (L[currentLanguage][key]) {
-            el.textContent = L[currentLanguage][key];
+        const val = L[currentLanguage] && L[currentLanguage][key];
+        if (val !== undefined && typeof val !== 'function') {
+            el.textContent = val;
         }
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
-        if (L[currentLanguage][key]) {
-            el.setAttribute('placeholder', L[currentLanguage][key]);
+        const val = L[currentLanguage] && L[currentLanguage][key];
+        if (val !== undefined && typeof val !== 'function') {
+            el.setAttribute('placeholder', val);
         }
     });
 
     document.querySelectorAll('[data-i18n-format]').forEach(el => {
         const key   = el.getAttribute('data-i18n-format');
         const param = el.getAttribute('data-format-param');
-        const fn    = L[currentLanguage][key];
+        const fn    = L[currentLanguage] && L[currentLanguage][key];
         if (typeof fn === 'function') {
             el.textContent = fn(param);
-        } else if (fn) {
-            el.textContent = fn;
         }
     });
 
@@ -1264,13 +785,37 @@ function applyI18N() {
         const parts = el.getAttribute('data-i18n-options').split('.');
         const key   = parts[0];
         const idx   = parseInt(parts[1], 10);
-        if (L[currentLanguage][key] && Array.isArray(L[currentLanguage][key])) {
-            el.textContent = L[currentLanguage][key][idx] || el.textContent;
+        const arr   = L[currentLanguage] && L[currentLanguage][key];
+        if (Array.isArray(arr) && arr[idx] !== undefined) {
+            el.textContent = arr[idx];
         }
     });
 
+    updateLangButton();
     updateRecordTypeOptions();
     updateFilterButtonText();
+    updateStatsTab();
+    updateSettingsButton();
+}
+
+function updateLangButton() {
+    const icon = document.getElementById('langIcon');
+    const code = document.getElementById('langCode');
+    if (currentLanguage === 'ru') {
+        if (icon) icon.textContent = '🇷🇺';
+        if (code) code.textContent = 'RU';
+    } else {
+        if (icon) icon.textContent = '🇬🇧';
+        if (code) code.textContent = 'EN';
+    }
+}
+
+function updateSettingsButton() {
+    const icon = document.getElementById('settingsIcon');
+    const box = document.getElementById('settingsBox');
+    if (icon) {
+        icon.textContent = (box.style.display === 'flex') ? t('settingsOpen') : t('settingsClosed');
+    }
 }
 
 function updateRecordTypeOptions() {
@@ -1281,9 +826,10 @@ function updateRecordTypeOptions() {
         TXT:   '📝 TXT (' + t('txtLabel') + ')',
         CNAME: '🔗 CNAME (' + t('cnameLabel') + ')',
         CAA:   '🔒 CAA (' + t('caaLabel') + ')',
-        PTR:   '↩️ PTR (' + t('ptrLabel') + ')',
+        PTR:   '↩️ PTR (' + t('ptrLabel') + ')'
     };
     const sel = document.getElementById('recordType');
+    if (!sel) return;
     for (let i = 0; i < sel.options.length; i++) {
         const opt = sel.options[i];
         if (labels[opt.value]) {
@@ -1292,9 +838,17 @@ function updateRecordTypeOptions() {
     }
 }
 
-// ═══════════════════════════════════════════
-//  Toast
-// ═══════════════════════════════════════════
+function updateFilterButtonText() {
+    const btn = document.getElementById('filterBtn');
+    if (!btn) return;
+    const texts = {
+        all: t('filterBtn'),
+        success: '✅ ' + (currentLanguage === 'ru' ? 'Успешные' : 'Success'),
+        errors: '❌ ' + (currentLanguage === 'ru' ? 'Ошибки' : 'Errors')
+    };
+    btn.textContent = texts[filterMode] || texts.all;
+}
+
 function toast(msg) {
     let el = document.querySelector('.toast');
     if (!el) {
@@ -1309,9 +863,6 @@ function toast(msg) {
     setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// ═══════════════════════════════════════════
-//  Theme
-// ═══════════════════════════════════════════
 function applyTheme() {
     document.body.classList.remove('light', 'xp');
     if (themeMode === 'system') {
@@ -1321,200 +872,142 @@ function applyTheme() {
     } else if (themeMode === 'xp') {
         document.body.classList.add('xp');
     }
-    updateThemeIcon();
-    updateLogo();
-}
-
-function updateThemeIcon() {
-    const btn = document.getElementById('themeToggleBtn');
     const icons = { system: '🔄', light: '☀️', xp: 'XP', dark: '🌙' };
-    const icon = btn.querySelector('.h-icon');
-    if (icon) icon.textContent = icons[themeMode] || '🌙';
-    else btn.textContent = icons[themeMode] || '🌙';
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) {
+        btn.innerHTML = (icons[themeMode] || '🌙') + ' <span data-i18n="btnTheme">' + t('btnTheme') + '</span>';
+    }
+    const logos = {
+        light: 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png',
+        xp:    'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png'
+    };
+    const logo = document.getElementById('logo');
+    if (logo) {
+        logo.src = logos[themeMode] || 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png';
+    }
 }
 
 function cycleTheme() {
     const order = ['system', 'light', 'xp', 'dark'];
     themeMode = order[(order.indexOf(themeMode) + 1) % order.length];
-    updateThemeIcon();
     applyTheme();
-    try { localStorage.setItem('dnsresolver_theme', themeMode); } catch (e) {}
-}
-
-function updateLogo() {
-    const el = document.getElementById('logo');
-    const logos = {
-        light: 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logow.png',
-        xp:    'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoxp.png',
-    };
-    el.src = logos[themeMode] || 'https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logop.png';
+    try { localStorage.setItem('dnsresolver_theme', themeMode); } catch(e) {}
 }
 
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
     if (themeMode === 'system') applyTheme();
 });
 
-// ═══════════════════════════════════════════
-//  Language
-// ═══════════════════════════════════════════
-function selectLanguage(lang) {
-    currentLanguage = lang;
-    updateLangIcon();
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
     applyI18N();
-    updateDynamicTexts();
-    hideModal('langMenu');
-    try { localStorage.setItem('dnsresolver_lang', currentLanguage); } catch (e) {}
-}
-
-function updateLangIcon() {
-    const flags = { ru: '🇷🇺', en: '🇬🇧', es: '🇪🇸', zh: '🇨🇳' };
-    const el = document.getElementById('langIcon');
-    if (el) el.textContent = flags[currentLanguage] || '🌐';
+    updateLineCounter();
+    updateProviderFilter();
+    try { localStorage.setItem('dnsresolver_lang', currentLanguage); } catch(e) {}
 }
 
 function detectInitialLanguage() {
     try {
         const saved = localStorage.getItem('dnsresolver_lang');
-        if (saved && L[saved]) { currentLanguage = saved; return; }
-        const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-        if (nav.startsWith('ru')) currentLanguage = 'ru';
-        else if (nav.startsWith('zh')) currentLanguage = 'zh';
-        else if (nav.startsWith('es')) currentLanguage = 'es';
-        else currentLanguage = 'en';
-    } catch(e) { currentLanguage = 'en'; }
+        if (saved === 'ru' || saved === 'en') {
+            currentLanguage = saved;
+            return;
+        }
+        const nav = (navigator.language || 'en').toLowerCase();
+        currentLanguage = nav.startsWith('ru') ? 'ru' : 'en';
+    } catch(e) {
+        currentLanguage = 'en';
+    }
 }
 
-// ═══════════════════════════════════════════
-//  Update dynamic texts
-// ═══════════════════════════════════════════
-function updateDynamicTexts() {
-    updateProviderFilter();
-    updateFormatButtonText();
-    updateDNSButtonText();
-    updateRecordTypeOptions();
-    updateStatusTexts();
-    updateFilterButtonText();
-    if (currentResults.length > 0) applyAllFilters();
-    updateStatsDisplay();
+document.getElementById('tabResultsBtn').addEventListener('click', () => switchTab('results'));
+document.getElementById('tabStatsBtn').addEventListener('click', () => {
+    switchTab('stats');
+    updateStatsTab();
+});
+
+function switchTab(tab) {
+    document.getElementById('tabResults').classList.toggle('active', tab === 'results');
+    document.getElementById('tabStats').classList.toggle('active', tab === 'stats');
+    document.getElementById('tabResultsBtn').classList.toggle('active', tab === 'results');
+    document.getElementById('tabStatsBtn').classList.toggle('active', tab === 'stats');
+}
+
+function updateLineCounter() {
+    const lines = document.getElementById('inputDomains').value.split('\n').map(l => l.trim()).filter(l => l.length);
+    const counter = document.getElementById('lineCounter');
+    if (!lines.length) {
+        counter.textContent = '';
+        counter.classList.remove('has-content');
+        return;
+    }
+    const unique = new Set(lines.map(l => l.toLowerCase())).size;
+    const dupes = lines.length - unique;
+    const loc = currentLanguage === 'ru'
+        ? { lines: 'Строк', unique: 'Уникальные IP', dupes: 'Дублей' }
+        : { lines: 'Lines', unique: 'Unique IPs', dupes: 'Dupes' };
+    let label = `📊 ${loc.lines}: ${lines.length} | ✨ ${loc.unique}: ${unique}`;
+    if (dupes > 0) label += ` | 🔁 ${loc.dupes}: ${dupes}`;
+    counter.textContent = label;
+    counter.classList.add('has-content');
+}
+
+function filterInputDomains() {
+    const q = document.getElementById('inputSearch').value.toLowerCase();
+    const ta = document.getElementById('inputDomains');
+    const src = allInputDomains || ta.value;
+    if (!q.trim()) {
+        ta.value = src;
+        updateLineCounter();
+        return;
+    }
+    ta.value = src.split('\n').filter(l => l.toLowerCase().includes(q)).join('\n');
     updateLineCounter();
-    updateSettingsButtonText();
 }
 
-function updateStatusTexts() {
-    const dnsInd = document.getElementById('dnsIndicator');
-    if (dnsInd.innerText && activeServers.length > 0) {
-        const names = activeServers.map(k => allDNSServers[k]?.name ?? k).join(', ');
-        setElementText(dnsInd, t('dnsIndicator', names));
+function addPreset(text) {
+    document.getElementById('inputDomains').value = text;
+    allInputDomains = text;
+    updateLineCounter();
+    toast(t('presetAdded'));
+}
+
+function dedupDomains() {
+    const ta = document.getElementById('inputDomains');
+    const lines = ta.value.split('\n').map(l => l.trim()).filter(l => l.length);
+    const seen = new Set();
+    const uniq = [];
+    for (const l of lines) {
+        const low = l.toLowerCase();
+        if (!seen.has(low)) {
+            seen.add(low);
+            uniq.push(l);
+        }
     }
-
-    const ti = document.getElementById('timeInfo');
-    if (resolveStartTime > 0) {
-        // Пересобираем строку времени с сохранённым RTT
-        setElementText(ti, t('timeInfo', lastElapsed, lastSizeKB) + lastRttStr);
+    if (lines.length === uniq.length) {
+        toast(t('noDupesFound'));
+        return;
     }
+    ta.value = uniq.join('\n');
+    allInputDomains = ta.value;
+    updateLineCounter();
+    toast(t('dupsRemoved'));
 }
 
-function setElementText(el, text) {
-    if (!el) return;
-    el.innerText = text;
-    if (text && text.trim()) {
-        el.style.display = 'inline-block';
-        el.classList.add('has-content');
-    } else {
-        el.style.display = 'none';
-        el.classList.remove('has-content');
-    }
+function clearInputOnly() {
+    document.getElementById('inputDomains').value = '';
+    document.getElementById('inputSearch').value = '';
+    allInputDomains = '';
+    updateLineCounter();
+    toast(t('cleared'));
 }
 
-// ═══════════════════════════════════════════
-//  Settings panel
-// ═══════════════════════════════════════════
-function toggleSettings() {
-    const box = document.getElementById('settingsBox');
-    if (box.style.display === 'flex') {
-        box.style.display = 'none';
-    } else {
-        box.style.display = 'flex';
-    }
-    updateSettingsButtonText();
-}
-
-function setRecordType(val) { recordType = val; }
-function setTimeoutVal(s)   { timeout = s * 1000; document.getElementById('timeoutSelect').value = String(s); }
-function setDelay(d)        { delay = d; document.getElementById('delaySelect').value = String(d); }
-function setShowTTL(v)      { showTTL = v;      applyAllFilters(); }
-function setShowDNSNames(v) { showDNSNames = v; applyAllFilters(); }
-function setShowSep(v)      { showSep = v;      applyAllFilters(); }
-function setShowSpeed(v)    { showSpeed = v;    applyAllFilters(); }
-
-// ═══════════════════════════════════════════
-//  DNS server menu
-// ═══════════════════════════════════════════
-function showDNSMenu() {
-    const grid = document.getElementById('dnsGrid');
-    const rows = [];
-    for (const key in allDNSServers) {
-        const s = allDNSServers[key];
-        const checked = activeServers.includes(key) ? 'checked' : '';
-        rows.push(`<label><input type="checkbox" value="${key}" ${checked} onchange="toggleServer('${key}', this.checked)">${s.name}</label>`);
-    }
-    grid.innerHTML = rows.join('');
-    showModal('dnsMenu');
-}
-
-function toggleServer(key, checked) {
-    if (checked) {
-        if (!activeServers.includes(key)) activeServers.push(key);
-    } else {
-        activeServers = activeServers.filter(k => k !== key);
-    }
-    updateDNSButtonText();
-    updateProviderFilter();
-}
-
-function updateDNSButtonText() {
-    const btn = document.querySelector('.dns-select-btn');
-    if (btn) {
-        btn.setAttribute('data-format-param', activeServers.length);
-        btn.textContent = t('dnsSelectBtn', activeServers.length);
-    }
-}
-
-// ═══════════════════════════════════════════
-//  View menu
-// ═══════════════════════════════════════════
-function showViewMenu() {
-    const grid = document.getElementById('viewGrid');
-    grid.innerHTML = [
-        `<label><input type="checkbox" ${showDNSNames ? 'checked' : ''} onchange="setShowDNSNames(this.checked)">${t('showDNSNamesLabel')}</label>`,
-        `<label><input type="checkbox" ${showSep     ? 'checked' : ''} onchange="setShowSep(this.checked)">${t('showSepLabel')}</label>`,
-        `<label><input type="checkbox" ${showTTL     ? 'checked' : ''} onchange="setShowTTL(this.checked)">${t('showTTLLabel')}</label>`,
-        `<label><input type="checkbox" ${showSpeed   ? 'checked' : ''} onchange="setShowSpeed(this.checked)">${t('showSpeedLabel')}</label>`,
-    ].join('');
-    showModal('viewMenu');
-}
-
-// ═══════════════════════════════════════════
-//  Modals
-// ═══════════════════════════════════════════
-function showModal(id) { document.getElementById(id).classList.add('show'); }
-function hideModal(id) { document.getElementById(id).classList.remove('show'); }
-
-// ═══════════════════════════════════════════
-//  Fullscreen
-// ═══════════════════════════════════════════
-function openFS(overlayId, sourceId, targetId) {
-    document.getElementById(targetId).value = document.getElementById(sourceId).value;
-    document.getElementById(overlayId).classList.add('show');
-}
-function closeFS(id) { document.getElementById(id).classList.remove('show'); }
-
-// ═══════════════════════════════════════════
-//  Clipboard
-// ═══════════════════════════════════════════
 function copyTextarea(id) {
     const text = document.getElementById(id).value;
-    if (!text.trim()) { toast(t('emptyToast')); return; }
+    if (!text.trim()) {
+        toast(t('emptyToast'));
+        return;
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text)
             .then(() => toast(t('copied')))
@@ -1537,9 +1030,241 @@ function fallbackCopy(id) {
     ta.blur();
 }
 
-// ═══════════════════════════════════════════
-//  File import
-// ═══════════════════════════════════════════
+function openFS(overlayId, sourceId, targetId) {
+    document.getElementById(targetId).value = document.getElementById(sourceId).value;
+    document.getElementById(overlayId).classList.add('show');
+}
+
+function closeFS(id) {
+    document.getElementById(id).classList.remove('show');
+}
+
+function showModal(id) {
+    document.getElementById(id).classList.add('show');
+}
+
+function hideModal(id) {
+    document.getElementById(id).classList.remove('show');
+}
+
+function toggleSettings() {
+    const box = document.getElementById('settingsBox');
+    box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+    updateSettingsButton();
+}
+
+function setRecordType(val) {
+    recordType = val;
+}
+
+function setTimeoutVal(s) {
+    timeout = s * 1000;
+}
+
+function setDelay(d) {
+    delay = d;
+}
+
+function toggleFormat() {
+    outputFormat = outputFormat === 'hosts' ? 'onlyip' : 'hosts';
+    document.getElementById('formatBtn').setAttribute('data-format-param', outputFormat);
+    document.getElementById('formatBtn').textContent = t('formatBtn', outputFormat);
+    if (currentResults.length) applyAllFilters();
+}
+
+function showDNSMenu() {
+    const grid = document.getElementById('dnsGrid');
+    grid.innerHTML = Object.keys(allDNSServers).map(k => {
+        const s = allDNSServers[k];
+        const checked = activeServers.includes(k) ? 'checked' : '';
+        return `<label><input type="checkbox" value="${k}" ${checked} onchange="toggleServer('${k}', this.checked)">${s.name}</label>`;
+    }).join('');
+    showModal('dnsMenu');
+}
+
+function toggleServer(key, checked) {
+    if (checked) {
+        if (!activeServers.includes(key)) activeServers.push(key);
+    } else {
+        activeServers = activeServers.filter(k => k !== key);
+    }
+    const btn = document.querySelector('.dns-select-btn');
+    if (btn) {
+        btn.setAttribute('data-format-param', activeServers.length);
+        btn.textContent = t('dnsSelectBtn', activeServers.length);
+    }
+    updateProviderFilter();
+}
+
+function showViewMenu() {
+    const grid = document.getElementById('viewGrid');
+    grid.innerHTML = [
+        `<label><input type="checkbox" ${showDNSNames ? 'checked' : ''} onchange="setShowDNSNames(this.checked)">${t('showDNSNamesLabel')}</label>`,
+        `<label><input type="checkbox" ${showSep ? 'checked' : ''} onchange="setShowSep(this.checked)">${t('showSepLabel')}</label>`,
+        `<label><input type="checkbox" ${showTTL ? 'checked' : ''} onchange="setShowTTL(this.checked)">${t('showTTLLabel')}</label>`,
+        `<label><input type="checkbox" ${showSpeed ? 'checked' : ''} onchange="setShowSpeed(this.checked)">${t('showSpeedLabel')}</label>`
+    ].join('');
+    showModal('viewMenu');
+}
+
+function setShowTTL(v)      { showTTL = v;      if (currentResults.length) applyAllFilters(); }
+function setShowDNSNames(v) { showDNSNames = v; if (currentResults.length) applyAllFilters(); }
+function setShowSep(v)      { showSep = v;      if (currentResults.length) applyAllFilters(); }
+function setShowSpeed(v)    { showSpeed = v;    if (currentResults.length) applyAllFilters(); }
+
+function updateProviderFilter() {
+    const sel = document.getElementById('providerFilter');
+    while (sel.options.length > 1) sel.remove(1);
+    for (const s of activeServers) {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = allDNSServers[s]?.name || s;
+        sel.appendChild(opt);
+    }
+    sel.options[0].textContent = t('providerAll');
+}
+
+function cycleFilter() {
+    const order = ['all', 'success', 'errors'];
+    filterMode = order[(order.indexOf(filterMode) + 1) % order.length];
+    updateFilterButtonText();
+    if (currentResults.length) applyAllFilters();
+}
+
+function applyAllFilters() {
+    if (!currentResults.length) {
+        document.getElementById('resultsBox').value = '';
+        return;
+    }
+    let filtered = [...currentResults];
+    if (filterMode === 'success') {
+        filtered = filtered.filter(r => !r.error);
+    } else if (filterMode === 'errors') {
+        filtered = filtered.filter(r => r.error);
+    }
+    const provider = document.getElementById('providerFilter').value;
+    if (provider !== 'all') {
+        filtered = filtered.filter(r => r.server === provider);
+    }
+    const q = document.getElementById('resultsSearch').value.toLowerCase();
+    if (q.trim()) {
+        filtered = filtered.filter(r =>
+            r.domain.toLowerCase().includes(q) ||
+            (r.ip || '').toLowerCase().includes(q)
+        );
+    }
+    displayResults(filtered);
+}
+
+function displayResults(results) {
+    const lines = [];
+    for (let i = 0; i < results.length; i++) {
+        const r = results[i];
+        if (r.error) {
+            lines.push(`❌ ${r.domain}`);
+        } else {
+            let extras = '';
+            if (showTTL && r.ttl) extras += ` | TTL: ${r.ttl}s`;
+            if (showSpeed && r.responseTime) extras += ` | ${r.responseTime} ms`;
+            const prefix = (showDNSNames && r.server && allDNSServers[r.server])
+                ? allDNSServers[r.server].short + ': '
+                : '';
+            lines.push(outputFormat === 'hosts'
+                ? `${prefix}${r.ip} ${r.domain}${extras}`
+                : `${prefix}${r.ip}${extras}`
+            );
+        }
+        if (showSep && i < results.length - 1) lines.push('');
+    }
+    document.getElementById('resultsBox').value = lines.join('\n');
+}
+
+function dedupResults() {
+    if (!currentResults.length) {
+        toast(t('noDupesFound'));
+        return;
+    }
+    const seen = new Set();
+    const newRes = [];
+    for (const r of currentResults) {
+        if (r.error) {
+            newRes.push(r);
+            continue;
+        }
+        if (!seen.has(r.ip)) {
+            seen.add(r.ip);
+            newRes.push(r);
+        }
+    }
+    if (newRes.length === currentResults.length) {
+        toast(t('noDupesFound'));
+        return;
+    }
+    currentResults = newRes;
+    applyAllFilters();
+    toast(t('dupsRemoved'));
+}
+
+function clearResultsOnly() {
+    document.getElementById('resultsBox').value = '';
+    currentResults = [];
+    resolveStartTime = 0;
+    lastRttStr = '';
+    statsData = {
+        found: 0,
+        errors: 0,
+        total: 0,
+        unique: 0,
+        dupes: 0,
+        responseTimes: [],
+        servers: [],
+        ttlAvg: 0
+    };
+    toast(t('cleared'));
+    updateStatsTab();
+}
+
+function exportFile(format) {
+    if (!currentResults.length) {
+        toast(t('emptyToast'));
+        return;
+    }
+    let content = '';
+    let ext = 'txt';
+    let mime = 'text/plain';
+
+    if (format === 'csv') {
+        content = ['Domain,IP,Status', ...currentResults.map(r => `${r.domain},${r.ip || ''},${r.error ? 'Error' : 'OK'}`)].join('\n');
+        ext = 'csv';
+        mime = 'text/csv';
+    } else if (format === 'json') {
+        content = JSON.stringify(currentResults.map(r => ({
+            domain: r.domain,
+            ip: r.ip || null,
+            error: r.error
+        })), null, 2);
+        ext = 'json';
+        mime = 'application/json';
+    } else if (format === 'md') {
+        content = [
+            '| Domain | IP | Status |',
+            '|:---|:---|:---|',
+            ...currentResults.map(r => `| ${r.domain} | ${r.ip || '-'} | ${r.error ? '❌' : '✅'} |`)
+        ].join('\n');
+        ext = 'md';
+        mime = 'text/markdown';
+    } else {
+        content = document.getElementById('resultsBox').value || '';
+    }
+
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement('a'), { href: url, download: `dns-results.${ext}` });
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(t('exported'));
+}
+
 function handleFile(input, isDrop) {
     const file = input.files[0];
     if (!file) return;
@@ -1551,14 +1276,19 @@ function handleFile(input, isDrop) {
         if (isDrop) hideModal('dropOverlay');
         toast(t('imported'));
     };
-    reader.onerror = () => toast(t('importFail'));
+    reader.onerror = () => toast(t('copyFail'));
     reader.readAsText(file);
     input.value = '';
 }
 
 document.getElementById('dropBox').addEventListener('click', () => document.getElementById('dropFileInput').click());
-document.getElementById('dropBox').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
-document.getElementById('dropBox').addEventListener('dragleave', e => { e.currentTarget.classList.remove('drag-over'); });
+document.getElementById('dropBox').addEventListener('dragover', e => {
+    e.preventDefault();
+    e.currentTarget.classList.add('drag-over');
+});
+document.getElementById('dropBox').addEventListener('dragleave', e => {
+    e.currentTarget.classList.remove('drag-over');
+});
 document.getElementById('dropBox').addEventListener('drop', e => {
     e.preventDefault();
     e.currentTarget.classList.remove('drag-over');
@@ -1571,442 +1301,192 @@ document.getElementById('dropBox').addEventListener('drop', e => {
     }
 });
 
-// ═══════════════════════════════════════════
-//  Domain input helpers
-// ═══════════════════════════════════════════
-function updateLineCounter() {
-    const lines = document.getElementById('inputDomains').value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-    const counter = document.getElementById('lineCounter');
-    if (!lines.length) {
-        setElementText(counter, '');
-        return;
-    }
-    const unique = new Set(lines.map(l => l.toLowerCase())).size;
-    const dupes  = lines.length - unique;
-    const loc = {
-        ru: { lines: 'Строк', dupes: 'Дублей', unique: 'Уникальных' },
-        en: { lines: 'Lines', dupes: 'Dupes', unique: 'Unique' },
-        es: { lines: 'Líneas', dupes: 'Dupes', unique: 'Únicos' },
-        zh: { lines: '行数', dupes: '重复', unique: '唯一' },
-    }[currentLanguage] || { lines: 'Lines', dupes: 'Dupes', unique: 'Unique' };
-    let label = `📊 ${loc.lines}: ${lines.length}`;
-    if (dupes > 0) label += ` | 🔁 ${loc.dupes}: ${dupes}`;
-    label += ` | ✨ ${loc.unique}: ${unique}`;
-    setElementText(counter, label);
-}
+async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
+    const start = Date.now();
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeout);
+    const onAbort = () => ctrl.abort();
+    if (signal) signal.addEventListener('abort', onAbort);
 
-function filterInputDomains() {
-    const query = document.getElementById('inputSearch').value.toLowerCase();
-    const ta = document.getElementById('inputDomains');
-    if (!allInputDomains && ta.value) allInputDomains = ta.value;
-    const source = allInputDomains || ta.value;
-    if (!query.trim()) { ta.value = source; updateLineCounter(); return; }
-    ta.value = source.split('\n').filter(l => l.toLowerCase().includes(query)).join('\n');
-    updateLineCounter();
-}
-
-function addPreset(text) {
-    document.getElementById('inputDomains').value = text;
-    allInputDomains = text;
-    updateLineCounter();
-    toast(t('presetAdded'));
-}
-
-function dedupDomains() {
-    const ta = document.getElementById('inputDomains');
-    const unique = [...new Set(ta.value.split('\n').map(l => l.trim().toLowerCase()).filter(l => l.length > 0))];
-    ta.value = unique.join('\n');
-    allInputDomains = ta.value;
-    updateLineCounter();
-    toast(t('dupsRemoved'));
-}
-
-function clearInputOnly() {
-    document.getElementById('inputDomains').value = '';
-    document.getElementById('inputSearch').value = '';
-    allInputDomains = '';
-    updateLineCounter();
-    toast(t('cleared'));
-}
-
-// ═══════════════════════════════════════════
-//  Results helpers
-// ═══════════════════════════════════════════
-function clearResultsOnly() {
-    document.getElementById('resultsBox').value = '';
-    document.getElementById('resultsContainer').style.display = 'none';
-    setElementText(document.getElementById('stats'), '');
-    setElementText(document.getElementById('timeInfo'), '');
-    setElementText(document.getElementById('dnsIndicator'), '');
-    document.getElementById('resultsSearch').value = '';
-    currentResults = [];
-    resolveStartTime = 0;
-    lastRttStr = '';   // сбрасываем RTT при очистке
-    toast(t('cleared'));
-}
-
-function cycleFilter() {
-    const order = ['all', 'success', 'errors'];
-    filterMode = order[(order.indexOf(filterMode) + 1) % order.length];
-    updateFilterButtonText();
-    applyAllFilters();
-}
-
-function updateFilterButtonText() {
-    const btn = document.getElementById('filterBtn');
-    if (btn) {
-        btn.textContent = t('filterBtn', filterMode);
-    }
-}
-
-function dedupResults() {
-    if (!currentResults.length) return;
-    const seen = new Set();
-    currentResults = currentResults.filter(r => {
-        if (r.error) return true;
-        if (seen.has(r.ip)) return false;
-        seen.add(r.ip);
-        return true;
-    });
-    applyAllFilters();
-    toast(t('dupsRemoved'));
-}
-
-function applyAllFilters() {
-    if (!currentResults.length) {
-        document.getElementById('resultsBox').value = '';
-        updateStatsDisplay();
-        return;
-    }
-    let filtered = [...currentResults];
-    if (filterMode === 'success') filtered = filtered.filter(r => !r.error);
-    else if (filterMode === 'errors') filtered = filtered.filter(r => r.error);
-
-    const providerFilter = document.getElementById('providerFilter').value;
-    if (providerFilter !== 'all') filtered = filtered.filter(r => r.server === providerFilter);
-
-    const query = document.getElementById('resultsSearch').value.toLowerCase();
-    if (query.trim()) {
-        filtered = filtered.filter(r =>
-            r.domain.toLowerCase().includes(query) ||
-            (r.ip || '').toLowerCase().includes(query) ||
-            (r.server || '').toLowerCase().includes(query)
-        );
-    }
-    displayResults(filtered);
-    updateStatsDisplay();
-}
-
-function displayResults(results) {
-    const lines = [];
-    for (let i = 0; i < results.length; i++) {
-        const r = results[i];
-        if (r.error) {
-            lines.push(outputFormat === 'hosts' ? `${t('errorHosts')} ${r.domain}` : `${t('errorHosts')} ${r.domain}`);
-        } else {
-            let extras = '';
-            if (showTTL && r.ttl) extras += ` | TTL: ${r.ttl}s`;
-            if (showSpeed && r.responseTime) extras += ` | ⚡ ${r.responseTime} ms`;
-            if (r.cnameChain) extras += ` | CNAME: ${r.cnameChain}`;
-            const prefix = showDNSNames && r.server && allDNSServers[r.server]
-                ? allDNSServers[r.server].short + ': '
-                : '';
-            lines.push(outputFormat === 'hosts'
-                ? `${prefix}${r.ip} ${r.domain}${extras}`
-                : `${prefix}${r.ip}${extras}`
-            );
-        }
-        if (showSep && i < results.length - 1) lines.push('');
-    }
-    document.getElementById('resultsBox').value = lines.join('\n');
-    updateStatsDisplay();
-}
-
-function updateStatsDisplay() {
-    const statsEl = document.getElementById('stats');
-    if (!currentResults.length) {
-        setElementText(statsEl, '');
-        return;
-    }
-    const found  = currentResults.filter(r => !r.error).length;
-    const errors = currentResults.length - found;
-    const ips    = new Set(currentResults.filter(r => !r.error && r.ip).map(r => r.ip));
-    const dupes  = found - ips.size;
-    setElementText(statsEl, t('stats', found, errors, currentResults.length, ips.size, dupes));
-}
-
-function updateProviderFilter() {
-    const sel = document.getElementById('providerFilter');
-    while (sel.options.length > 1) sel.remove(1);
-    for (const s of activeServers) {
-        const opt = document.createElement('option');
-        opt.value = s;
-        opt.textContent = allDNSServers[s] ? allDNSServers[s].name : s;
-        sel.appendChild(opt);
-    }
-    sel.options[0].textContent = t('providerAll');
-}
-
-// ═══════════════════════════════════════════
-//  Export
-// ═══════════════════════════════════════════
-function exportFile(format) {
-    if (!currentResults.length) { toast(t('emptyToast')); return; }
-
-    let content = '', mime = 'text/plain', ext = 'txt';
-
-    if (format === 'csv') {
-        const header = ['Domain', 'IP', 'Status', showTTL ? 'TTL' : null].filter(Boolean).join(',');
-        const rows = currentResults.map(r => [
-            r.domain,
-            r.ip || '',
-            r.error ? 'Error' : 'OK',
-            showTTL ? (r.ttl || '') : null,
-        ].filter((_, i) => !(!showTTL && i === 3)).join(','));
-        content = [header, ...rows].join('\n');
-        mime = 'text/csv'; ext = 'csv';
-    } else if (format === 'json') {
-        content = JSON.stringify(currentResults.map(r => ({
-            domain:       r.domain,
-            ip:           r.ip || null,
-            error:        r.error,
-            ttl:          showTTL ? (r.ttl || null) : undefined,
-            dnssec:       r.dnssec || false,
-            responseTime: r.responseTime || null,
-            server:       r.server || null,
-        })), null, 2);
-        mime = 'application/json'; ext = 'json';
-    } else if (format === 'md') {
-        const headerRow = ['| Domain | IP | Status |', showTTL ? ' TTL |' : ''].join('');
-        const sepRow    = ['|:---|:---|:---|',          showTTL ? ':---|' : ''].join('');
-        const dataRows  = currentResults.map(r =>
-            `| ${r.domain} | ${r.ip || '-'} | ${r.error ? '❌' : '✅'} |${showTTL ? ` ${r.ttl || ''} |` : ''}`
-        );
-        content = [headerRow, sepRow, ...dataRows].join('\n');
-        mime = 'text/markdown'; ext = 'md';
-    } else {
-        content = document.getElementById('resultsBox').value || '';
-    }
-
-    const blob = new Blob([content], { type: mime });
-    const url  = URL.createObjectURL(blob);
-    const a    = Object.assign(document.createElement('a'), { href: url, download: `dns-results.${ext}` });
-    a.click();
-    URL.revokeObjectURL(url);
-    toast(t('exported'));
-}
-
-// ═══════════════════════════════════════════
-//  DNS Resolution
-// ═══════════════════════════════════════════
-async function resolveSingle(domain, serverKey, type, externalSignal, attempt = 0) {
-    const MAX_RETRIES = 2;
-    const startTime = Date.now();
-    const localController = new AbortController();
-    const timer = setTimeout(() => localController.abort(), timeout);
-    const onGlobalAbort = () => localController.abort();
-    if (externalSignal) externalSignal.addEventListener('abort', onGlobalAbort);
     try {
-        const apiUrl = allDNSServers[serverKey]?.url ?? 'https://cloudflare-dns.com/dns-query';
-        const res = await fetch(`${apiUrl}?name=${encodeURIComponent(domain)}&type=${type}`, {
+        const url = allDNSServers[serverKey]?.url;
+        const res = await fetch(`${url}?name=${encodeURIComponent(domain)}&type=${type}`, {
             headers: { Accept: 'application/dns-json' },
-            signal: localController.signal,
+            signal: ctrl.signal
         });
         clearTimeout(timer);
-        if (externalSignal) externalSignal.removeEventListener('abort', onGlobalAbort);
-        const data   = await res.json();
-        const dnssec = !!data.AD;
-        let result = null, ttl = null, cnameChain = null;
+        if (signal) signal.removeEventListener('abort', onAbort);
 
-        const cnameRecords = data.Answer?.filter(r => r.type === 5) ?? [];
-        if (cnameRecords.length > 0) {
-            cnameChain = cnameRecords.map(r => r.data.replace(/\.$/, '')).join(' → ');
-        }
+        const data = await res.json();
+        let result = null;
+        let ttl = null;
 
-        if (data.Answer?.length > 0) {
-            if (type === 'MX') {
-                const mx = data.Answer.filter(r => r.type === 15).sort((a, b) => a.preference - b.preference);
-                if (mx.length) { result = mx.map(r => r.data).join(', '); ttl = mx[0].TTL; }
-            } else if (type === 'NS') {
-                const ns = data.Answer.filter(r => r.type === 2);
-                if (ns.length) { result = ns.map(r => r.data).join(', '); ttl = ns[0].TTL; }
-            } else if (type === 'TXT') {
-                const txt = data.Answer.filter(r => r.type === 16);
-                if (txt.length) { result = txt.map(r => r.data).join(' | '); ttl = txt[0].TTL; }
-            } else if (type === 'SOA') {
-                const soa = data.Answer.find(r => r.type === 6);
-                if (soa) { result = soa.data; ttl = soa.TTL; }
-            } else if (type === 'CNAME') {
-                const cname = data.Answer.filter(r => r.type === 5);
-                if (cname.length) {
-                    result = cname.map(r => r.data.replace(/\.$/, '')).join(' → ');
-                    ttl = cname[0].TTL;
-                } else {
-                    const any = data.Answer[0];
-                    result = any.data.replace(/\.$/, '');
-                    ttl = any.TTL;
-                }
-            } else if (type === 'CAA') {
-                const caa = data.Answer.filter(r => r.type === 257);
-                if (caa.length) { result = caa.map(r => r.data).join(', '); ttl = caa[0].TTL; }
-                else {
-                    const any = data.Answer[0];
-                    if (any) { result = any.data; ttl = any.TTL; }
-                }
-            } else if (type === 'PTR') {
-                const ptr = data.Answer.filter(r => r.type === 12);
-                if (ptr.length) { result = ptr.map(r => r.data.replace(/\.$/, '')).join(', '); ttl = ptr[0].TTL; }
-                else {
-                    const any = data.Answer[0];
-                    if (any) { result = any.data.replace(/\.$/, ''); ttl = any.TTL; }
-                }
-            } else {
-                const rec = data.Answer.find(r => r.type === recordTypes[type]);
-                if (rec) { result = rec.data; ttl = rec.TTL; }
+        if (data.Answer?.length) {
+            const rec = data.Answer.find(r => r.type === recordTypes[type]);
+            if (rec) {
+                result = rec.data;
+                ttl = rec.TTL;
             }
         }
-        return { result, ttl, dnssec, cnameChain, size: JSON.stringify(data).length, responseTime: Date.now() - startTime };
-    } catch (e) {
+
+        return {
+            result,
+            ttl,
+            size: JSON.stringify(data).length,
+            responseTime: Date.now() - start
+        };
+    } catch(e) {
         clearTimeout(timer);
-        if (externalSignal) externalSignal.removeEventListener('abort', onGlobalAbort);
-        if (attempt < MAX_RETRIES && !externalSignal?.aborted) {
+        if (signal) signal.removeEventListener('abort', onAbort);
+
+        if (attempt < 2 && !signal?.aborted) {
             await new Promise(r => setTimeout(r, 300 * (attempt + 1)));
-            return resolveSingle(domain, serverKey, type, externalSignal, attempt + 1);
+            return resolveSingle(domain, serverKey, type, signal, attempt + 1);
         }
-        return { error: true, responseTime: Date.now() - startTime };
+        return { error: true, responseTime: Date.now() - start };
     }
 }
 
 async function startResolving() {
-    const rb          = document.getElementById('resultsBox');
-    const rc          = document.getElementById('resultsContainer');
-    const stats       = document.getElementById('stats');
-    const timeInfo    = document.getElementById('timeInfo');
-    const dnsInd      = document.getElementById('dnsIndicator');
-    const startBtn    = document.getElementById('startBtn');
-    const stopBtn     = document.getElementById('stopBtn');
-    const progressBar = document.getElementById('progressBar');
-    const progressFill= document.getElementById('progressFill');
-
-    if (activeServers.length === 0) {
-        rc.style.display = 'flex';
-        setElementText(stats, '');
-        setElementText(timeInfo, '');
-        setElementText(dnsInd, '');
-        rb.value = t('noServers');
-        updateStatsDisplay();
+    if (!activeServers.length) {
+        document.getElementById('inputDomains').value = '';
+        document.getElementById('inputSearch').value = '';
+        allInputDomains = '';
+        updateLineCounter();
+        
+        currentResults = [];
+        statsData = {
+            found: 0,
+            errors: 0,
+            total: 0,
+            unique: 0,
+            dupes: 0,
+            responseTimes: [],
+            servers: [],
+            ttlAvg: 0
+        };
+        
+        document.getElementById('resultsBox').value = t('noServers');
+        updateStatsTab();
+        switchTab('results');
+        
         return;
     }
 
     let rawText = document.getElementById('inputDomains').value
         .replace(/https?:\/\//g, '')
         .replace(/\/.*/g, '');
-    const domains = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    const domains = rawText.split('\n').map(l => l.trim()).filter(l => l.length);
 
-    if (domains.length === 0) {
-        rc.style.display = 'none';
-        rb.value = t('empty');
+    if (!domains.length) {
         toast(t('noDomainsToast'));
         return;
     }
 
-    const invalidDomains = domains.filter(d => !/^[a-zA-Z0-9._\-]+$/.test(d));
-    if (invalidDomains.length > 0) {
-        toast(`⚠️ ${invalidDomains.length} ${currentLanguage === 'ru' ? 'невалидных доменов пропущено' : 'invalid domains skipped'}`);
+    const valid = domains.filter(d => /^[a-zA-Z0-9._\-]+$/.test(d));
+    if (!valid.length) {
+        toast(t('noDomainsToast'));
+        return;
     }
-    const validDomains = domains.filter(d => /^[a-zA-Z0-9._\-]+$/.test(d));
-    if (validDomains.length === 0) { toast(t('noDomainsToast')); return; }
 
     allInputDomains = document.getElementById('inputDomains').value;
-    rc.style.display = 'flex';
-    setElementText(stats, '');
-    setElementText(timeInfo, '');
-    setElementText(dnsInd, '');
-    rb.value = '';
-    startBtn.style.display = 'none';
-    stopBtn.style.display = 'inline-block';
-    stopBtn.textContent = t('stopBtn');
-    stopBtn.disabled = false;
-    progressBar.style.display = 'block';
-    progressFill.style.width = '0%';
+
+    document.getElementById('startBtn').style.display = 'none';
+    document.getElementById('stopBtn').style.display = 'inline-block';
+    document.getElementById('progressBar').style.display = 'block';
+    document.getElementById('progressFill').style.width = '0%';
     currentResults = [];
     resolveStartTime = Date.now();
 
-    const names = activeServers.map(k => allDNSServers[k]?.name ?? k).join(', ');
-    setElementText(dnsInd, t('dnsIndicator', names));
     toast(t('started'));
 
     abortController = new AbortController();
     const signal = abortController.signal;
 
-    let found = 0, errors = 0, totalSize = 0;
-    const allResponseTimes = [];
+    let found = 0;
+    let errors = 0;
+    let totalSize = 0;
+    const allRtt = [];
+
     const BATCH_SIZE = 5;
 
-    for (let i = 0; i < validDomains.length; i += BATCH_SIZE) {
+    for (let i = 0; i < valid.length; i += BATCH_SIZE) {
         if (signal.aborted) break;
-        const batch = validDomains.slice(i, i + BATCH_SIZE);
 
-        const batchTasks = batch.map(domain =>
-            Promise.all(activeServers.map(s => resolveSingle(domain, s, recordType, signal)))
-                .then(results => ({ domain, results }))
+        const batch = valid.slice(i, i + BATCH_SIZE);
+        const batchRes = await Promise.all(
+            batch.map(domain =>
+                Promise.all(activeServers.map(s => resolveSingle(domain, s, recordType, signal)))
+                    .then(results => ({ domain, results }))
+            )
         );
-        const batchResolved = await Promise.all(batchTasks);
 
-        for (const { domain, results } of batchResolved) {
+        for (const { domain, results } of batchRes) {
             if (signal.aborted) break;
             for (let j = 0; j < results.length; j++) {
-                const res = results[j];
-                const s   = activeServers[j];
-                if (res && res.result) {
+                const r = results[j];
+                const s = activeServers[j];
+                if (r?.result) {
                     found++;
-                    totalSize += res.size;
-                    if (res.responseTime) allResponseTimes.push(res.responseTime);
+                    totalSize += r.size;
+                    if (r.responseTime) allRtt.push(r.responseTime);
                     currentResults.push({
-                        domain, ip: res.result, error: false,
-                        ttl: res.ttl ?? null, dnssec: res.dnssec,
-                        cnameChain: res.cnameChain ?? null,
-                        size: res.size, server: s, responseTime: res.responseTime ?? null,
+                        domain,
+                        ip: r.result,
+                        error: false,
+                        ttl: r.ttl,
+                        server: s,
+                        responseTime: r.responseTime
                     });
                 } else {
                     errors++;
                     currentResults.push({
-                        domain, ip: null, error: true,
-                        size: 0, server: s, responseTime: res?.responseTime ?? null,
+                        domain,
+                        ip: null,
+                        error: true,
+                        server: s
                     });
                 }
             }
         }
 
-        const processed = Math.min(i + BATCH_SIZE, validDomains.length);
-        const uniqueIPs = new Set(currentResults.filter(r => !r.error && r.ip).map(r => r.ip));
-        setElementText(stats, t('stats', found, errors, processed, uniqueIPs.size, found - uniqueIPs.size));
-        progressFill.style.width = `${(processed / validDomains.length) * 100}%`;
+        const progress = Math.min(i + BATCH_SIZE, valid.length);
+        document.getElementById('progressFill').style.width = `${(progress / valid.length) * 100}%`;
 
-        if (delay > 0 && i + BATCH_SIZE < validDomains.length && !signal.aborted) {
+        if (delay > 0 && i + BATCH_SIZE < valid.length && !signal.aborted) {
             await new Promise(r => setTimeout(r, delay));
         }
     }
 
-    updateProviderFilter();
     applyAllFilters();
 
     lastElapsed = ((Date.now() - resolveStartTime) / 1000).toFixed(1);
-    lastSizeKB  = (totalSize / 1024).toFixed(1);
+    lastSizeKB = (totalSize / 1024).toFixed(1);
 
-    if (allResponseTimes.length > 0) {
-        const minRtt = Math.min(...allResponseTimes);
-        const maxRtt = Math.max(...allResponseTimes);
-        const avgRtt = Math.round(allResponseTimes.reduce((a, b) => a + b, 0) / allResponseTimes.length);
-        lastRttStr = ` | ⚡ RTT: ${minRtt}/${avgRtt}/${maxRtt} ms`;
+    if (allRtt.length) {
+        const min = Math.min(...allRtt);
+        const max = Math.max(...allRtt);
+        const avg = Math.round(allRtt.reduce((a, b) => a + b, 0) / allRtt.length);
+        lastRttStr = t('rtt', min, avg, max);
     } else {
         lastRttStr = '';
     }
-    setElementText(timeInfo, t('timeInfo', lastElapsed, lastSizeKB) + lastRttStr);
 
-    saveHistory(validDomains.length, found, errors);
+    const uniqueIpsFinal = new Set(currentResults.filter(r => !r.error && r.ip).map(r => r.ip));
+    statsData = {
+        found,
+        errors,
+        total: currentResults.length,
+        unique: uniqueIpsFinal.size,
+        dupes: found - uniqueIpsFinal.size,
+        responseTimes: allRtt,
+        servers: [...activeServers],
+        ttlAvg: currentResults.filter(r => r.ttl).length
+            ? Math.round(currentResults.filter(r => r.ttl).reduce((a, b) => a + b.ttl, 0) / currentResults.filter(r => r.ttl).length)
+            : 0
+    };
 
-    abortController = null;
+    updateStatsTab();
     stopResolving();
 }
 
@@ -2015,81 +1495,56 @@ function stopResolving() {
         abortController.abort();
         abortController = null;
     }
-    const startBtn = document.getElementById('startBtn');
-    startBtn.style.display  = 'inline-block';
-    startBtn.disabled = false;
-    startBtn.textContent = t('startBtn');
-    document.getElementById('stopBtn').style.display   = 'none';
+    document.getElementById('startBtn').style.display = 'inline-block';
+    document.getElementById('stopBtn').style.display = 'none';
     document.getElementById('progressBar').style.display = 'none';
 }
 
-// ═══════════════════════════════════════════
-//  Easter egg
-// ═══════════════════════════════════════════
+function updateStatsTab() {
+    const grid = document.getElementById('statsGrid');
+    if (!grid) return;
+
+    const r = statsData.responseTimes || [];
+
+    let html = '';
+
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statTotal')}</div><div class="stats-value">${statsData.total}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statFound')}</div><div class="stats-value">${statsData.found}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statErrors')}</div><div class="stats-value">${statsData.errors}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statUnique')}</div><div class="stats-value">${statsData.unique}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statDupes')}</div><div class="stats-value">${statsData.dupes}</div></div>`;
+
+    if (r.length) {
+        const minRtt = Math.min(...r);
+        const maxRtt = Math.max(...r);
+        const avgRtt = Math.round(r.reduce((a, b) => a + b, 0) / r.length);
+        html += `<div class="stats-card-row"><div class="stats-label">${t('statRtt')}</div><div class="stats-value">${minRtt}/${avgRtt}/${maxRtt} ${t('ms')}</div></div>`;
+    }
+
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statTime')}</div><div class="stats-value">${lastElapsed} ${t('sec')}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statSize')}</div><div class="stats-value">${lastSizeKB} ${t('kb')}</div></div>`;
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statTtl')}</div><div class="stats-value">${statsData.ttlAvg} ${t('ms')}</div></div>`;
+
+    html += `<div class="stats-card-row"><div class="stats-label">${t('statServers')}</div><div class="stats-value"><div class="dns-list">`;
+    for (const s of (statsData.servers || [])) {
+        html += `<span class="dns-badge">${allDNSServers[s]?.name || s}</span>`;
+    }
+    html += `</div></div></div>`;
+
+    grid.innerHTML = html;
+}
+
 function easterClick() {
     easterClicks++;
     if (easterClicks >= 3) {
-        document.getElementById('easterEgg').classList.add('show');
-        setTimeout(() => document.getElementById('easterEgg').classList.remove('show'), 2500);
+        const egg = document.getElementById('easterEgg');
+        egg.querySelector('span').textContent = t('easterText');
+        egg.classList.add('show');
+        setTimeout(() => egg.classList.remove('show'), 2500);
         easterClicks = 0;
     }
 }
 
-// ═══════════════════════════════════════════
-//  History
-// ═══════════════════════════════════════════
-function saveHistory(total, found, errors) {
-    try {
-        const history = JSON.parse(localStorage.getItem('dnsresolver_history') || '[]');
-        history.unshift({
-            date: new Date().toLocaleString(),
-            domains: total,
-            found,
-            errors,
-            servers: activeServers.slice(),
-            recordType,
-            elapsed: lastElapsed,
-        });
-        if (history.length > 20) history.length = 20;
-        localStorage.setItem('dnsresolver_history', JSON.stringify(history));
-    } catch(e) {}
-}
-
-function showHistory() {
-    try {
-        const history = JSON.parse(localStorage.getItem('dnsresolver_history') || '[]');
-        const box = document.getElementById('historyBox');
-        if (!history.length) {
-            box.innerHTML = `<div style="color:var(--text3);font-size:13px">${t('historyEmpty')}</div>`;
-        } else {
-            box.innerHTML = history.map((h, i) => `
-                <div style="background:var(--btn);border:1px solid var(--border);padding:8px;font-size:12px;text-align:left">
-                    <div style="color:var(--text2);font-weight:bold">#${i+1} — ${h.date}</div>
-                    <div style="color:var(--text3)">${h.recordType} | ${(h.servers||[]).join(', ')} | ⏱️ ${h.elapsed}s</div>
-                    <div style="color:var(--text3)">📊 ${h.domains} ${t('historyDomains')} | ✅ ${h.found} | ❌ ${h.errors}</div>
-                </div>`).join('');
-        }
-        showModal('historyMenu');
-    } catch(e) {}
-}
-
-// ═══════════════════════════════════════════
-//  Export errors only
-// ═══════════════════════════════════════════
-function exportErrors() {
-    const errors = currentResults.filter(r => r.error).map(r => r.domain);
-    if (!errors.length) { toast(t('emptyToast')); return; }
-    const blob = new Blob([errors.join('\n')], { type: 'text/plain' });
-    const url  = URL.createObjectURL(blob);
-    const a    = Object.assign(document.createElement('a'), { href: url, download: 'dns-errors.txt' });
-    a.click();
-    URL.revokeObjectURL(url);
-    toast(t('exported'));
-}
-
-// ═══════════════════════════════════════════
-//  Keyboard shortcuts
-// ═══════════════════════════════════════════
 document.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
         e.preventDefault();
@@ -2097,46 +1552,23 @@ document.addEventListener('keydown', e => {
     }
     if (e.key === 'Escape') {
         const openModal = document.querySelector('.modal-overlay.show, .fullscreen-overlay.show');
-        if (openModal) { openModal.classList.remove('show'); return; }
+        if (openModal) {
+            openModal.classList.remove('show');
+            return;
+        }
         if (abortController) stopResolving();
     }
 });
 
-// ═══════════════════════════════════════════
-//  Format button
-// ═══════════════════════════════════════════
-function toggleFormat() {
-    outputFormat = outputFormat === 'hosts' ? 'onlyip' : 'hosts';
-    updateFormatButtonText();
-    applyAllFilters();
-}
-
-function updateFormatButtonText() {
-    const btn = document.getElementById('formatBtn');
-    btn.setAttribute('data-format-param', outputFormat);
-    btn.textContent = t('formatBtn', outputFormat);
-    btn.classList.toggle('active', outputFormat === 'hosts');
-}
-
-function updateSettingsButtonText() {
-    const sb  = document.getElementById('settingsBox');
-    const icon = document.querySelector('#settingsToggleBtn .h-icon');
-    if (icon) icon.textContent = sb.style.display === 'flex' ? '❌' : '⚙️';
-}
-
-// ═══════════════════════════════════════════
-//  Boot
-// ═══════════════════════════════════════════
 try {
-    const savedTheme = localStorage.getItem('dnsresolver_theme');
-    if (['system', 'light', 'dark', 'xp'].includes(savedTheme)) themeMode = savedTheme;
-} catch (e) {}
+    const saved = localStorage.getItem('dnsresolver_theme');
+    if (['system', 'light', 'dark', 'xp'].includes(saved)) themeMode = saved;
+} catch(e) {}
 
 detectInitialLanguage();
 applyTheme();
-updateLangIcon();
 applyI18N();
-updateDynamicTexts();
+updateProviderFilter();
 </script>
 </body>
 </html>
