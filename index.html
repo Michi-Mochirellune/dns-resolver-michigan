@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-	<link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-512.png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/icon-192.png">
     <link rel="manifest" href="https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/resolver/manifest.json">
@@ -125,6 +125,7 @@
         .h-btn.preset { background-color: var(--preset-bg); color: #fff; }
         .h-btn.preset:hover { background-color: var(--preset-hover); }
         .h-btn.star-btn { background-color: var(--accent-btn); color: #fff; }
+        .h-btn.star-btn:hover { background-color: var(--accent-btn2); }
 
         .settings-box {
             background-color: var(--bg2); padding: 14px; display: none; flex-direction: column; gap: 10px;
@@ -143,6 +144,7 @@
         }
         .settings-item select:hover, .settings-item button:hover { background: var(--accent-btn); color: #fff; }
         .dns-select-btn, .view-select-btn { background: var(--accent-btn); color: #fff; padding: 10px; cursor: pointer; text-align: center; }
+        .dns-select-btn:hover, .view-select-btn:hover { background: var(--accent-btn2); }
         .tgl-btn { background: var(--btn); color: var(--text2); border: 1px solid var(--border); padding: 8px; cursor: pointer; font-size: 12px; transition: background-color 0.3s ease, color 0.3s ease; }
         .tgl-btn:hover { background: var(--accent-btn); color: #fff; }
 
@@ -315,6 +317,13 @@
         <button class="dns-done-btn" onclick="hideModal('viewMenu')" data-i18n="viewDoneBtn">✅ Готово</button>
     </div>
 </div>
+<div class="modal-overlay" id="presetMenu" onclick="hideModal('presetMenu')">
+    <div class="modal-box" onclick="event.stopPropagation()" style="max-width:400px; max-height:80vh; overflow-y:auto;">
+        <div style="font-weight:bold" data-i18n="presetMenuTitle">📋 Тест резолвера</div>
+        <div id="presetList" style="display:flex; flex-direction:column; gap:6px;"></div>
+        <button onclick="hideModal('presetMenu')" data-i18n="presetClose">✅ Закрыть</button>
+    </div>
+</div>
 <div class="modal-overlay" id="starMenu" onclick="hideModal('starMenu')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <div class="star-text" data-i18n="starText">⭐ Поддержи проект</div>
@@ -335,7 +344,7 @@
             <button class="h-btn star-btn" onclick="showModal('starMenu')">⭐ <span data-i18n="btnSupport">Проект</span></button>
         </div>
         <div class="header-buttons">
-            <button class="h-btn preset" onclick="addPreset('telegram.org\nreddit.com\nwikipedia.org\nstackoverflow.com\n')">📋 <span data-i18n="presetBtnShort">Тест</span></button>
+            <button class="h-btn preset" onclick="showPresetMenu()">📋 <span data-i18n="presetBtnShort">Тест</span></button>
             <button class="h-btn" id="themeToggleBtn" onclick="cycleTheme()">🔄 <span data-i18n="btnTheme">Тема</span></button>
             <button class="h-btn lang" id="langToggleBtn" onclick="toggleLanguage()"><span id="langIcon">🇷🇺</span> <span id="langCode">RU</span></button>
             <button class="h-btn" id="settingsToggleBtn" onclick="toggleSettings()"><span id="settingsIcon">⚙️</span> <span data-i18n="btnSettings">Настройки</span></button>
@@ -350,6 +359,7 @@
                         <option value="MX">📧 MX</option><option value="NS">🗄️ NS</option><option value="SOA">📋 SOA</option>
                         <option value="TXT">📝 TXT</option><option value="CNAME">🔗 CNAME</option>
                         <option value="CAA">🔒 CAA</option><option value="PTR">↩️ PTR</option>
+                        <option value="PTR_RANGE">↩️ PTR Range</option>
                     </select>
                 </div>
                 <div class="settings-item"><div class="settings-label" data-i18n="timeoutLabel">⏰ Таймаут</div>
@@ -475,7 +485,84 @@ const recordTypes = {
     TXT: 16,
     CNAME: 5,
     CAA: 257,
-    PTR: 12
+    PTR: 12,
+    PTR_RANGE: 12
+};
+
+// Пресеты для тестов
+const presets = {
+    A: {
+        label: '🌐 A (IPv4)',
+        list: [
+            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
+            'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
+        ]
+    },
+    AAAA: {
+        label: '🌍 AAAA (IPv6)',
+        list: [
+            'google.com', 'netflix.com', 'reddit.com', 'wikipedia.org',
+            'debian.org', 'yandex.ru', 'youtube.com', 'cloudflare.com'
+        ]
+    },
+    MX: {
+        label: '📧 MX',
+        list: [
+            'gmail.com', 'rambler.ru', 'proton.me', 'mail.ru',
+            'outlook.com', 'yahoo.com', 'zoho.com', 'tutanota.com'
+        ]
+    },
+    NS: {
+        label: '🗄️ NS',
+        list: [
+            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
+            'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
+        ]
+    },
+    SOA: {
+        label: '📋 SOA',
+        list: [
+            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
+            'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
+        ]
+    },
+    TXT: {
+        label: '📝 TXT',
+        list: [
+            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
+            'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
+        ]
+    },
+    CNAME: {
+        label: '🔗 CNAME',
+        list: [
+            'www.github.com', 'www.pinterest.com', 'www.reddit.com', 'www.wikipedia.org',
+            'www.amazon.com', 'login.live.com', 'www.youtube.com', 'm.facebook.com'
+        ]
+    },
+    CAA: {
+        label: '🔒 CAA',
+        list: [
+            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
+            'stackoverflow.com', 'youtube.com', 'cloudflare.com', 'digicert.com'
+        ]
+    },
+    PTR: {
+        label: '↩️ PTR',
+        list: [
+            '8.8.8.8', '8.8.4.4', '1.1.1.1', '1.0.0.1',
+            '2001:4860:4860::8888', '2001:4860:4860::8844',
+            '2606:4700:4700::1111', '2606:4700:4700::1001'
+        ]
+    },
+    PTR_RANGE: {
+        label: '↩️ PTR Range',
+        list: [
+            '8.8.8.8-8.8.8.9', '8.8.4.4-8.8.4.5', '1.1.1.1-1.1.1.4',
+            '1.0.0.1-1.0.0.4', '9.9.9.9-9.9.9.12',
+            '208.67.222.222-208.67.222.223', '208.67.220.220-208.67.220.221', '185.222.222.222-185.222.222.229'
+        ]
+    }
 };
 
 // ─────────────────────────────────────────────
@@ -483,15 +570,12 @@ const recordTypes = {
 // ─────────────────────────────────────────────
 const L = {
     ru: {
-        // Вкладки
         tabResults: '📊 Результаты',
         tabStats: '📈 Статистика',
-
-        // Статистика
         statFound: '✅ Найдено',
         statErrors: '❌ Ошибки',
         statTotal: '📊 Всего запросов',
-        statUnique: '✨ Уникальных IP',
+        statUnique: '✨ Уникальных',
         statDupes: '🔁 Дублей',
         statRtt: '⚡ RTT (мин/сред/макс)',
         statTime: '⏱️ Время выполнения',
@@ -502,11 +586,7 @@ const L = {
         sec: 'сек',
         kb: 'КБ',
         rtt: (min, avg, max) => `⚡ RTT: ${min}/${avg}/${max} мс`,
-
-        // Кнопка фильтра
         filterBtn: '🔍 Все',
-
-        // Типы записей
         mxLabel: 'Почта',
         nsLabel: 'DNS-серверы',
         soaLabel: 'Зона',
@@ -514,12 +594,8 @@ const L = {
         cnameLabel: 'Псевдоним',
         caaLabel: 'Центр сертификации',
         ptrLabel: 'Обратный',
-
-        // DNS настройки
         dnsSelectBtn: (count) => `📡 Выбрать DNS серверы (${count})`,
         viewSelectBtn: '👁️ Вид результатов',
-
-        // Меню вида
         viewMenuTitle: '👁️ Вид результатов',
         viewDoneBtn: '✅ Готово',
         showDNSNamesLabel: '🏷️ Названия DNS',
@@ -534,24 +610,24 @@ const L = {
         ttlOff: '❌ Выкл',
         speedOn: '✅ Вкл',
         speedOff: '❌ Выкл',
-
-        // Меню DNS
         dnsMenuTitle: '📡 Выберите DNS серверы',
         dnsDoneBtn: '✅ Готово',
-
-        // Тип записи
+        presetMenuTitle: '📋 Тест резолвера',
+        presetClose: '✅ Закрыть',
         typeLabel: '📝 Тип записи',
-
-        // Формат
-        formatBtn: (val) => val === 'hosts' ? '📁 Формат: Hosts' : '🔢 Формат: Only IP',
-
-        // Плейсхолдеры
+        formatBtn: (val) => {
+            const formats = {
+                'onlyip': '🔢 Формат: Only IP',
+                'hosts': '📁 Формат: Hosts',
+                'adguard': '🛡️ Формат: AdGuard',
+                'pihole': '🚫 Формат: Pi-hole'
+            };
+            return formats[val] || '🔢 Формат: Only IP';
+        },
         inputPlaceholder: '📝 Вставь список доменов сюда...',
         resultsPlaceholder: '📊 Результаты появятся здесь...',
         inputSearchPlaceholder: '🔍 Поиск по доменам...',
         resultsSearchPlaceholder: '🔍 Поиск по результатам...',
-
-        // Основные кнопки
         startBtn: '🚀 Проверить',
         stopBtn: '⏹️ Стоп',
         presetBtnShort: 'Тест',
@@ -559,8 +635,6 @@ const L = {
         btnTheme: 'Тема',
         btnLang: 'Язык',
         btnSettings: 'Настройки',
-
-        // Сообщения
         empty: '📭 Список пуст',
         error: '❌ Ошибка/Не найден',
         noServers: 'Вот чего ты ожидал, когда решил сделать проверку без DNS-серверов? Думаешь тебе сам бог ответы даст? Бога нету, смирись <3\n\nВыбери хоть один DNS сервер в настройках',
@@ -578,52 +652,36 @@ const L = {
         noDupesFound: '✨ Дублей не найдено',
         presetAdded: '📋 Тестовые сайты добавлены',
         providerAll: '🏢 Все провайдеры',
-
-        // Статистика в строке
         stats: (f, e, total, u, d) => {
             let s = `✅ Найдено: ${f} / ❌ Ошибок: ${e} / 📊 Всего: ${total} / ✨ Уникальных: ${u}`;
             if (d > 0) s += ` / 🔁 Дублей: ${d}`;
             return s;
         },
-
-        // Индикаторы
         dnsIndicator: (p) => `🔍 Проверено через: ${p}`,
         timeInfo: (s, z) => `⏱️ Время: ${s} сек | 📦 Ответ: ${z} KB`,
-
-        // Таймаут и задержка
         timeoutLabel: '⏰ Таймаут',
         delayLabel: '🐌 Задержка',
         timeoutOptions: ['5 сек', '10 сек', '15 сек'],
         delayOptions: ['Без задержки', '0.5 сек', '1 сек'],
-
-        // Карточки
         dedupBtn: 'Убрать дубли',
         uploadBtn: 'Импорт',
         dedupResultsBtn: 'Убрать дубли',
         exportMenuBtn: 'Экспорт',
-
-        // Звёздочка и пасхалка
         starText: 'Хэй! Поддержи мой полностью бесплатный проект звёздочкой, иначе укушу твоё ушко :Р',
         easterText: 'Спасибо за использование',
-
-        // Язык
         langRu: '🇷🇺 RU',
         langEn: '🇬🇧 EN',
-
-        // Настройки
         settingsOpen: '❌',
-        settingsClosed: '⚙️'
+        settingsClosed: '⚙️',
+        ptrNotFound: 'не найден'
     },
     en: {
-        // Вкладки
         tabResults: '📊 Results',
         tabStats: '📈 Statistics',
-
-        // Статистика
         statFound: '✅ Found',
         statErrors: '❌ Errors',
         statTotal: '📊 Total queries',
-        statUnique: '✨ Unique IPs',
+        statUnique: '✨ Unique',
         statDupes: '🔁 Dupes',
         statRtt: '⚡ RTT (min/avg/max)',
         statTime: '⏱️ Execution time',
@@ -634,11 +692,7 @@ const L = {
         sec: 'sec',
         kb: 'KB',
         rtt: (min, avg, max) => `⚡ RTT: ${min}/${avg}/${max} ms`,
-
-        // Кнопка фильтра
         filterBtn: '🔍 All',
-
-        // Типы записей
         mxLabel: 'Mail',
         nsLabel: 'DNS servers',
         soaLabel: 'Zone',
@@ -646,12 +700,8 @@ const L = {
         cnameLabel: 'Alias',
         caaLabel: 'Cert Authority',
         ptrLabel: 'Reverse',
-
-        // DNS настройки
         dnsSelectBtn: (count) => `📡 Choose DNS servers (${count})`,
         viewSelectBtn: '👁️ View options',
-
-        // Меню вида
         viewMenuTitle: '👁️ View options',
         viewDoneBtn: '✅ Done',
         showDNSNamesLabel: '🏷️ DNS names',
@@ -666,24 +716,24 @@ const L = {
         ttlOff: '❌ Off',
         speedOn: '✅ On',
         speedOff: '❌ Off',
-
-        // Меню DNS
         dnsMenuTitle: '📡 Select DNS servers',
         dnsDoneBtn: '✅ Done',
-
-        // Тип записи
+        presetMenuTitle: '📋 Resolver test',
+        presetClose: '✅ Close',
         typeLabel: '📝 Record type',
-
-        // Формат
-        formatBtn: (val) => val === 'hosts' ? '📁 Format: Hosts' : '🔢 Format: Only IP',
-
-        // Плейсхолдеры
+        formatBtn: (val) => {
+            const formats = {
+                'onlyip': '🔢 Format: Only IP',
+                'hosts': '📁 Format: Hosts',
+                'adguard': '🛡️ Format: AdGuard',
+                'pihole': '🚫 Format: Pi-hole'
+            };
+            return formats[val] || '🔢 Format: Only IP';
+        },
         inputPlaceholder: '📝 Paste domain list here...',
         resultsPlaceholder: '📊 Results will appear here...',
         inputSearchPlaceholder: '🔍 Search domains...',
         resultsSearchPlaceholder: '🔍 Search results...',
-
-        // Основные кнопки
         startBtn: '🚀 Resolve',
         stopBtn: '⏹️ Stop',
         presetBtnShort: 'Test',
@@ -691,8 +741,6 @@ const L = {
         btnTheme: 'Theme',
         btnLang: 'Language',
         btnSettings: 'Settings',
-
-        // Сообщения
         empty: '📭 List is empty',
         error: '❌ Error/Not found',
         noServers: "What did you expect when you decided to run a check without DNS servers? Think God himself will give you answers? There is no God, deal with it <3\n\nPick at least one DNS server in the settings",
@@ -710,41 +758,28 @@ const L = {
         noDupesFound: '✨ No duplicates found',
         presetAdded: '📋 Test sites added',
         providerAll: '🏢 All providers',
-
-        // Статистика в строке
         stats: (f, e, total, u, d) => {
             let s = `✅ Found: ${f} / ❌ Errors: ${e} / 📊 Total: ${total} / ✨ Unique: ${u}`;
             if (d > 0) s += ` / 🔁 Dupes: ${d}`;
             return s;
         },
-
-        // Индикаторы
         dnsIndicator: (p) => `🔍 Resolved via: ${p}`,
         timeInfo: (s, z) => `⏱️ Time: ${s} s | 📦 Response: ${z} KB`,
-
-        // Таймаут и задержка
         timeoutLabel: '⏰ Timeout',
         delayLabel: '🐌 Delay',
         timeoutOptions: ['5 sec', '10 sec', '15 sec'],
         delayOptions: ['No delay', '0.5 sec', '1 sec'],
-
-        // Карточки
         dedupBtn: 'Remove duplicates',
         uploadBtn: 'Import',
         dedupResultsBtn: 'Remove duplicates',
         exportMenuBtn: 'Export',
-
-        // Звёздочка и пасхалка
         starText: "Hey! Star my completely free project or I'll bite your ear :P",
         easterText: 'Thank you for using',
-
-        // Язык
         langRu: '🇷🇺 RU',
         langEn: '🇬🇧 EN',
-
-        // Настройки
         settingsOpen: '❌',
-        settingsClosed: '⚙️'
+        settingsClosed: '⚙️',
+        ptrNotFound: 'not found'
     }
 };
 
@@ -756,9 +791,6 @@ function t(key, ...args) {
     return val !== undefined ? val : key;
 }
 
-// ─────────────────────────────────────────────
-//  i18n engine
-// ─────────────────────────────────────────────
 function applyI18N() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -767,7 +799,6 @@ function applyI18N() {
             el.textContent = val;
         }
     });
-
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         const val = L[currentLanguage] && L[currentLanguage][key];
@@ -775,7 +806,6 @@ function applyI18N() {
             el.setAttribute('placeholder', val);
         }
     });
-
     document.querySelectorAll('[data-i18n-format]').forEach(el => {
         const key   = el.getAttribute('data-i18n-format');
         const param = el.getAttribute('data-format-param');
@@ -784,7 +814,6 @@ function applyI18N() {
             el.textContent = fn(param);
         }
     });
-
     document.querySelectorAll('[data-i18n-options]').forEach(el => {
         const parts = el.getAttribute('data-i18n-options').split('.');
         const key   = parts[0];
@@ -794,7 +823,6 @@ function applyI18N() {
             el.textContent = arr[idx];
         }
     });
-
     updateLangButton();
     updateRecordTypeOptions();
     updateFilterButtonText();
@@ -830,7 +858,8 @@ function updateRecordTypeOptions() {
         TXT:   '📝 TXT (' + t('txtLabel') + ')',
         CNAME: '🔗 CNAME (' + t('cnameLabel') + ')',
         CAA:   '🔒 CAA (' + t('caaLabel') + ')',
-        PTR:   '↩️ PTR (' + t('ptrLabel') + ')'
+        PTR:   '↩️ PTR (' + t('ptrLabel') + ')',
+        PTR_RANGE: '↩️ PTR Range'
     };
     const sel = document.getElementById('recordType');
     if (!sel) return;
@@ -948,8 +977,8 @@ function updateLineCounter() {
     const unique = new Set(lines.map(l => l.toLowerCase())).size;
     const dupes = lines.length - unique;
     const loc = currentLanguage === 'ru'
-        ? { lines: 'Строк', unique: 'Уникальные IP', dupes: 'Дублей' }
-        : { lines: 'Lines', unique: 'Unique IPs', dupes: 'Dupes' };
+        ? { lines: 'Строк', unique: 'Уникальных', dupes: 'Дублей' }
+        : { lines: 'Lines', unique: 'Unique', dupes: 'Dupes' };
     let label = `📊 ${loc.lines}: ${lines.length} | ✨ ${loc.unique}: ${unique}`;
     if (dupes > 0) label += ` | 🔁 ${loc.dupes}: ${dupes}`;
     counter.textContent = label;
@@ -967,6 +996,27 @@ function filterInputDomains() {
     }
     ta.value = src.split('\n').filter(l => l.toLowerCase().includes(q)).join('\n');
     updateLineCounter();
+}
+
+function showPresetMenu() {
+    const list = document.getElementById('presetList');
+    list.innerHTML = Object.keys(presets).map(type => {
+        const p = presets[type];
+        return `<button onclick="applyPreset('${type}')" style="text-align:left; padding:10px;">
+            ${p.label}
+        </button>`;
+    }).join('');
+    showModal('presetMenu');
+}
+
+function applyPreset(type) {
+    document.getElementById('recordType').value = type;
+    recordType = type;
+    document.getElementById('inputDomains').value = presets[type].list.join('\n');
+    allInputDomains = presets[type].list.join('\n');
+    updateLineCounter();
+    hideModal('presetMenu');
+    toast(t('presetAdded'));
 }
 
 function addPreset(text) {
@@ -1070,7 +1120,9 @@ function setDelay(d) {
 }
 
 function toggleFormat() {
-    outputFormat = outputFormat === 'hosts' ? 'onlyip' : 'hosts';
+    const formats = ['onlyip', 'hosts', 'adguard', 'pihole'];
+    const currentIndex = formats.indexOf(outputFormat);
+    outputFormat = formats[(currentIndex + 1) % formats.length];
     document.getElementById('formatBtn').setAttribute('data-format-param', outputFormat);
     document.getElementById('formatBtn').textContent = t('formatBtn', outputFormat);
     if (currentResults.length) applyAllFilters();
@@ -1165,7 +1217,13 @@ function displayResults(results) {
     for (let i = 0; i < results.length; i++) {
         const r = results[i];
         if (r.error) {
-            lines.push(`❌ ${r.domain}`);
+            if (outputFormat === 'adguard') {
+                lines.push(`# ❌ ${r.domain}`);
+            } else if (outputFormat === 'pihole') {
+                lines.push(`# ❌ ${r.domain}`);
+            } else {
+                lines.push(`❌ ${r.domain}`);
+            }
         } else {
             let extras = '';
             if (showTTL && r.ttl) extras += ` | TTL: ${r.ttl}s`;
@@ -1173,10 +1231,16 @@ function displayResults(results) {
             const prefix = (showDNSNames && r.server && allDNSServers[r.server])
                 ? allDNSServers[r.server].short + ': '
                 : '';
-            lines.push(outputFormat === 'hosts'
-                ? `${prefix}${r.ip} ${r.domain}${extras}`
-                : `${prefix}${r.ip}${extras}`
-            );
+            
+            if (outputFormat === 'hosts') {
+                lines.push(`${prefix}${r.ip} ${r.domain}${extras}`);
+            } else if (outputFormat === 'adguard') {
+                lines.push(`||${r.domain}^${extras}`);
+            } else if (outputFormat === 'pihole') {
+                lines.push(`0.0.0.0 ${r.domain}${extras}`);
+            } else {
+                lines.push(`${prefix}${r.ip}${extras}`);
+            }
         }
         if (showSep && i < results.length - 1) lines.push('');
     }
@@ -1305,6 +1369,19 @@ document.getElementById('dropBox').addEventListener('drop', e => {
     }
 });
 
+function expandIPv6(ip) {
+    if (ip.includes('::')) {
+        const parts = ip.split('::');
+        const left = parts[0] ? parts[0].split(':') : [];
+        const right = parts[1] ? parts[1].split(':') : [];
+        const missing = 8 - left.length - right.length;
+        const middle = new Array(missing).fill('0000');
+        const full = [...left, ...middle, ...right];
+        return full.map(part => part.padStart(4, '0')).join('');
+    }
+    return ip.split(':').map(part => part.padStart(4, '0')).join('');
+}
+
 async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
     const start = Date.now();
     const ctrl = new AbortController();
@@ -1314,7 +1391,27 @@ async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
 
     try {
         const url = allDNSServers[serverKey]?.url;
-        const res = await fetch(`${url}?name=${encodeURIComponent(domain)}&type=${type}`, {
+        const queryType = (type === 'PTR_RANGE') ? 'PTR' : type;
+        
+        let queryName = domain;
+        if (queryType === 'PTR') {
+            // Если это уже готовый .in-addr.arpa или .ip6.arpa — не трогаем
+            if (domain.endsWith('.in-addr.arpa') || domain.endsWith('.ip6.arpa')) {
+                queryName = domain;
+            }
+            // IPv4: 8.8.8.8 → 8.8.8.8.in-addr.arpa
+            else if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(domain)) {
+                const parts = domain.split('.');
+                queryName = `${parts[3]}.${parts[2]}.${parts[1]}.${parts[0]}.in-addr.arpa`;
+            }
+            // IPv6: 2001:4860:4860::8888 → .ip6.arpa
+            else if (domain.includes(':')) {
+                const expanded = expandIPv6(domain);
+                queryName = expanded.split('').reverse().join('.') + '.ip6.arpa';
+            }
+        }
+        
+        const res = await fetch(`${url}?name=${encodeURIComponent(queryName)}&type=${queryType}`, {
             headers: { Accept: 'application/dns-json' },
             signal: ctrl.signal
         });
@@ -1326,9 +1423,10 @@ async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
         let ttl = null;
 
         if (data.Answer?.length) {
-            const rec = data.Answer.find(r => r.type === recordTypes[type]);
+            const rec = data.Answer.find(r => r.type === recordTypes[queryType]);
             if (rec) {
                 result = rec.data;
+                if (result && result.endsWith('.')) result = result.slice(0, -1);
                 ttl = rec.TTL;
             }
         }
@@ -1351,6 +1449,39 @@ async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
     }
 }
 
+function expandIPRange(entry) {
+    const rangeMatch = entry.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*-\s*(\d{1,3}(?:\.\d{1,3}\.\d{1,3}\.\d{1,3})?)$/);
+    if (!rangeMatch) return [entry];
+    
+    const startIP = rangeMatch[1];
+    const endPart = rangeMatch[2];
+    
+    const startParts = startIP.split('.').map(Number);
+    let endParts;
+    
+    if (endPart.includes('.')) {
+        endParts = endPart.split('.').map(Number);
+    } else {
+        endParts = [...startParts];
+        endParts[3] = parseInt(endPart, 10);
+    }
+    
+    const ips = [];
+    const startNum = (startParts[0] << 24) | (startParts[1] << 16) | (startParts[2] << 8) | startParts[3];
+    const endNum = (endParts[0] << 24) | (endParts[1] << 16) | (endParts[2] << 8) | endParts[3];
+    
+    if (endNum < startNum || endNum - startNum > 255) return [entry];
+    
+    for (let i = startNum; i <= endNum; i++) {
+        const a = (i >> 24) & 255;
+        const b = (i >> 16) & 255;
+        const c = (i >> 8) & 255;
+        const d = i & 255;
+        ips.push(`${a}.${b}.${c}.${d}`);
+    }
+    return ips;
+}
+
 async function startResolving() {
     if (!activeServers.length) {
         document.getElementById('inputDomains').value = '';
@@ -1360,35 +1491,31 @@ async function startResolving() {
         
         currentResults = [];
         statsData = {
-            found: 0,
-            errors: 0,
-            total: 0,
-            unique: 0,
-            dupes: 0,
-            responseTimes: [],
-            servers: [],
-            ttlAvg: 0
+            found: 0, errors: 0, total: 0, unique: 0, dupes: 0,
+            responseTimes: [], servers: [], ttlAvg: 0
         };
         
         document.getElementById('resultsBox').value = t('noServers');
         updateStatsTab();
         switchTab('results');
-        
         return;
     }
 
     let rawText = document.getElementById('inputDomains').value
         .replace(/https?:\/\//g, '')
         .replace(/\/.*/g, '');
-    const domains = rawText.split('\n').map(l => l.trim()).filter(l => l.length);
+    let entries = rawText.split('\n').map(l => l.trim()).filter(l => l.length);
 
-    if (!domains.length) {
-        toast(t('noDomainsToast'));
-        return;
+    if (recordType === 'PTR_RANGE') {
+        const expanded = [];
+        for (const entry of entries) {
+            const ips = expandIPRange(entry);
+            expanded.push(...ips);
+        }
+        entries = expanded;
     }
 
-    const valid = domains.filter(d => /^[a-zA-Z0-9._\-]+$/.test(d));
-    if (!valid.length) {
+    if (!entries.length) {
         toast(t('noDomainsToast'));
         return;
     }
@@ -1411,17 +1538,16 @@ async function startResolving() {
     let errors = 0;
     let totalSize = 0;
     const allRtt = [];
-
     const BATCH_SIZE = 5;
 
-    for (let i = 0; i < valid.length; i += BATCH_SIZE) {
+    for (let i = 0; i < entries.length; i += BATCH_SIZE) {
         if (signal.aborted) break;
 
-        const batch = valid.slice(i, i + BATCH_SIZE);
+        const batch = entries.slice(i, i + BATCH_SIZE);
         const batchRes = await Promise.all(
-            batch.map(domain =>
-                Promise.all(activeServers.map(s => resolveSingle(domain, s, recordType, signal)))
-                    .then(results => ({ domain, results }))
+            batch.map(entry =>
+                Promise.all(activeServers.map(s => resolveSingle(entry, s, recordType, signal)))
+                    .then(results => ({ domain: entry, results }))
             )
         );
 
@@ -1446,7 +1572,7 @@ async function startResolving() {
                     errors++;
                     currentResults.push({
                         domain,
-                        ip: null,
+                        ip: t('ptrNotFound'),
                         error: true,
                         server: s
                     });
@@ -1454,10 +1580,10 @@ async function startResolving() {
             }
         }
 
-        const progress = Math.min(i + BATCH_SIZE, valid.length);
-        document.getElementById('progressFill').style.width = `${(progress / valid.length) * 100}%`;
+        const progress = Math.min(i + BATCH_SIZE, entries.length);
+        document.getElementById('progressFill').style.width = `${(progress / entries.length) * 100}%`;
 
-        if (delay > 0 && i + BATCH_SIZE < valid.length && !signal.aborted) {
+        if (delay > 0 && i + BATCH_SIZE < entries.length && !signal.aborted) {
             await new Promise(r => setTimeout(r, delay));
         }
     }
