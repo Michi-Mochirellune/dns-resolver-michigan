@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://michi-mochirellune.github.io/dns-resolver-michigan/sitemap.xml
