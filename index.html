@@ -137,12 +137,13 @@
         .settings-row { display: flex; gap: 8px; flex-wrap: wrap; }
         .settings-item { flex: 1; min-width: 100px; display: flex; flex-direction: column; gap: 4px; }
         .settings-label { font-size: 12px; color: var(--text3); text-align: center; }
-        .settings-item select, .settings-item button {
+        .settings-item select, .settings-item input {
             background: var(--btn); color: var(--text2); border: 1px solid var(--border);
             padding: 8px; font-size: 12px; cursor: pointer; text-align: center;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        .settings-item select:hover, .settings-item button:hover { background: var(--accent-btn); color: #fff; }
+        .settings-item select:hover, .settings-item input:hover { background: var(--accent-btn); color: #fff; }
+        .settings-item input::placeholder { color: var(--placeholder); }
         .dns-select-btn, .view-select-btn { background: var(--accent-btn); color: #fff; padding: 10px; cursor: pointer; text-align: center; }
         .dns-select-btn:hover, .view-select-btn:hover { background: var(--accent-btn2); }
         .tgl-btn { background: var(--btn); color: var(--text2); border: 1px solid var(--border); padding: 8px; cursor: pointer; font-size: 12px; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -261,11 +262,12 @@
         
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 998; justify-content: center; align-items: center; }
         .modal-overlay.show { display: flex; }
-        .modal-box { background: var(--bg2); border: 1px solid var(--border); padding: 20px; max-width: 350px; width: 90%; display: flex; flex-direction: column; gap: 10px; transition: background-color 0.4s ease, border-color 0.4s ease; }
+        .modal-box { background: var(--bg2); border: 1px solid var(--border); padding: 20px; max-width: 400px; width: 90%; display: flex; flex-direction: column; gap: 10px; transition: background-color 0.4s ease, border-color 0.4s ease; max-height: 80vh; overflow-y: auto; }
         .modal-box button { background: var(--btn); padding: 10px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; }
         .modal-box button:hover { background: var(--accent-btn); color: #fff; }
         .dns-grid, .view-grid { display: flex; flex-direction: column; gap: 8px; }
         .dns-grid label, .view-grid label { display: flex; align-items: center; gap: 10px; padding: 8px; background: var(--btn); cursor: pointer; transition: background-color 0.3s ease; }
+        .dns-grid input::placeholder { color: var(--placeholder); }
         .drop-box { background: var(--bg2); border: 2px dashed var(--accent-btn); padding: 40px; text-align: center; cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease; }
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent-btn); color: #fff; padding: 8px 20px; font-size: 13px; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
         .toast.show { opacity: 1; }
@@ -279,6 +281,12 @@
         .easter-egg .heart { display: inline-block; animation: pulse 0.6s ease-in-out infinite alternate; }
         @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.3); } }
         input[type="file"] { display: none; }
+        .reset-btn {
+            background: var(--btn); color: var(--text2); border: 1px solid var(--border);
+            padding: 8px; font-size: 12px; cursor: pointer; flex-shrink: 0; text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .reset-btn:hover { background: var(--accent-btn); color: #fff; }
         
         @media (max-width: 550px) { body { padding: 12px; } .tab-btn { font-size: 12px; padding: 10px 4px; } .stats-value { font-size: 16px; } }
     </style>
@@ -318,7 +326,7 @@
     </div>
 </div>
 <div class="modal-overlay" id="presetMenu" onclick="hideModal('presetMenu')">
-    <div class="modal-box" onclick="event.stopPropagation()" style="max-width:400px; max-height:80vh; overflow-y:auto;">
+    <div class="modal-box" onclick="event.stopPropagation()">
         <div style="font-weight:bold" data-i18n="presetMenuTitle">📋 Тест резолвера</div>
         <div id="presetList" style="display:flex; flex-direction:column; gap:6px;"></div>
         <button onclick="hideModal('presetMenu')" data-i18n="presetClose">✅ Закрыть</button>
@@ -346,7 +354,7 @@
         <div class="header-buttons">
             <button class="h-btn preset" onclick="showPresetMenu()">📋 <span data-i18n="presetBtnShort">Тест</span></button>
             <button class="h-btn" id="themeToggleBtn" onclick="cycleTheme()">🔄 <span data-i18n="btnTheme">Тема</span></button>
-            <button class="h-btn lang" id="langToggleBtn" onclick="toggleLanguage()"><span id="langIcon">🇷🇺</span> <span id="langCode">RU</span></button>
+            <button class="h-btn lang" id="langToggleBtn" onclick="cycleLanguage()"><span id="langIcon">🇷🇺</span> <span id="langCode">RU</span></button>
             <button class="h-btn" id="settingsToggleBtn" onclick="toggleSettings()"><span id="settingsIcon">⚙️</span> <span data-i18n="btnSettings">Настройки</span></button>
         </div>
         <div class="settings-box" id="settingsBox">
@@ -355,26 +363,41 @@
             <div class="settings-row">
                 <div class="settings-item"><div class="settings-label" data-i18n="typeLabel">📝 Тип записи</div>
                     <select id="recordType" onchange="setRecordType(this.value)">
-                        <option value="A">🌐 A (IPv4)</option><option value="AAAA">🌍 AAAA (IPv6)</option>
-                        <option value="MX">📧 MX</option><option value="NS">🗄️ NS</option><option value="SOA">📋 SOA</option>
-                        <option value="TXT">📝 TXT</option><option value="CNAME">🔗 CNAME</option>
-                        <option value="CAA">🔒 CAA</option><option value="PTR">↩️ PTR</option>
+                        <option value="A">🌐 A (IPv4)</option>
+                        <option value="AAAA">🌍 AAAA (IPv6)</option>
+                        <option value="MX">📧 MX</option>
+                        <option value="NS">🗄️ NS</option>
+                        <option value="TXT">📝 TXT</option>
+                        <option value="CNAME">🔗 CNAME</option>
+                        <option value="PTR">↩️ PTR</option>
                         <option value="PTR_RANGE">↩️ PTR Range</option>
+                        <option value="SRV">🎯 SRV</option>
+                        <option value="HTTPS">🔐 HTTPS</option>
                     </select>
                 </div>
                 <div class="settings-item"><div class="settings-label" data-i18n="timeoutLabel">⏰ Таймаут</div>
-                    <select id="timeoutSelect" onchange="setTimeoutVal(parseInt(this.value))">
-                        <option value="5" data-i18n-options="timeoutOptions.0">5 сек</option>
-                        <option value="10" data-i18n-options="timeoutOptions.1">10 сек</option>
-                        <option value="15" data-i18n-options="timeoutOptions.2">15 сек</option>
+                    <select id="timeoutSelect" onchange="handleTimeoutSelect(this.value)">
+                        <option value="5">5 сек</option>
+                        <option value="10">10 сек</option>
+                        <option value="15">15 сек</option>
+                        <option value="custom" data-i18n="customOption">✏️ Своё...</option>
                     </select>
+                    <div id="timeoutCustomRow" style="display:none; gap:4px;">
+                        <input type="number" id="timeoutCustom" placeholder="Сек" min="0.1" max="60" step="0.1" style="flex:1;" onchange="timeout = parseFloat(this.value) * 1000">
+                        <button onclick="resetTimeoutSelect()" class="reset-btn">↩️</button>
+                    </div>
                 </div>
                 <div class="settings-item"><div class="settings-label" data-i18n="delayLabel">🐌 Задержка</div>
-                    <select id="delaySelect" onchange="setDelay(parseInt(this.value))">
-                        <option value="0" data-i18n-options="delayOptions.0">Без задержки</option>
-                        <option value="500" data-i18n-options="delayOptions.1">0.5 сек</option>
-                        <option value="1000" data-i18n-options="delayOptions.2">1 сек</option>
+                    <select id="delaySelect" onchange="handleDelaySelect(this.value)">
+                        <option value="0">Без задержки</option>
+                        <option value="500">0.5 сек</option>
+                        <option value="1000">1 сек</option>
+                        <option value="custom" data-i18n="customOption">✏️ Своё...</option>
                     </select>
+                    <div id="delayCustomRow" style="display:none; gap:4px;">
+                        <input type="number" id="delayCustom" placeholder="Сек" min="0.1" max="60" step="0.1" style="flex:1;" onchange="delay = parseFloat(this.value) * 1000">
+                        <button onclick="resetDelaySelect()" class="reset-btn">↩️</button>
+                    </div>
                 </div>
             </div>
             <button class="tgl-btn" id="formatBtn" onclick="toggleFormat()" data-i18n-format="formatBtn" data-format-param="onlyip">🔢 Формат: Only IP</button>
@@ -455,6 +478,7 @@ let allInputDomains  = '';
 let abortController  = null;
 let resolveStartTime = 0;
 let activeServers    = ['cloudflare'];
+let customServers    = [];
 let lastElapsed      = '0';
 let lastSizeKB       = '0';
 let lastRttStr       = '';
@@ -481,12 +505,12 @@ const recordTypes = {
     AAAA: 28,
     MX: 15,
     NS: 2,
-    SOA: 6,
     TXT: 16,
     CNAME: 5,
-    CAA: 257,
     PTR: 12,
-    PTR_RANGE: 12
+    PTR_RANGE: 12,
+    SRV: 33,
+    HTTPS: 65
 };
 
 // Пресеты для тестов
@@ -502,7 +526,7 @@ const presets = {
         label: '🌍 AAAA (IPv6)',
         list: [
             'google.com', 'netflix.com', 'reddit.com', 'wikipedia.org',
-            'debian.org', 'yandex.ru', 'youtube.com', 'cloudflare.com'
+            'debian.org', 'mozilla.org', 'youtube.com', 'cloudflare.com'
         ]
     },
     MX: {
@@ -514,13 +538,6 @@ const presets = {
     },
     NS: {
         label: '🗄️ NS',
-        list: [
-            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
-            'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
-        ]
-    },
-    SOA: {
-        label: '📋 SOA',
         list: [
             'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
             'stackoverflow.com', 'telegram.org', 'youtube.com', 'cloudflare.com'
@@ -540,13 +557,6 @@ const presets = {
             'www.amazon.com', 'login.live.com', 'www.youtube.com', 'm.facebook.com'
         ]
     },
-    CAA: {
-        label: '🔒 CAA',
-        list: [
-            'google.com', 'github.com', 'reddit.com', 'wikipedia.org',
-            'stackoverflow.com', 'youtube.com', 'cloudflare.com', 'digicert.com'
-        ]
-    },
     PTR: {
         label: '↩️ PTR',
         list: [
@@ -558,9 +568,26 @@ const presets = {
     PTR_RANGE: {
         label: '↩️ PTR Range',
         list: [
-            '8.8.8.8-8.8.8.9', '8.8.4.4-8.8.4.5', '1.1.1.1-1.1.1.4',
-            '1.0.0.1-1.0.0.4', '9.9.9.9-9.9.9.12',
-            '208.67.222.222-208.67.222.223', '208.67.220.220-208.67.220.221', '185.222.222.222-185.222.222.229'
+            '8.8.8.8-8.8.8.9', '8.8.4.4-8.8.4.5',
+            '1.1.1.1-1.1.1.4', '1.0.0.1-1.0.0.4',
+            '9.9.9.9-9.9.9.12', '208.67.222.222-208.67.222.223',
+            '208.67.220.220-208.67.220.221', '185.222.222.222-185.222.222.229'
+        ]
+    },
+    SRV: {
+        label: '🎯 SRV',
+        list: [
+            '_sip._tcp.sipgate.de', '_xmpp-client._tcp.jabber.org',
+            '_sip._udp.sipgate.de', '_imaps._tcp.gmail.com',
+            '_submission._tcp.gmail.com', '_xmpp-server._tcp.jabber.org',
+            '_ldap._tcp.apple.com', '_sip._tls.sipgate.de'
+        ]
+    },
+    HTTPS: {
+        label: '🔐 HTTPS',
+        list: [
+            'google.com', 'cloudflare.com', 'github.com', 'facebook.com',
+            'microsoft.com', 'apple.com', 'twitter.com', 'wikipedia.org'
         ]
     }
 };
@@ -589,11 +616,11 @@ const L = {
         filterBtn: '🔍 Все',
         mxLabel: 'Почта',
         nsLabel: 'DNS-серверы',
-        soaLabel: 'Зона',
         txtLabel: 'Текст',
         cnameLabel: 'Псевдоним',
-        caaLabel: 'Центр сертификации',
         ptrLabel: 'Обратный',
+        srvLabel: 'Сервис',
+        httpsLabel: 'HTTPS',
         dnsSelectBtn: (count) => `📡 Выбрать DNS серверы (${count})`,
         viewSelectBtn: '👁️ Вид результатов',
         viewMenuTitle: '👁️ Вид результатов',
@@ -671,9 +698,18 @@ const L = {
         easterText: 'Спасибо за использование',
         langRu: '🇷🇺 RU',
         langEn: '🇬🇧 EN',
+        langUa: '🇺🇦 UA',
         settingsOpen: '❌',
         settingsClosed: '⚙️',
-        ptrNotFound: 'не найден'
+        ptrNotFound: 'не найден',
+        customDnsTitle: '➕ Кастомные DoH-серверы',
+        customDnsPlaceholder: 'https://doh.example.com/dns-query',
+        customDnsName: 'Название',
+        customDnsAdd: '➕',
+        customDnsRemove: '🗑️',
+        customOption: '✏️ Своё...',
+        timeoutCustomPlaceholder: 'Сек',
+        delayCustomPlaceholder: 'Сек'
     },
     en: {
         tabResults: '📊 Results',
@@ -695,11 +731,11 @@ const L = {
         filterBtn: '🔍 All',
         mxLabel: 'Mail',
         nsLabel: 'DNS servers',
-        soaLabel: 'Zone',
         txtLabel: 'Text',
         cnameLabel: 'Alias',
-        caaLabel: 'Cert Authority',
         ptrLabel: 'Reverse',
+        srvLabel: 'Service',
+        httpsLabel: 'HTTPS',
         dnsSelectBtn: (count) => `📡 Choose DNS servers (${count})`,
         viewSelectBtn: '👁️ View options',
         viewMenuTitle: '👁️ View options',
@@ -777,9 +813,133 @@ const L = {
         easterText: 'Thank you for using',
         langRu: '🇷🇺 RU',
         langEn: '🇬🇧 EN',
+        langUa: '🇺🇦 UA',
         settingsOpen: '❌',
         settingsClosed: '⚙️',
-        ptrNotFound: 'not found'
+        ptrNotFound: 'not found',
+        customDnsTitle: '➕ Custom DoH servers',
+        customDnsPlaceholder: 'https://doh.example.com/dns-query',
+        customDnsName: 'Name',
+        customDnsAdd: '➕',
+        customDnsRemove: '🗑️',
+        customOption: '✏️ Custom...',
+        timeoutCustomPlaceholder: 'Sec',
+        delayCustomPlaceholder: 'Sec'
+    },
+    ua: {
+        tabResults: '📊 Результати',
+        tabStats: '📈 Статистика',
+        statFound: '✅ Знайдено',
+        statErrors: '❌ Помилки',
+        statTotal: '📊 Всього запитів',
+        statUnique: '✨ Унікальних',
+        statDupes: '🔁 Дублів',
+        statRtt: '⚡ RTT (мін/сер/макс)',
+        statTime: '⏱️ Час виконання',
+        statSize: '📦 Розмір відповіді',
+        statServers: '🌐 DNS сервери',
+        statTtl: '⏲️ Середній TTL',
+        ms: 'мс',
+        sec: 'сек',
+        kb: 'КБ',
+        rtt: (min, avg, max) => `⚡ RTT: ${min}/${avg}/${max} мс`,
+        filterBtn: '🔍 Усі',
+        mxLabel: 'Пошта',
+        nsLabel: 'DNS-сервери',
+        txtLabel: 'Текст',
+        cnameLabel: 'Псевдонім',
+        ptrLabel: 'Зворотний',
+        srvLabel: 'Сервіс',
+        httpsLabel: 'HTTPS',
+        dnsSelectBtn: (count) => `📡 Вибрати DNS сервери (${count})`,
+        viewSelectBtn: '👁️ Вигляд результатів',
+        viewMenuTitle: '👁️ Вигляд результатів',
+        viewDoneBtn: '✅ Готово',
+        showDNSNamesLabel: '🏷️ Назви DNS',
+        showSepLabel: '↕️ Роздільник рядків',
+        showTTLLabel: '⏱️ Показувати TTL',
+        showSpeedLabel: '⚡ Показувати швидкість',
+        dnsNamesOn: '✅ Увімк',
+        dnsNamesOff: '❌ Вимк',
+        sepOn: '✅ Увімк',
+        sepOff: '❌ Вимк',
+        ttlOn: '✅ Увімк',
+        ttlOff: '❌ Вимк',
+        speedOn: '✅ Увімк',
+        speedOff: '❌ Вимк',
+        dnsMenuTitle: '📡 Виберіть DNS сервери',
+        dnsDoneBtn: '✅ Готово',
+        presetMenuTitle: '📋 Тест резолвера',
+        presetClose: '✅ Закрити',
+        typeLabel: '📝 Тип запису',
+        formatBtn: (val) => {
+            const formats = {
+                'onlyip': '🔢 Формат: Only IP',
+                'hosts': '📁 Формат: Hosts',
+                'adguard': '🛡️ Формат: AdGuard',
+                'pihole': '🚫 Формат: Pi-hole'
+            };
+            return formats[val] || '🔢 Формат: Only IP';
+        },
+        inputPlaceholder: '📝 Вставте список доменів сюди...',
+        resultsPlaceholder: '📊 Результати зʼявляться тут...',
+        inputSearchPlaceholder: '🔍 Пошук по доменах...',
+        resultsSearchPlaceholder: '🔍 Пошук по результатах...',
+        startBtn: '🚀 Перевірити',
+        stopBtn: '⏹️ Стоп',
+        presetBtnShort: 'Тест',
+        btnSupport: 'Проєкт',
+        btnTheme: 'Тема',
+        btnLang: 'Мова',
+        btnSettings: 'Налаштування',
+        empty: '📭 Список порожній',
+        error: '❌ Помилка/Не знайдено',
+        noServers: 'Чого ти очікував, коли вирішив перевірити без DNS-серверів? Думаєш, Бог тобі відповість? Бога нема, змирись <3\n\nВибери хоча б один DNS сервер у налаштуваннях',
+        noDomainsToast: '📭 Нічого шукати',
+        dropText: '📂 Перетягніть файл сюди або натисніть',
+        exportTitle: '📥 Експорт',
+        copied: '✅ Скопійовано',
+        copyFail: '❌ Не вдалося',
+        emptyToast: '📭 Нічого копіювати',
+        imported: '✅ Файл завантажено',
+        cleared: '🗑️ Очищено',
+        started: '🚀 Перевірка почалася',
+        exported: '📥 Експорт збережено',
+        dupsRemoved: '♻️ Дублі видалено',
+        noDupesFound: '✨ Дублів не знайдено',
+        presetAdded: '📋 Тестові сайти додано',
+        providerAll: '🏢 Усі провайдери',
+        stats: (f, e, total, u, d) => {
+            let s = `✅ Знайдено: ${f} / ❌ Помилок: ${e} / 📊 Всього: ${total} / ✨ Унікальних: ${u}`;
+            if (d > 0) s += ` / 🔁 Дублів: ${d}`;
+            return s;
+        },
+        dnsIndicator: (p) => `🔍 Перевірено через: ${p}`,
+        timeInfo: (s, z) => `⏱️ Час: ${s} сек | 📦 Відповідь: ${z} KB`,
+        timeoutLabel: '⏰ Таймаут',
+        delayLabel: '🐌 Затримка',
+        timeoutOptions: ['5 сек', '10 сек', '15 сек'],
+        delayOptions: ['Без затримки', '0.5 сек', '1 сек'],
+        dedupBtn: 'Видалити дублі',
+        uploadBtn: 'Імпорт',
+        dedupResultsBtn: 'Видалити дублі',
+        exportMenuBtn: 'Експорт',
+        starText: 'Гей! Підтримай мій повністю безкоштовний проєкт зірочкою, інакше вкушу твоє вушко :Р',
+        easterText: 'Дякуємо за використання',
+        langRu: '🇷🇺 RU',
+        langEn: '🇬🇧 EN',
+        langUa: '🇺🇦 UA',
+        settingsOpen: '❌',
+        settingsClosed: '⚙️',
+        ptrNotFound: 'не знайдено',
+        customDnsTitle: '➕ Користувацькі DoH-сервери',
+        customDnsPlaceholder: 'https://doh.example.com/dns-query',
+        customDnsName: 'Назва',
+        customDnsAdd: '➕',
+        customDnsRemove: '🗑️',
+        customOption: '✏️ Своє...',
+        timeoutCustomPlaceholder: 'Сек',
+        delayCustomPlaceholder: 'Сек'
     }
 };
 
@@ -791,6 +951,9 @@ function t(key, ...args) {
     return val !== undefined ? val : key;
 }
 
+// ─────────────────────────────────────────────
+//  i18n engine
+// ─────────────────────────────────────────────
 function applyI18N() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -823,11 +986,18 @@ function applyI18N() {
             el.textContent = arr[idx];
         }
     });
+    // Обновляем placeholder'ы кастомных полей
+    const timeoutCustom = document.getElementById('timeoutCustom');
+    const delayCustom = document.getElementById('delayCustom');
+    if (timeoutCustom) timeoutCustom.placeholder = t('timeoutCustomPlaceholder');
+    if (delayCustom) delayCustom.placeholder = t('delayCustomPlaceholder');
+    
     updateLangButton();
     updateRecordTypeOptions();
     updateFilterButtonText();
     updateStatsTab();
     updateSettingsButton();
+    updateProviderFilter();
 }
 
 function updateLangButton() {
@@ -836,9 +1006,12 @@ function updateLangButton() {
     if (currentLanguage === 'ru') {
         if (icon) icon.textContent = '🇷🇺';
         if (code) code.textContent = 'RU';
-    } else {
+    } else if (currentLanguage === 'en') {
         if (icon) icon.textContent = '🇬🇧';
         if (code) code.textContent = 'EN';
+    } else if (currentLanguage === 'ua') {
+        if (icon) icon.textContent = '🇺🇦';
+        if (code) code.textContent = 'UA';
     }
 }
 
@@ -854,12 +1027,12 @@ function updateRecordTypeOptions() {
     const labels = {
         MX:    '📧 MX (' + t('mxLabel') + ')',
         NS:    '🗄️ NS (' + t('nsLabel') + ')',
-        SOA:   '📋 SOA (' + t('soaLabel') + ')',
         TXT:   '📝 TXT (' + t('txtLabel') + ')',
         CNAME: '🔗 CNAME (' + t('cnameLabel') + ')',
-        CAA:   '🔒 CAA (' + t('caaLabel') + ')',
         PTR:   '↩️ PTR (' + t('ptrLabel') + ')',
-        PTR_RANGE: '↩️ PTR Range'
+        PTR_RANGE: '↩️ PTR Range',
+        SRV:   '🎯 SRV (' + t('srvLabel') + ')',
+        HTTPS: '🔐 HTTPS (' + t('httpsLabel') + ')'
     };
     const sel = document.getElementById('recordType');
     if (!sel) return;
@@ -876,8 +1049,8 @@ function updateFilterButtonText() {
     if (!btn) return;
     const texts = {
         all: t('filterBtn'),
-        success: '✅ ' + (currentLanguage === 'ru' ? 'Успешные' : 'Success'),
-        errors: '❌ ' + (currentLanguage === 'ru' ? 'Ошибки' : 'Errors')
+        success: '✅ ' + (currentLanguage === 'ru' ? 'Успешные' : currentLanguage === 'ua' ? 'Успішні' : 'Success'),
+        errors: '❌ ' + (currentLanguage === 'ru' ? 'Ошибки' : currentLanguage === 'ua' ? 'Помилки' : 'Errors')
     };
     btn.textContent = texts[filterMode] || texts.all;
 }
@@ -931,8 +1104,10 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ()
     if (themeMode === 'system') applyTheme();
 });
 
-function toggleLanguage() {
-    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+function cycleLanguage() {
+    const langs = ['ru', 'en', 'ua'];
+    const idx = langs.indexOf(currentLanguage);
+    currentLanguage = langs[(idx + 1) % langs.length];
     applyI18N();
     updateLineCounter();
     updateProviderFilter();
@@ -942,12 +1117,14 @@ function toggleLanguage() {
 function detectInitialLanguage() {
     try {
         const saved = localStorage.getItem('dnsresolver_lang');
-        if (saved === 'ru' || saved === 'en') {
+        if (saved === 'ru' || saved === 'en' || saved === 'ua') {
             currentLanguage = saved;
             return;
         }
         const nav = (navigator.language || 'en').toLowerCase();
-        currentLanguage = nav.startsWith('ru') ? 'ru' : 'en';
+        if (nav.startsWith('ru')) currentLanguage = 'ru';
+        else if (nav.startsWith('uk')) currentLanguage = 'ua';
+        else currentLanguage = 'en';
     } catch(e) {
         currentLanguage = 'en';
     }
@@ -978,6 +1155,8 @@ function updateLineCounter() {
     const dupes = lines.length - unique;
     const loc = currentLanguage === 'ru'
         ? { lines: 'Строк', unique: 'Уникальных', dupes: 'Дублей' }
+        : currentLanguage === 'ua'
+        ? { lines: 'Рядків', unique: 'Унікальних', dupes: 'Дублів' }
         : { lines: 'Lines', unique: 'Unique', dupes: 'Dupes' };
     let label = `📊 ${loc.lines}: ${lines.length} | ✨ ${loc.unique}: ${unique}`;
     if (dupes > 0) label += ` | 🔁 ${loc.dupes}: ${dupes}`;
@@ -1111,6 +1290,40 @@ function setRecordType(val) {
     recordType = val;
 }
 
+function handleTimeoutSelect(val) {
+    if (val === 'custom') {
+        document.getElementById('timeoutSelect').style.display = 'none';
+        document.getElementById('timeoutCustomRow').style.display = 'flex';
+        document.getElementById('timeoutCustom').focus();
+    } else {
+        timeout = parseInt(val) * 1000;
+    }
+}
+
+function resetTimeoutSelect() {
+    document.getElementById('timeoutCustomRow').style.display = 'none';
+    document.getElementById('timeoutSelect').style.display = 'block';
+    document.getElementById('timeoutSelect').value = '5';
+    timeout = 5000;
+}
+
+function handleDelaySelect(val) {
+    if (val === 'custom') {
+        document.getElementById('delaySelect').style.display = 'none';
+        document.getElementById('delayCustomRow').style.display = 'flex';
+        document.getElementById('delayCustom').focus();
+    } else {
+        delay = parseInt(val);
+    }
+}
+
+function resetDelaySelect() {
+    document.getElementById('delayCustomRow').style.display = 'none';
+    document.getElementById('delaySelect').style.display = 'block';
+    document.getElementById('delaySelect').value = '0';
+    delay = 0;
+}
+
 function setTimeoutVal(s) {
     timeout = s * 1000;
 }
@@ -1128,14 +1341,74 @@ function toggleFormat() {
     if (currentResults.length) applyAllFilters();
 }
 
+// ─────────────────────────────────────────────
+//  DNS Menu (с кастомными серверами)
+// ─────────────────────────────────────────────
 function showDNSMenu() {
     const grid = document.getElementById('dnsGrid');
+    
+    // Стандартные серверы
     grid.innerHTML = Object.keys(allDNSServers).map(k => {
         const s = allDNSServers[k];
         const checked = activeServers.includes(k) ? 'checked' : '';
-        return `<label><input type="checkbox" value="${k}" ${checked} onchange="toggleServer('${k}', this.checked)">${s.name}</label>`;
+        return `<label>
+            <input type="checkbox" value="${k}" ${checked} onchange="toggleServer('${k}', this.checked)">
+            ${s.name}
+        </label>`;
     }).join('');
+    
+    // Кастомные серверы
+    customServers.forEach((cs, i) => {
+        grid.innerHTML += `<div style="display:flex; gap:6px; align-items:center; padding:6px 0;">
+            <label style="flex:1; background:var(--btn); padding:8px; cursor:pointer; display:flex; align-items:center; gap:10px;">
+                <input type="checkbox" value="custom_${i}" ${activeServers.includes('custom_' + i) ? 'checked' : ''} onchange="toggleServer('custom_${i}', this.checked)">
+                🔧 ${cs.name || cs.url}
+            </label>
+            <button onclick="removeCustomServer(${i})" style="background:var(--clear-hover); color:#fff; padding:6px 8px; font-size:12px; flex-shrink:0;" title="${t('customDnsRemove')}">🗑️</button>
+        </div>`;
+    });
+    
+    // Форма добавления
+    grid.innerHTML += `<div style="border-top:1px solid var(--border); padding-top:8px; margin-top:4px;">
+        <div style="font-size:12px; color:var(--text3); margin-bottom:6px;">${t('customDnsTitle')}</div>
+        <div style="display:flex; gap:6px; flex-wrap:nowrap;">
+            <input type="text" id="customDnsName" placeholder="${t('customDnsName')}" style="flex:1; min-width:0; background:var(--input); color:var(--input-text); border:1px solid var(--border); padding:8px; font-size:12px; outline:none;">
+            <input type="text" id="customDnsUrl" placeholder="${t('customDnsPlaceholder')}" style="flex:2; min-width:0; background:var(--input); color:var(--input-text); border:1px solid var(--border); padding:8px; font-size:12px; outline:none;">
+            <button onclick="addCustomDns()" style="background:var(--accent-btn); color:#fff; padding:8px; min-width:36px; font-size:14px; flex-shrink:0;" title="${t('customDnsAdd')}">➕</button>
+        </div>
+    </div>`;
+    
     showModal('dnsMenu');
+}
+
+function addCustomDns() {
+    const name = document.getElementById('customDnsName').value.trim();
+    const url = document.getElementById('customDnsUrl').value.trim();
+    if (!url) {
+        toast(currentLanguage === 'ru' ? 'Введите URL' : currentLanguage === 'ua' ? 'Введіть URL' : 'Enter URL');
+        return;
+    }
+    customServers.push({ name: name || url, url: url });
+    try { localStorage.setItem('dnsresolver_custom_servers', JSON.stringify(customServers)); } catch(e) {}
+    showDNSMenu();
+}
+
+function removeCustomServer(index) {
+    customServers.splice(index, 1);
+    try { localStorage.setItem('dnsresolver_custom_servers', JSON.stringify(customServers)); } catch(e) {}
+    activeServers = activeServers.filter(s => !s.startsWith('custom_'));
+    showDNSMenu();
+    updateProviderFilter();
+    updateDNSButtonText();
+}
+
+function updateDNSButtonText() {
+    const btn = document.querySelector('.dns-select-btn');
+    if (btn) {
+        const total = activeServers.length;
+        btn.setAttribute('data-format-param', total);
+        btn.textContent = t('dnsSelectBtn', total);
+    }
 }
 
 function toggleServer(key, checked) {
@@ -1144,11 +1417,7 @@ function toggleServer(key, checked) {
     } else {
         activeServers = activeServers.filter(k => k !== key);
     }
-    const btn = document.querySelector('.dns-select-btn');
-    if (btn) {
-        btn.setAttribute('data-format-param', activeServers.length);
-        btn.textContent = t('dnsSelectBtn', activeServers.length);
-    }
+    updateDNSButtonText();
     updateProviderFilter();
 }
 
@@ -1172,10 +1441,20 @@ function updateProviderFilter() {
     const sel = document.getElementById('providerFilter');
     while (sel.options.length > 1) sel.remove(1);
     for (const s of activeServers) {
-        const opt = document.createElement('option');
-        opt.value = s;
-        opt.textContent = allDNSServers[s]?.name || s;
-        sel.appendChild(opt);
+        if (allDNSServers[s]) {
+            const opt = document.createElement('option');
+            opt.value = s;
+            opt.textContent = allDNSServers[s]?.name || s;
+            sel.appendChild(opt);
+        } else if (s.startsWith('custom_')) {
+            const idx = parseInt(s.replace('custom_', ''));
+            if (customServers[idx]) {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = '🔧 ' + (customServers[idx].name || customServers[idx].url);
+                sel.appendChild(opt);
+            }
+        }
     }
     sel.options[0].textContent = t('providerAll');
 }
@@ -1228,9 +1507,15 @@ function displayResults(results) {
             let extras = '';
             if (showTTL && r.ttl) extras += ` | TTL: ${r.ttl}s`;
             if (showSpeed && r.responseTime) extras += ` | ${r.responseTime} ms`;
-            const prefix = (showDNSNames && r.server && allDNSServers[r.server])
-                ? allDNSServers[r.server].short + ': '
-                : '';
+            
+            let prefix = '';
+            if (showDNSNames && r.server) {
+                if (allDNSServers[r.server]) {
+                    prefix = allDNSServers[r.server].short + ': ';
+                } else if (r.server.startsWith('custom_')) {
+                    prefix = '🔧: ';
+                }
+            }
             
             if (outputFormat === 'hosts') {
                 lines.push(`${prefix}${r.ip} ${r.domain}${extras}`);
@@ -1369,6 +1654,9 @@ document.getElementById('dropBox').addEventListener('drop', e => {
     }
 });
 
+// ─────────────────────────────────────────────
+//  IPv6 helper
+// ─────────────────────────────────────────────
 function expandIPv6(ip) {
     if (ip.includes('::')) {
         const parts = ip.split('::');
@@ -1382,6 +1670,21 @@ function expandIPv6(ip) {
     return ip.split(':').map(part => part.padStart(4, '0')).join('');
 }
 
+// ─────────────────────────────────────────────
+//  Получение URL сервера
+// ─────────────────────────────────────────────
+function getServerUrl(serverKey) {
+    if (allDNSServers[serverKey]) return allDNSServers[serverKey].url;
+    if (serverKey.startsWith('custom_')) {
+        const idx = parseInt(serverKey.replace('custom_', ''));
+        if (customServers[idx]) return customServers[idx].url;
+    }
+    return null;
+}
+
+// ─────────────────────────────────────────────
+//  DNS Resolution
+// ─────────────────────────────────────────────
 async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
     const start = Date.now();
     const ctrl = new AbortController();
@@ -1390,28 +1693,25 @@ async function resolveSingle(domain, serverKey, type, signal, attempt = 0) {
     if (signal) signal.addEventListener('abort', onAbort);
 
     try {
-        const url = allDNSServers[serverKey]?.url;
-        const queryType = (type === 'PTR_RANGE') ? 'PTR' : type;
+        const serverUrl = getServerUrl(serverKey);
+        if (!serverUrl) return { error: true, responseTime: Date.now() - start };
         
+        const queryType = (type === 'PTR_RANGE') ? 'PTR' : type;
         let queryName = domain;
+        
         if (queryType === 'PTR') {
-            // Если это уже готовый .in-addr.arpa или .ip6.arpa — не трогаем
             if (domain.endsWith('.in-addr.arpa') || domain.endsWith('.ip6.arpa')) {
                 queryName = domain;
-            }
-            // IPv4: 8.8.8.8 → 8.8.8.8.in-addr.arpa
-            else if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(domain)) {
+            } else if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(domain)) {
                 const parts = domain.split('.');
                 queryName = `${parts[3]}.${parts[2]}.${parts[1]}.${parts[0]}.in-addr.arpa`;
-            }
-            // IPv6: 2001:4860:4860::8888 → .ip6.arpa
-            else if (domain.includes(':')) {
+            } else if (domain.includes(':')) {
                 const expanded = expandIPv6(domain);
                 queryName = expanded.split('').reverse().join('.') + '.ip6.arpa';
             }
         }
         
-        const res = await fetch(`${url}?name=${encodeURIComponent(queryName)}&type=${queryType}`, {
+        const res = await fetch(`${serverUrl}?name=${encodeURIComponent(queryName)}&type=${queryType}`, {
             headers: { Accept: 'application/dns-json' },
             signal: ctrl.signal
         });
@@ -1645,10 +1945,10 @@ function updateStatsTab() {
     html += `<div class="stats-card-row"><div class="stats-label">${t('statDupes')}</div><div class="stats-value">${statsData.dupes}</div></div>`;
 
     if (r.length) {
-        const minRtt = Math.min(...r);
-        const maxRtt = Math.max(...r);
-        const avgRtt = Math.round(r.reduce((a, b) => a + b, 0) / r.length);
-        html += `<div class="stats-card-row"><div class="stats-label">${t('statRtt')}</div><div class="stats-value">${minRtt}/${avgRtt}/${maxRtt} ${t('ms')}</div></div>`;
+        const min = Math.min(...r);
+        const max = Math.max(...r);
+        const avg = Math.round(r.reduce((a, b) => a + b, 0) / r.length);
+        html += `<div class="stats-card-row"><div class="stats-label">${t('statRtt')}</div><div class="stats-value">${min}/${avg}/${max} ${t('ms')}</div></div>`;
     }
 
     html += `<div class="stats-card-row"><div class="stats-label">${t('statTime')}</div><div class="stats-value">${lastElapsed} ${t('sec')}</div></div>`;
@@ -1657,7 +1957,14 @@ function updateStatsTab() {
 
     html += `<div class="stats-card-row"><div class="stats-label">${t('statServers')}</div><div class="stats-value"><div class="dns-list">`;
     for (const s of (statsData.servers || [])) {
-        html += `<span class="dns-badge">${allDNSServers[s]?.name || s}</span>`;
+        if (allDNSServers[s]) {
+            html += `<span class="dns-badge">${allDNSServers[s]?.name || s}</span>`;
+        } else if (s.startsWith('custom_')) {
+            const idx = parseInt(s.replace('custom_', ''));
+            if (customServers[idx]) {
+                html += `<span class="dns-badge">🔧 ${customServers[idx].name || customServers[idx].url}</span>`;
+            }
+        }
     }
     html += `</div></div></div>`;
 
@@ -1690,9 +1997,17 @@ document.addEventListener('keydown', e => {
     }
 });
 
+// ─────────────────────────────────────────────
+//  Boot
+// ─────────────────────────────────────────────
 try {
     const saved = localStorage.getItem('dnsresolver_theme');
     if (['system', 'light', 'dark', 'xp'].includes(saved)) themeMode = saved;
+} catch(e) {}
+
+try {
+    const saved = localStorage.getItem('dnsresolver_custom_servers');
+    if (saved) customServers = JSON.parse(saved);
 } catch(e) {}
 
 detectInitialLanguage();
