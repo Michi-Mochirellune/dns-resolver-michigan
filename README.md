@@ -2,9 +2,6 @@
 
 # 🌐 DNS Resolver Michigan
 
-## Разработчик
-- Telegram: [@PSI_missing](https://t.me/PSI_missing)
-
 https://michi-mochirellune.github.io/dns-resolver-michigan/
 
 (Код написан не мною, а при помощи Deepseek, я же просто проверяю и прошу где-то добавить/исправить)
@@ -12,6 +9,13 @@ https://michi-mochirellune.github.io/dns-resolver-michigan/
 **Карманный DNS-резолвер. Кидаешь список доменов — получаешь IP. Без регистраций и рекламы.**
 
 Надоело вбивать домены по одному? Этот резолвер берёт список из 100+ доменов и выплёвывает готовые IP.
+
+Укушу за ушко, если не поставишь звезду⭐ :Р
+
+---
+
+## Разработчик
+- Telegram: [@PSI_missing](https://t.me/PSI_missing)
 
 ---
 
