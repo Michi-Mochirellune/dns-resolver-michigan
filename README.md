@@ -91,16 +91,3 @@ https://michi-mochirellune.github.io/dns-resolver-michigan/
 Vanilla JS, DNS-over-HTTPS API, CSS Custom Properties, Service Workers (PWA).
 
 ---
-
-## 📄 Лицензия
-GNU General Public License v3.0
-
-✅ Можно использовать, изменять, распространять
-
-✅ Можно встраивать в коммерческие проекты
-
-❌ Нельзя закрыть исходный код и продавать как проприетарный продукт
-
-❌ Производные проекты — тоже под GPL
-
----
