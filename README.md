@@ -1,4 +1,4 @@
-![Dns Resolver Michigan](https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoreadme.jpg)
+![Dns Resolver Michigan](https://raw.githubusercontent.com/Michi-Mochirellune/dns-resolver-michigan/main/logoreadme.png)
 
 # 🌐 DNS Resolver Michigan
 
